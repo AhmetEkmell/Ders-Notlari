@@ -1,0 +1,241 @@
+#include <p16f877A.inc>
+__CONFIG H'3F31'
+
+org 0x0000
+call setup
+goto mainLoop
+
+gecikme
+decfsz sayi1,1
+goto $+2
+decfsz sayi2,1
+goto $+2
+goto $+2
+goto gecikme
+call setupfor
+return
+
+gecikme2
+decfsz sayi3,1
+goto $+2
+decfsz sayi4,1
+goto $+2
+goto $+2
+goto gecikme2
+call setupfor2
+return
+
+mainLoop
+call gosterkafa
+call gecikme
+call gostergövde
+call gecikme
+call gosterkuyruk
+call gecikme
+
+btfsc	PORTA,2
+call sagkaykafa
+btfsc 	PORTA,1
+call asagkaykafa
+btfsc	PORTA,0
+call yukarikaykafa
+btfsc	PORTA,3
+call solkaykafa
+goto mainLoop
+
+gosterkafa
+banksel	kafaportc
+movfw	kafaportc
+banksel	PORTC
+movwf	PORTC
+banksel kafaportb
+movfw kafaportb
+banksel	PORTB
+movwf	PORTB
+return
+gostergövde
+banksel	gövdeportc
+movfw	gövdeportc
+banksel	PORTC
+movwf	PORTC
+banksel gövdeportb
+movfw gövdeportb
+banksel	PORTB
+movwf	PORTB
+return
+gosterkuyruk
+banksel	kuyrukportc
+movfw	kuyrukportc
+banksel	PORTC
+movwf	PORTC
+banksel kuyrukportb
+movfw kuyrukportb
+banksel	PORTB
+movwf	PORTB
+return
+
+sagkaykafa
+call vücutata
+btfsc	STATUS,0
+bcf	STATUS,0
+banksel kafaportc
+rlf	kafaportc,1
+return
+
+solkaykafa
+call vücutata
+btfsc	STATUS,0
+bcf	STATUS,0
+banksel kafaportc
+rrf kafaportc,1
+return
+
+asagkaykafa
+call vücutata
+btfsc	STATUS,0
+bcf	STATUS,0
+banksel	kafaportb
+rlf kafaportb,1
+bsf kafaportb,0
+return
+
+yukarikaykafa
+call vücutata
+btfsc	STATUS,0
+bcf	STATUS,0
+banksel kafaportb
+rrf kafaportb,1
+bsf	kafaportb,7
+return
+
+vücutata
+call gecikme2
+banksel gövdeportc
+movfw	gövdeportc
+banksel gövdetutucuc
+movwf	gövdetutucuc
+banksel gövdeportb
+movfw	gövdeportb
+banksel gövdetutucub
+movwf	gövdetutucub
+
+banksel	kafaportc
+movfw kafaportc
+banksel gövdeportc
+movwf	gövdeportc
+banksel kafaportb
+movfw kafaportb
+banksel gövdeportb
+movwf gövdeportb
+
+banksel gövdetutucuc
+movfw	gövdetutucuc
+banksel	kuyrukportc
+movwf	kuyrukportc
+banksel	gövdetutucub
+movfw	gövdetutucub
+banksel	kuyrukportb
+movwf	kuyrukportb
+return
+
+setup
+sayi1 equ 0x21
+sayi2 equ 0x22
+satir equ 0x23
+sütun equ 0x24
+kafaportb equ 0x25
+kafaportc equ 0x26
+gövdeportb equ 0x27
+gövdeportc equ 0x28
+kuyrukportb equ 0x29
+kuyrukportc equ 0x30
+gövdetutucuc equ 0x31
+gövdetutucub equ 0x32
+sayi3 equ 0x33
+sayi4 equ 0x34
+banksel kuyrukportb
+movlw b'11111110'
+movwf	kuyrukportb
+banksel kuyrukportc
+movlw b'00000001'
+movwf	kuyrukportc
+
+banksel gövdeportb
+movlw b'11111110'
+movwf	gövdeportb
+banksel gövdeportc
+movlw b'00000010'
+movwf	gövdeportc
+
+banksel kafaportb
+movlw b'11111110'
+movwf	kafaportb
+banksel kafaportc
+movlw b'00000100'
+movwf	kafaportc
+
+
+banksel	satir
+movlw	b'00000000'
+movwf	satir
+banksel	sütun
+movlw	b'00011111'
+movwf	sütun
+
+banksel	sayi1
+movlw d'10'
+movwf	sayi1
+banksel	sayi2
+movlw d'10'
+movwf	sayi2
+
+banksel	sayi3
+movlw d'200'
+movwf	sayi3
+banksel	sayi4
+movlw d'200'
+movwf	sayi4
+
+banksel	ADCON1
+movlw	0x06
+movwf	ADCON1
+banksel	TRISA
+movlw	b'00001111'
+movwf	TRISA
+banksel	TRISB
+movlw	b'00000000'
+movwf	TRISB
+banksel	TRISC
+movlw	b'00000000'
+movwf	TRISC
+banksel	PORTA
+clrf	PORTA
+banksel	PORTB
+clrf	PORTB
+banksel	PORTC
+clrf	PORTC
+banksel	STATUS
+bcf	STATUS,Z
+bcf	STATUS,C
+
+return
+
+setupfor
+banksel	sayi1
+movlw d'10'
+movwf	sayi1
+banksel	sayi2
+movlw d'10'
+movwf	sayi2
+return
+
+setupfor2
+banksel	sayi3
+movlw d'200'
+movwf	sayi3
+banksel	sayi4
+movlw d'200'
+movwf	sayi4
+return
+
+end
