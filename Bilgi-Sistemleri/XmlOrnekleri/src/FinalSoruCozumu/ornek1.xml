@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Validation sağlamak
+<!DOCTYPE Kisi SYSTEM "ornek1.xsd"> veya
+<!DOCTYPE Kisi SYSTEM "ornek1.dtd"> yi yazarak xml validation'ı sağlanabilir.
+-->
+
+<!DOCTYPE Kisi SYSTEM "ornek1.xsd">
+<Kisi>
+    <Baba type="BabaType">
+        <isim>Kadir</isim>
+        <Dtarihi>1955</Dtarihi>
+        <erkekcocuk type="Kadir/E-CType">
+            <isim>Ahmet</isim>
+            <Dtarihi>1997</Dtarihi>
+            <erkekcocuk type="Ahmet/E-CType">
+                <isim1>Yavuz</isim1>
+                <isim2>Mahmut</isim2>
+            </erkekcocuk>
+            <kizcocuk type="Ahmet/K-CType">
+                <isim>Nisanur</isim>
+                <erkekcocuk type="Nisanur/E-CType">
+                    <isim1>Yunus</isim1>
+                    <isim2>Omer</isim2>
+                    <erkekcocuk type="OmerE-CType">
+                        <isim>Mehmet</isim>
+                    </erkekcocuk>
+                    <kizcocuk type="Omer/K-CType">
+                        <isim>Fatma</isim>
+                    </kizcocuk>
+                </erkekcocuk>
+                <kizcocuk type="Nisanur/K-CType">
+                    <isim>Nisanur'un kiz cocugu yoktur</isim>
+                </kizcocuk>
+            </kizcocuk>
+        </erkekcocuk>
+        <kizcocuk type="Kadir/K-CType">
+            <isim>Ayse</isim>
+            <erkekcocuk type="Ayse/E-CType">
+                <isim>ismail</isim>
+            </erkekcocuk>
+            <kizcocuk type="Ayse/K-CType">
+                <isim>iklim</isim>
+            </kizcocuk>
+        </kizcocuk>
+    </Baba>
+</Kisi>

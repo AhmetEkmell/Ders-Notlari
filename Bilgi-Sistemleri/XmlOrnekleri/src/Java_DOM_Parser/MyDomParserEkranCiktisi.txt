@@ -1,0 +1,6 @@
+Student 1:Ahmet=name
+Student 1:Yesilyurt=surname
+Student 2:Mehmet=name
+Student 2:Karaca=surname
+Student 3:Ali=name
+Student 3:Can=surname

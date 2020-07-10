@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding='UTF-8'?>
+
+<xs:schema version = "1.0" xmlns:xs = "http://www.w3.org//2001//XMLSchema">
+    
+    <xs:complexType name="OmerE-CType">
+        <xs:sequence>
+            <xs:element name="isim" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Omer/K-CType">
+        <xs:sequence>
+            <xs:element name="isim" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Nisanur/E-CType">
+        <xs:sequence>
+            <xs:element name="isim1" type="xs:string"/>
+            <xs:element name="isim2" type="xs:string"/>
+            <xs:element name="erkekcocuk" type="OmerE-CType"/>
+            <xs:element name="kizcocuk" type="Omer/K-CType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Nisanur/K-CType">
+        <xs:sequence>
+            <xs:element name="isim" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Ahmet/K-CType">
+        <xs:sequence>
+            <xs:element name="isim" tpye="xs:string"/>
+            <xs:element name="erkekcocuk" tpye="Nisanur/E-CType"/>
+            <xs:element name="kizcocuk" tpye="Nisanur/K-CType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Ahmet/E-CType">
+        <xs:sequence>
+            <xs:element name="isim1" type="xs:string"/>
+            <xs:element name="isim2" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Ayse/E-CType">
+        <xs:sequence>
+            <xs:element name="isim" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Ayse/K-CType">
+        <xs:sequence>
+            <xs:element name="isim" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Kadir/E-CType">
+        <xs:sequence>
+            <xs:element name="isim" type="xs:string"/>
+            <xs:element name="Dtarihi" type="xs:string"/>
+            <xs:element name="erkekcocuk" type="Ahmet/E-CType"/>
+            <xs:element name="kizcocuk" type="Ahmet/K-CType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Kadir/K-CType">
+        <xs:sequence>
+            <xs:element name="isim" type="xs:string"/>
+            <xs:element name="erkekcocuk" type="Ayse/E-CType"/>
+            <xs:element name="kizcocuk" type="Ayse/K-CType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="BabaType">
+        <xs:sequence>
+            <xs:element name="isim" type="xs:string"/>
+            <xs:element name="Dtarihi" type="xs:string"/>
+            <xs:element name="erkekcocuk" type="Kadir/E-CType"/>
+            <xs:element name="kizcocuk" type="Kadir/K-CType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="kisiType">
+        <xs:sequence>
+            <xs:element name="Baba" type="BabaType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="Kisi" type="kisiType"/>
+
+</xs:schema>

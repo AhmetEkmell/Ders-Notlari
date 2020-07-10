@@ -1,0 +1,96 @@
+                        XML NEDİR? NE AMAÇLA KULLANILIR?
+
+# XML, interneti kullanarak veri alışverişi  yapan sistemler ve platformlar
+  arasındaki veri iletişimini standart hale getirmek için tasarlanan işaretleme
+  dilidir. (Extensible Markum Language / Genişletilebilir İşaretleme Dili)
+
+
+                        XML E NEDEN İHTİYAÇ DUYULMUŞTUR?
+
+# XML standardı ortaya çıkmadan önce, bir yazılımda veya veritabanında kullanılan
+  verilerin başka bir platforma taşınması sırasında birçok problem ile karşılaşılıyordu.
+
+# İletilen bilgi kümesindeki veri yapısının, diğer sistemdeki yapıya uygun hale
+  getirilmesi işlemi uzun zaman alıyor ve karmaşık süreçler gerektiriyordu.
+
+# Ayrıca tasarlanan bu sistem ve fonksiyonların işlem sonucunda başka alanlarda
+  kullanılması mümkün olmuyordu.
+
+# Bu sorunların çözümü için standart bir veri iletişimi sağlanması ihtiyacı doğmuş
+  ve XML ortaya çıkmıştır.
+
+
+                                BİLGİ EVRELERİ
++DATA:
+    => Olgu, kavram ya da komutların;
+        => İletişim, yorum ve işlem için elverişli ve uzlaşımsal bir gösterimi.
+        => Ölçüm, sayım, deney vb. yollar ile elde edilen ham bilgi.
+
++INFORMATION:
+    => Uzlaşımsal kurallar yardımıyla veriye yöneltilen anlam.
+    => Verilerin anlamlı bir şekilde organize edildiği seviye.
+
++KNOWLEDGE:
+    => Farklı kaynaklardan sentezlenen information'ın;
+        => Teoriler, aksiyomlar veya yapılara oturtulması.
+        => Verinin anlamlandırılan hali.
+
++WISDOM:
+    => Değerlendirmeler ve yönlemlendirmelerin yapıldığı akıl yürütme seviyesidir.
+    => Öznel bir katmandır, insana ihtiyaç duyulur.
+
++ÖRNEK:
+    => VERİ: 785MM , INFORMATION: Yıllık yağış ortalaması 785 mm.
+    => KNOWLEDGE: 785 mm üzerine çıkılırsa sel baskını yaşanabilir.
+
+
+
+                KLASİK KAYNAKLARA GÖRE BİLGİ SİSTEMLERİ TÜRLERİ
+
+*En alt katmandan en üst katmana olacak şekilde sırasıyla şunlardır;
+    +İşlem İşleme Sistemleri   -> Çalışan
+    +Yönetim Bilgi Sistemleri  -> Orta seviye yönetici
+    +Karar Destek Sistemleri   -> Üst düzey yönetici
+    +Yönetici Bilgi Sistemleri -> İdareciler, Otoriteler
+
+
+                      XML VE HTML ARASINDAKİ FARKLAR
+
+                XML                                             HTML
+#İhtiyaca göre etiketler artırılabilir.              #Belirli sayıda etiket vardır.
+#Veriler ve içerik önemlidir.                        #Verinin gösterimini esas alır.
+#Standart veri değişimi.                             #Veri doğrulama yeteneği yok.
+#Farklı çıktı biçimlerine izin verir.                #Tek tip, standart çıktılar.
+
+
+DOCUMENT TYPE DEFINITIONS (DTD) NEDİR?
+-> Doküman içindeki elementlerin yapısına odaklanır.
+-> Özellikleri sınırlıdır.
+-> Elementlerin hangi sırada olacağını belirtir.
+-> Elementlerin sayısını belirtir.
+-> Elementlerin veri tiplerini belirtir.
+-> Veri türleri kısıtlıdır.
+-> Veritabanı veri türleri için desteği yoktur.
+-> XML formatında değildir.
+ÖRNEK DTD: <!ELEMENT isim[veri-tipi]>
+
+
+XML SCHEMA NEDİR?
+-> Şema aynı zamanda XML dokümanıdır.
+-> DTD'lerden sonra geliştirilmiştir ve doküman hakkında kapsamlı bilgi sunar.
+-> Tanımlı birçok veri tipi mevcuttur: integer,string,boolean,date time...
+-> Ağaç yapısı belirlenip bir elemanın kaç çocuğu olacağına karar verilebilir.
+-> Root elementi <schema> olmalıdır.
+-> XML formatında olmalıdır.
+-> Eleman simple ve complex türler olarak ikiye ayrılır.
+
+#Simple Elements: 
+    -> Attribute yok.
+    -> Başka bir element içeremez fakat metinsel bir içerik olabilir.
+    -> Boş olamaz.
+
+#Complex Elements:
+    -> Attribute içerebilir.
+    -> Metinsel veri, element ya da herhangi bir veriyi içerebilir.
+    -> Boş değere sahip olabilir.
+    -> XML formatında olmalıdır.

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!ELEMENT Kisi (Baba)*>
+
+<!ELEMENT Baba (isim|Dtarihi|erkekcocuk|kizcocuk)*>
+<!ATTLIST Baba type CDATA #IMPLIED>
+
+<!ELEMENT isim (#PCDATA)>
+<!ELEMENT Dtarihi (#PCDATA)>
+
+<!ELEMENT erkekcocuk (isim|Dtarihi|erkekcocuk|isim1|isim2|kizcocuk)*>
+<!ATTLIST erkekcocuk type CDATA #IMPLIED>
+
+<!ELEMENT isim1 (#PCDATA)>
+
+<!ELEMENT isim2 (#PCDATA)>
+
+<!ELEMENT kizcocuk (isim|erkekcocuk|kizcocuk)*>
+<!ATTLIST kizcocuk type CDATA #IMPLIED>

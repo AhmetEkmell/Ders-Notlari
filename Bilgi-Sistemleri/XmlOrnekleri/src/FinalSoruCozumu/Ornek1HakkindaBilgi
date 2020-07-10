@@ -1,0 +1,10 @@
+Baba: Kadir
+Çocukları: Ahmet, Ayşe
+Ahmet'in çocukları: Yavuz, Mahmut, Nisanur
+Ayşe'nin çocukları: İsmail, İklim
+Nisanur'un çocukları: Yunus, Ömer
+Ömer'in çocukları: Mehmet, Fatma
+
+Bizden istenilen yukarıdaki şekildeki soyağacının tanımlandığı bir xml dokümanı.
+Bu xml dokümanının .dtd ve .xsd dosyalarını da inceleyebilirsiniz. 
+
