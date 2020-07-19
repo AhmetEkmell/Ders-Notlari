@@ -1,0 +1,499 @@
+MPASM  4.02 Released                             MOD10000.ASM   7-18-2020  22:31:08         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (LIST)
+                      00001 LIST P=16F877A
+Warning[205]: Found directive in column 1. (INCLUDE)
+                      00002 INCLUDE <P16F877A.INC>
+                      00001         LIST
+                      00002 ; P16F877A.INC  Standard Header File, Version 1.00    Microchip Technology, Inc.
+                      00398         LIST
+Warning[205]: Found directive in column 1. (__CONFIG)
+2007   3F7A           00003 __CONFIG _CP_OFF &_WDT_OFF &_HS_OSC &_PWRTE_OFF &_LVP_OFF
+                      00004 
+                      00005 ;Bu uygulama bir dijital olarak sayaç uygulamasýdýr.
+                      00006 ;Sayaç 0 dan 9999'a kadar sayma iþlemini display de gösterecek.
+                      00007 
+  00000020            00008 SAYI0  EQU 0x20
+  00000021            00009 SAYI1  EQU 0x21
+  00000022            00010 SAYI2  EQU 0x22
+  00000023            00011 TEMP   EQU 0x23
+  00000024            00012 BIRLER EQU 0x24
+  00000025            00013 ONLAR  EQU 0x25
+  00000026            00014 YUZLER EQU 0x26
+  00000027            00015 BINLER EQU 0x27
+  00000028            00016 TEMP1  EQU 0x28
+  00000029            00017 TEMP2  EQU 0x29
+  0000002A            00018 TEMP3  EQU 0x2A
+  0000002B            00019 TEMP4  EQU 0x2B
+                      00020 
+0000                  00021     ORG 0
+0000   2805           00022     GOTO START 
+                      00023     
+0004                  00024     ORG 4
+0004   2805           00025     GOTO START 
+                      00026 
+                      00027 BANK0 MACRO 
+                      00028         BCF STATUS,5
+                      00029         ENDM 
+                      00030 BANK1 MACRO 
+                      00031         BSF STATUS,5
+                      00032         ENDM 
+0005                  00033 START 
+                      00034         BANK1
+0005   1683               M         BSF STATUS,5
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0006   0186           00035         CLRF TRISB
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0007   0188           00036         CLRF TRISD
+                      00037     BANK0
+0008   1283               M         BCF STATUS,5
+0009   0186           00038     CLRF PORTB
+000A   0188           00039     CLRF PORTD
+000B   3000           00040     MOVLW .0
+000C   00A7           00041     MOVWF BINLER
+000D   3000           00042     MOVLW .0
+000E   00A6           00043     MOVWF YUZLER 
+MPASM  4.02 Released                             MOD10000.ASM   7-18-2020  22:31:08         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000F   3000           00044     MOVLW .0
+0010   00A5           00045     MOVWF ONLAR
+0011   3000           00046     MOVLW .0
+0012   00A4           00047     MOVWF BIRLER
+                      00048    
+0013                  00049 LOOP 
+0013   300A           00050         MOVLW .10    ; BURADA templer 0-9 a kadar artýrma yaparken kontrol saðlýyorlar.
+0014   00A8           00051         MOVWF TEMP1
+0015                  00052 LOOP1 
+0015   300A           00053         MOVLW .10
+0016   00A9           00054         MOVWF TEMP2
+0017                  00055 LOOP2 
+0017   300A           00056         MOVLW .10
+0018   00AA           00057         MOVWF TEMP3
+0019                  00058 LOOP3 
+0019   300A           00059         MOVLW .10
+001A   00AB           00060         MOVWF TEMP4
+001B                  00061 LOOP4 
+001B   3003           00062         MOVLW .3        ; sayma hýz ayarý 
+001C   00A3           00063         MOVWF TEMP
+001D                  00064 LOOP5 
+001D   2031           00065         CALL GOSTER     ; 12 ms zaman alýr. 83*12 = yaklaþýk 1000 ms yani 1 sn de artýþ gerçekleþiyor.
+001E   0BA3           00066         DECFSZ TEMP,F
+001F   281D           00067         GOTO LOOP5
+0020   0AA4           00068         INCF BIRLER,F   ; birler = birler + 1
+0021   0BAB           00069         DECFSZ TEMP4,F  ; temp4 = temp4 - 1 eðer temp4 = 0 ise 1 komut atla devam et.
+0022   281B           00070         GOTO LOOP4
+0023   01A4           00071         CLRF BIRLER
+0024   0AA5           00072         INCF ONLAR,F
+0025   0BAA           00073         DECFSZ TEMP3,F
+0026   2819           00074         GOTO LOOP3
+0027   01A5           00075         CLRF ONLAR
+0028   0AA6           00076         INCF YUZLER,F
+0029   0BA9           00077         DECFSZ TEMP2,F
+002A   2817           00078         GOTO LOOP2
+002B   01A6           00079         CLRF YUZLER
+002C   0AA7           00080         INCF BINLER,F
+002D   0BA8           00081         DECFSZ TEMP1,F
+002E   2815           00082         GOTO LOOP1
+002F   01A7           00083         CLRF BINLER
+0030   2813           00084         GOTO LOOP
+                      00085 
+0031                  00086 GOSTER ; burada seçilen displaylere deðerler gönderiliyor ve
+                      00087            ; aktif olan display de sonuç yazdýrýlýyor.
+0031   3008           00088         MOVLW B'00001000'
+0032   0086           00089         MOVWF PORTB
+0033   0824           00090         MOVF BIRLER,W
+0034   0088           00091         MOVWF PORTD
+0035   2046           00092         CALL BEKLE
+0036   3004           00093         MOVLW B'00000100'
+0037   0086           00094         MOVWF PORTB
+0038   0825           00095         MOVF ONLAR,W
+0039   0088           00096         MOVWF PORTD
+MPASM  4.02 Released                             MOD10000.ASM   7-18-2020  22:31:08         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+003A   2046           00097         CALL BEKLE
+003B   3002           00098         MOVLW B'00000010'
+003C   0086           00099         MOVWF PORTB
+003D   0826           00100         MOVF YUZLER,W
+003E   0088           00101         MOVWF PORTD
+003F   2046           00102         CALL BEKLE
+0040   3001           00103         MOVLW B'00000001'
+0041   0086           00104         MOVWF PORTB
+0042   0827           00105         MOVF BINLER,W
+0043   0088           00106         MOVWF PORTD
+0044   2046           00107         CALL BEKLE
+0045   0008           00108         RETURN
+                      00109 
+                      00110 ;Programda gecikme yaparak sonucun gözle görülebilir düzeye
+                      00111 ;getirilme iþlemleri yapýlýyor.
+0046                  00112 BEKLE
+0046   3001           00113         MOVLW .1
+0047   00A0           00114         MOVWF SAYI0
+0048                  00115 BEKLE0 
+0048   3032           00116         MOVLW .50
+0049   00A1           00117         MOVWF SAYI1
+004A                  00118 BEKLE1
+004A   3032           00119         MOVLW .50
+004B   00A2           00120         MOVWF SAYI2
+004C                  00121 BEKLE2
+004C   0BA2           00122         DECFSZ SAYI2,F
+004D   284C           00123         GOTO BEKLE2
+004E   0BA1           00124         DECFSZ SAYI1,F
+004F   284A           00125         GOTO BEKLE1
+0050   0BA0           00126         DECFSZ SAYI0,F
+0051   2848           00127         GOTO BEKLE0
+0052   0008           00128         RETURN
+                      00129   END
+MPASM  4.02 Released                             MOD10000.ASM   7-18-2020  22:31:08         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+BANK0                             
+BANK1                             
+BCLIE                             00000003
+BCLIF                             00000003
+BEKLE                             00000046
+BEKLE0                            00000048
+BEKLE1                            0000004A
+BEKLE2                            0000004C
+BF                                00000000
+BINLER                            00000027
+BIRLER                            00000024
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+MPASM  4.02 Released                             MOD10000.ASM   7-18-2020  22:31:08         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GOSTER                            00000031
+GO_DONE                           00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+MPASM  4.02 Released                             MOD10000.ASM   7-18-2020  22:31:08         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+INTF                              00000001
+IRP                               00000007
+LOOP                              00000013
+LOOP1                             00000015
+LOOP2                             00000017
+LOOP3                             00000019
+LOOP4                             0000001B
+LOOP5                             0000001D
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+ONLAR                             00000025
+OPTION_REG                        00000081
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+MPASM  4.02 Released                             MOD10000.ASM   7-18-2020  22:31:08         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+R                                 00000002
+RBIE                              00000003
+RBIF                              00000000
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_W                               00000002
+S                                 00000003
+SAYI0                             00000020
+SAYI1                             00000021
+SAYI2                             00000022
+SEN                               00000000
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+START                             00000005
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+MPASM  4.02 Released                             MOD10000.ASM   7-18-2020  22:31:08         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TEMP                              00000023
+TEMP1                             00000028
+TEMP2                             00000029
+TEMP3                             0000002A
+TEMP4                             0000002B
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISB                             00000086
+TRISC                             00000087
+TRISD                             00000088
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+YUZLER                            00000026
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+MPASM  4.02 Released                             MOD10000.ASM   7-18-2020  22:31:08         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_BODEN_ON                         00003FFF
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_HS_OSC                           00003FFE
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXX------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    80
+Program Memory Words Free:  8112
+
+
+Errors   :     0
+Warnings :     3 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+

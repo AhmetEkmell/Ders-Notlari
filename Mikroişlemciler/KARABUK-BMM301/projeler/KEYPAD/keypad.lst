@@ -1,0 +1,640 @@
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (LIST)
+                      00001 LIST P=16F877A
+Warning[205]: Found directive in column 1. (INCLUDE)
+                      00002 INCLUDE <P16F877A.INC>
+                      00001         LIST
+                      00002 ; P16F877A.INC  Standard Header File, Version 1.00    Microchip Technology, Inc.
+                      00398         LIST
+Warning[205]: Found directive in column 1. (__CONFIG)
+2007   3F7A           00003 __CONFIG _CP_OFF &_WDT_OFF &_HS_OSC &_PWRTE_OFF &_LVP_OFF
+                      00004 
+                      00005 ;Bu uygulama bir dijital olarak sayaç uygulamasýdýr.
+                      00006 ;Sayaç 0 dan 9999'a kadar sayma iþlemini display de gösterecek.
+                      00007 
+  00000020            00008 SAYI0  EQU 0x20
+  00000021            00009 SAYI1  EQU 0x21
+  00000022            00010 SAYI2  EQU 0x22
+  00000023            00011 TEMP   EQU 0x23
+  00000024            00012 BIRLER EQU 0x24
+  00000025            00013 ONLAR  EQU 0x25
+  00000026            00014 YUZLER EQU 0x26
+  00000027            00015 BINLER EQU 0x27
+  00000028            00016 TEMP1  EQU 0x28
+  00000029            00017 TEMP2  EQU 0x29
+  0000002A            00018 TEMP3  EQU 0x2A
+  0000002B            00019 TEMP4  EQU 0x2B
+                      00020 
+0000                  00021     ORG 0
+0000   2805           00022     GOTO START 
+                      00023     
+0004                  00024     ORG 4
+0004   2805           00025     GOTO START 
+                      00026 
+                      00027 BANK0 MACRO 
+                      00028         BCF STATUS,5
+                      00029         ENDM 
+                      00030 BANK1 MACRO 
+                      00031         BSF STATUS,5
+                      00032         ENDM 
+                      00033 
+0005                  00034 START 
+                      00035         BANK1
+0005   1683               M         BSF STATUS,5
+0006   30F0           00036         MOVLW B'11110000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0007   0088           00037         MOVWF TRISD  ; D portunda 0,1,2 ve 3 output 4,5,6 ve 7 input oldu.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0008   0186           00038         CLRF  TRISB  ; RB0-RB7 OUTPUT.
+                      00039     BANK0
+0009   1283               M         BCF STATUS,5
+000A   0186           00040     CLRF PORTB
+000B   0188           00041     CLRF PORTD
+000C   3000           00042     MOVLW .0
+000D   00A7           00043     MOVWF BINLER
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000E   3000           00044     MOVLW .0
+000F   00A6           00045     MOVWF YUZLER 
+0010   3000           00046     MOVLW .0
+0011   00A5           00047     MOVWF ONLAR
+0012   3000           00048     MOVLW .0
+0013   00A4           00049     MOVWF BIRLER
+                      00050    
+0014                  00051 LOOP 
+0014   2093           00052         CALL GOSTER  ; 6 ms zaman alýr.
+0015   2017           00053         CALL TUSTARA ; 6 ms zamanda buradan.
+0016   2814           00054         GOTO LOOP
+0017                  00055 TUSTARA 
+                      00056 ; 1.SATIR TARAMA BAÞLADI.....
+0017   30F7           00057         MOVLW B'11110111'
+0018   0088           00058         MOVWF PORTD  ; 1.SATIR SEÇME ÝÞLEMÝ YAPILDI.
+0019   20A9           00059         CALL BEKLE ; 1,5 ms bekle.
+001A   1A08           00060 B1  BTFSC PORTD,4  ;Eðer rd4=0 ise 1 komut atla.
+001B   2821           00061         GOTO B2
+001C   3000           00062         MOVLW .0
+001D   00A5           00063         MOVWF ONLAR
+001E   3001           00064         MOVLW .1
+001F   00A4           00065         MOVWF BIRLER
+0020   0008           00066         RETURN
+0021   1A88           00067 B2  BTFSC PORTD,5  ;Eðer rd5=0 ise 1 komut atla.
+0022   2828           00068         GOTO B3
+0023   3000           00069         MOVLW .0
+0024   00A5           00070         MOVWF ONLAR
+0025   3002           00071         MOVLW .2
+0026   00A4           00072         MOVWF BIRLER
+0027   0008           00073         RETURN
+0028   1B08           00074 B3  BTFSC PORTD,6  ;Eðer rd6=0 ise 1 komut atla.
+0029   282F           00075         GOTO B4
+002A   3000           00076         MOVLW .0
+002B   00A5           00077         MOVWF ONLAR
+002C   3003           00078         MOVLW .3
+002D   00A4           00079         MOVWF BIRLER
+002E   0008           00080         RETURN
+002F   1B88           00081 B4  BTFSC PORTD,7  ;Eðer rd7=0 ise 1 komut atla.
+0030   2836           00082         GOTO B5
+0031   3000           00083         MOVLW .0
+0032   00A5           00084         MOVWF ONLAR
+0033   3004           00085         MOVLW .4
+0034   00A4           00086         MOVWF BIRLER
+0035   0008           00087         RETURN
+                      00088 ; 1. SATIR TARAMA BÝTTÝ....
+                      00089 
+                      00090 ; 2.SATIR TARAMA BAÞLADI.....
+0036   30FB           00091 B5      MOVLW B'11111011'
+0037   0088           00092         MOVWF PORTD  ; 2.SATIR SEÇME ÝÞLEMÝ YAPILDI.
+0038   20A9           00093         CALL BEKLE ; 1,5 ms bekle.
+0039   1A08           00094     BTFSC PORTD,4  ;Eðer rd4=0 ise 1 komut atla.
+003A   2840           00095         GOTO B6
+003B   3000           00096         MOVLW .0
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+003C   00A5           00097         MOVWF ONLAR
+003D   3005           00098         MOVLW .5
+003E   00A4           00099         MOVWF BIRLER
+003F   0008           00100         RETURN
+0040   1A88           00101 B6  BTFSC PORTD,5  ;Eðer rd5=0 ise 1 komut atla.
+0041   2847           00102         GOTO B7
+0042   3000           00103         MOVLW .0
+0043   00A5           00104         MOVWF ONLAR
+0044   3006           00105         MOVLW .6
+0045   00A4           00106         MOVWF BIRLER
+0046   0008           00107         RETURN
+0047   1B08           00108 B7  BTFSC PORTD,6  ;Eðer rd6=0 ise 1 komut atla.
+0048   284E           00109         GOTO B8
+0049   3000           00110         MOVLW .0
+004A   00A5           00111         MOVWF ONLAR
+004B   3007           00112         MOVLW .7
+004C   00A4           00113         MOVWF BIRLER
+004D   0008           00114         RETURN
+004E   1B88           00115 B8  BTFSC PORTD,7  ;Eðer rd7=0 ise 1 komut atla.
+004F   2855           00116         GOTO B9
+0050   3000           00117         MOVLW .0
+0051   00A5           00118         MOVWF ONLAR
+0052   3008           00119         MOVLW .8
+0053   00A4           00120         MOVWF BIRLER
+0054   0008           00121         RETURN
+                      00122 ; 2. SATIR TARAMA BÝTTÝ....
+                      00123 
+                      00124 ; 3.SATIR TARAMA BAÞLADI.....
+0055   30FD           00125 B9      MOVLW B'11111101'
+0056   0088           00126         MOVWF PORTD  ; 3.SATIR SEÇME ÝÞLEMÝ YAPILDI.
+0057   20A9           00127         CALL BEKLE ; 1,5 ms bekle.
+0058   1A08           00128     BTFSC PORTD,4  ;Eðer rd4=0 ise 1 komut atla.
+0059   285F           00129         GOTO B10
+005A   3000           00130         MOVLW .0
+005B   00A5           00131         MOVWF ONLAR
+005C   3009           00132         MOVLW .9
+005D   00A4           00133         MOVWF BIRLER
+005E   0008           00134         RETURN
+005F   1A88           00135 B10  BTFSC PORTD,5  ;Eðer rd5=0 ise 1 komut atla.
+0060   2866           00136         GOTO B11
+0061   3001           00137         MOVLW .1
+0062   00A5           00138         MOVWF ONLAR
+0063   3000           00139         MOVLW .0
+0064   00A4           00140         MOVWF BIRLER
+0065   0008           00141         RETURN
+0066   1B08           00142 B11  BTFSC PORTD,6  ;Eðer rd6=0 ise 1 komut atla.
+0067   286D           00143         GOTO B12
+0068   3001           00144         MOVLW .1
+0069   00A5           00145         MOVWF ONLAR
+006A   3001           00146         MOVLW .1
+006B   00A4           00147         MOVWF BIRLER
+006C   0008           00148         RETURN
+006D   1B88           00149 B12  BTFSC PORTD,7  ;Eðer rd7=0 ise 1 komut atla.
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006E   2874           00150         GOTO B13
+006F   3001           00151         MOVLW .1
+0070   00A5           00152         MOVWF ONLAR
+0071   3002           00153         MOVLW .2
+0072   00A4           00154         MOVWF BIRLER
+0073   0008           00155         RETURN
+                      00156 ; 3. SATIR TARAMA BÝTTÝ....
+                      00157 
+                      00158 ; 4.SATIR TARAMA BAÞLADI.....
+0074   30FE           00159 B13     MOVLW B'11111110'
+0075   0088           00160         MOVWF PORTD  ; 4.SATIR SEÇME ÝÞLEMÝ YAPILDI.
+0076   20A9           00161         CALL BEKLE ; 1,5 ms bekle.
+0077   1A08           00162     BTFSC PORTD,4  ;Eðer rd4=0 ise 1 komut atla.
+0078   287E           00163         GOTO B14
+0079   3001           00164         MOVLW .1
+007A   00A5           00165         MOVWF ONLAR
+007B   3003           00166         MOVLW .3
+007C   00A4           00167         MOVWF BIRLER
+007D   0008           00168         RETURN
+007E   1A88           00169 B14  BTFSC PORTD,5  ;Eðer rd5=0 ise 1 komut atla.
+007F   2885           00170         GOTO B15
+0080   3001           00171         MOVLW .1
+0081   00A5           00172         MOVWF ONLAR
+0082   3004           00173         MOVLW .4
+0083   00A4           00174         MOVWF BIRLER
+0084   0008           00175         RETURN
+0085   1B08           00176 B15  BTFSC PORTD,6  ;Eðer rd6=0 ise 1 komut atla.
+0086   288C           00177         GOTO B16
+0087   3001           00178         MOVLW .1
+0088   00A5           00179         MOVWF ONLAR
+0089   3005           00180         MOVLW .5
+008A   00A4           00181         MOVWF BIRLER
+008B   0008           00182         RETURN
+008C   1B88           00183 B16  BTFSC PORTD,7  ;Eðer rd7=0 ise 1 komut atla.
+008D   0008           00184         RETURN          ; HÝÇBÝR BUTON BASILI DEÐÝLSE BURASI ÇALIÞIYOR.
+008E   3001           00185         MOVLW .1
+008F   00A5           00186         MOVWF ONLAR
+0090   3006           00187         MOVLW .6
+0091   00A4           00188         MOVWF BIRLER
+0092   0008           00189         RETURN
+                      00190 ; 4. SATIR TARAMA BÝTTÝ....
+                      00191 
+                      00192 
+0093                  00193 GOSTER ; burada seçilen displaylere deðerler gönderiliyor ve
+                      00194            ; aktif olan display de sonuç yazdýrýlýyor.
+0093   0827           00195         MOVF BINLER,W ; W = BINLER
+0094   0088           00196         MOVWF PORTD       ; PORTD = W => DATA BUS = BINLER
+0095   3001           00197         MOVLW B'00000001'
+0096   0086           00198         MOVWF PORTB   ; RB0=1 OLDU BINLER DISPLAY AKTÝF
+0097   20A9           00199         CALL BEKLE        ; 3ms BEKLE
+0098   0826           00200         MOVF YUZLER,W
+0099   0088           00201         MOVWF PORTD
+009A   3002           00202         MOVLW B'00000010'
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+009B   0086           00203         MOVWF PORTB
+009C   20A9           00204         CALL BEKLE    ; 3ms BEKLE
+009D   0825           00205         MOVF ONLAR,W
+009E   0088           00206         MOVWF PORTD
+009F   3004           00207         MOVLW B'00000100'
+00A0   0086           00208         MOVWF PORTB
+00A1   20A9           00209         CALL BEKLE    ; 3ms BEKLE
+00A2   0824           00210         MOVF BIRLER,W
+00A3   0088           00211         MOVWF PORTD
+00A4   3008           00212         MOVLW B'00001000'
+00A5   0086           00213         MOVWF PORTB
+00A6   20A9           00214         CALL BEKLE    ; 3ms BEKLE
+00A7   0186           00215         CLRF PORTB
+Warning[203]: Found opcode in column 1. (RETURN)
+00A8   0008           00216 RETURN
+                      00217 
+                      00218 
+                      00219 ;Programda gecikme yaparak sonucun gözle görülebilir düzeye
+                      00220 ;getirilme iþlemleri yapýlýyor.
+00A9                  00221 BEKLE
+00A9   3032           00222         MOVLW .50 
+00AA   00A0           00223         MOVWF SAYI0
+00AB                  00224 BEKLE0 
+00AB   3032           00225         MOVLW .50
+00AC   00A1           00226         MOVWF SAYI1
+00AD                  00227 BEKLE1
+00AD   3032           00228         MOVLW .50
+00AE   00A2           00229         MOVWF SAYI2
+00AF                  00230 BEKLE2
+00AF   0BA2           00231         DECFSZ SAYI2,F
+00B0   28AF           00232         GOTO BEKLE2
+00B1   0BA1           00233         DECFSZ SAYI1,F
+00B2   28AD           00234         GOTO BEKLE1
+00B3   0BA0           00235         DECFSZ SAYI0,F
+00B4   28AB           00236         GOTO BEKLE0
+00B5   0008           00237         RETURN
+                      00238   END
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+B1                                0000001A
+B10                               0000005F
+B11                               00000066
+B12                               0000006D
+B13                               00000074
+B14                               0000007E
+B15                               00000085
+B16                               0000008C
+B2                                00000021
+B3                                00000028
+B4                                0000002F
+B5                                00000036
+B6                                00000040
+B7                                00000047
+B8                                0000004E
+B9                                00000055
+BANK0                             
+BANK1                             
+BCLIE                             00000003
+BCLIF                             00000003
+BEKLE                             000000A9
+BEKLE0                            000000AB
+BEKLE1                            000000AD
+BEKLE2                            000000AF
+BF                                00000000
+BINLER                            00000027
+BIRLER                            00000024
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GOSTER                            00000093
+GO_DONE                           00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP                              00000014
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+ONLAR                             00000025
+OPTION_REG                        00000081
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+R                                 00000002
+RBIE                              00000003
+RBIF                              00000000
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_W                               00000002
+S                                 00000003
+SAYI0                             00000020
+SAYI1                             00000021
+SAYI2                             00000022
+SEN                               00000000
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+START                             00000005
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TEMP                              00000023
+TEMP1                             00000028
+TEMP2                             00000029
+TEMP3                             0000002A
+TEMP4                             0000002B
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISB                             00000086
+TRISC                             00000087
+TRISD                             00000088
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TUSTARA                           00000017
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+YUZLER                            00000026
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_HS_OSC                           00003FFE
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXX----------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   179
+Program Memory Words Free:  8013
+
+
+MPASM  4.02 Released                               KEYPAD.ASM   7-18-2020  22:28:54         PAGE 12
+
+
+
+
+
+Errors   :     0
+Warnings :     4 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+

@@ -1,0 +1,13 @@
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 1 : Found directive in column 1. (LIST)
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 2 : Found directive in column 1. (INCLUDE)
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 4 : Found directive in column 1. (__CONFIG)
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 25 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 30 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 35 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 40 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 45 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 50 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 55 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 60 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 166 : Found opcode in column 1. (RETURN)
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED\YURUYEN_LED.ASM 167 : Found directive in column 1. (END)

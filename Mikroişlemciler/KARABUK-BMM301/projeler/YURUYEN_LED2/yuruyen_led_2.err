@@ -1,0 +1,4 @@
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED2\YURUYEN_LED_2.ASM 1 : Found directive in column 1. (LIST)
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED2\YURUYEN_LED_2.ASM 2 : Found directive in column 1. (INCLUDE)
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED2\YURUYEN_LED_2.ASM 4 : Found directive in column 1. (__CONFIG)
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\YURUYEN_LED2\YURUYEN_LED_2.ASM 24 : Register in operand not in bank 0.  Ensure that bank bits are correct.

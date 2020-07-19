@@ -1,0 +1,6 @@
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\KEYPAD\KEYPAD.ASM 1 : Found directive in column 1. (LIST)
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\KEYPAD\KEYPAD.ASM 2 : Found directive in column 1. (INCLUDE)
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\KEYPAD\KEYPAD.ASM 3 : Found directive in column 1. (__CONFIG)
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\KEYPAD\KEYPAD.ASM 37 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\KEYPAD\KEYPAD.ASM 38 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] C:\USERS\AHMET\DESKTOP\PROJELER\KEYPAD\KEYPAD.ASM 216 : Found opcode in column 1. (RETURN)

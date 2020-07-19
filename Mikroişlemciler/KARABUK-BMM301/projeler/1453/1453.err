@@ -1,0 +1,5 @@
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\1453\1453.ASM 1 : Found directive in column 1. (LIST)
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\1453\1453.ASM 2 : Found directive in column 1. (INCLUDE)
+Warning[205] C:\USERS\AHMET\DESKTOP\PROJELER\1453\1453.ASM 4 : Found directive in column 1. (__CONFIG)
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\1453\1453.ASM 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\AHMET\DESKTOP\PROJELER\1453\1453.ASM 29 : Register in operand not in bank 0.  Ensure that bank bits are correct.

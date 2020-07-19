@@ -1,0 +1,47 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=yuruyen_led_2.err
+Folder=Intermediary
+DeviceName=PIC16F877A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPASM Suite\MPAsmWin.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|yuruyen_led_2.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+[File001]
+Location=C:\Users\Ahmet\Desktop\projeler\YURUYEN_LED2\yuruyen_led_2.cod
+Folder=Output
+DeviceName=PIC16F877A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPASM Suite\MPAsmWin.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|yuruyen_led_2.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+[File002]
+Location=C:\Users\Ahmet\Desktop\projeler\YURUYEN_LED2\yuruyen_led_2.hex
+Folder=Output
+DeviceName=PIC16F877A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPASM Suite\MPAsmWin.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|yuruyen_led_2.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+[File003]
+Location=yuruyen_led_2.lst
+Folder=Output
+DeviceName=PIC16F877A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\MPASM Suite\MPAsmWin.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|yuruyen_led_2.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=

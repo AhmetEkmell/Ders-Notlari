@@ -1,0 +1,553 @@
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (LIST)
+                      00001 LIST P=16F877A ; hangi mikrodenetleyici kullanýyorsak onu belirtiyoruz.
+Warning[205]: Found directive in column 1. (INCLUDE)
+                      00002 INCLUDE <P16F877A.INC> ; <> arasýnda yer alan dosya içerisinde ki tanýmlamalarý kullanmak için ekliyoruz
+                            .
+                      00001         LIST
+                      00002 ; P16F877A.INC  Standard Header File, Version 1.00    Microchip Technology, Inc.
+                      00398         LIST
+                      00003 
+Warning[205]: Found directive in column 1. (__CONFIG)
+2007   3F7A           00004 __CONFIG _CP_OFF &_WDT_OFF &_HS_OSC &_PWRTE_OFF &_LVP_OFF
+                      00005 
+  00000020            00006 SAYAC0 EQU 0X20 ; hafýza adresi 20H den baþlýyor pic de. (bank0 için)
+  00000021            00007 SAYAC1 EQU 0X21 ; 3 adet register tanýmladýk.
+  00000022            00008 SAYAC2 EQU 0X22
+                      00009 
+0000                  00010         ORG 0           ; program belleði üzerinde bir adrese git demek. (0.adrese git)
+0000   2805           00011         GOTO START
+                      00012 
+0004                  00013         ORG 4           ; interrupt kullanacak olursak lazým olacak. (4.adrese git)
+0004   2805           00014         GOTO START  ; goto ile pc ýn gösterdiði adres deðiþir. 
+                      00015 
+                      00016 BANK0 MACRO ; macro, endm olan kýsýma kadar ki bütün kodlarý copy paste yap iþlemini yapýyor.
+                      00017           BCF STATUS,5 ;Bank0 aktif olmasý için BCF ile 5.bit status yerine 0 deðerini veriyoruz.
+                      00018           ENDM
+                      00019 BANK1 MACRO
+                      00020           BSF STATUS,5 ;Bank1 aktif olmasý için BSF ile 5.bit status yere 1 deðeri veriliyor.
+                      00021           ENDM
+                      00022 
+0005                  00023 START 
+                      00024           BANK1
+0005   1683               M           BSF STATUS,5 ;Bank1 aktif olmasý için BSF ile 5.bit status yere 1 deðeri veriliyor.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0006   1007           00025           BCF TRISC,0 ; TRISC'nin 1.bitini(RC1) 0 yap(output). TRISC, portc yi kullanýrken I/O kontrolü 
+                            yapmamýzý saðlýyor
+                      00026           BANK0
+0007   1283               M           BCF STATUS,5 ;Bank0 aktif olmasý için BCF ile 5.bit status yerine 0 deðerini veriyoruz.
+0008   1007           00027           BCF PORTC,0 ; RC1'i 0 yap yani.
+                      00028                 
+                      00029           BANK1
+0009   1683               M           BSF STATUS,5 ;Bank1 aktif olmasý için BSF ile 5.bit status yere 1 deðeri veriliyor.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000A   1087           00030           BCF TRISC,1 ; TRISC'nin 1.bitini(RC1) 0 yap(output). TRISC, portc yi kullanýrken I/O kontrolü 
+                            yapmamýzý saðlýyor
+                      00031           BANK0
+000B   1283               M           BCF STATUS,5 ;Bank0 aktif olmasý için BCF ile 5.bit status yerine 0 deðerini veriyoruz.
+000C   1087           00032           BCF PORTC,1
+                      00033 
+                      00034           BANK1
+000D   1683               M           BSF STATUS,5 ;Bank1 aktif olmasý için BSF ile 5.bit status yere 1 deðeri veriliyor.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000E   1107           00035           BCF TRISC,2
+                      00036           BANK0
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000F   1283               M           BCF STATUS,5 ;Bank0 aktif olmasý için BCF ile 5.bit status yerine 0 deðerini veriyoruz.
+0010   1107           00037           BCF PORTC,2
+                      00038           
+                      00039       BANK1
+0011   1683               M           BSF STATUS,5 ;Bank1 aktif olmasý için BSF ile 5.bit status yere 1 deðeri veriliyor.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0012   1187           00040           BCF TRISC,3
+                      00041           BANK0
+0013   1283               M           BCF STATUS,5 ;Bank0 aktif olmasý için BCF ile 5.bit status yerine 0 deðerini veriyoruz.
+0014   1187           00042           BCF PORTC,3
+                      00043 
+                      00044       BANK1
+0015   1683               M           BSF STATUS,5 ;Bank1 aktif olmasý için BSF ile 5.bit status yere 1 deðeri veriliyor.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0016   1207           00045           BCF TRISC,4
+                      00046           BANK0
+0017   1283               M           BCF STATUS,5 ;Bank0 aktif olmasý için BCF ile 5.bit status yerine 0 deðerini veriyoruz.
+0018   1207           00047           BCF PORTC,4
+                      00048 
+                      00049       BANK1
+0019   1683               M           BSF STATUS,5 ;Bank1 aktif olmasý için BSF ile 5.bit status yere 1 deðeri veriliyor.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001A   1287           00050           BCF TRISC,5
+                      00051           BANK0
+001B   1283               M           BCF STATUS,5 ;Bank0 aktif olmasý için BCF ile 5.bit status yerine 0 deðerini veriyoruz.
+001C   1287           00052           BCF PORTC,5
+                      00053 
+                      00054       BANK1
+001D   1683               M           BSF STATUS,5 ;Bank1 aktif olmasý için BSF ile 5.bit status yere 1 deðeri veriliyor.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001E   1307           00055           BCF TRISC,6
+                      00056           BANK0
+001F   1283               M           BCF STATUS,5 ;Bank0 aktif olmasý için BCF ile 5.bit status yerine 0 deðerini veriyoruz.
+0020   1307           00057           BCF PORTC,6
+                      00058 
+                      00059       BANK1
+0021   1683               M           BSF STATUS,5 ;Bank1 aktif olmasý için BSF ile 5.bit status yere 1 deðeri veriliyor.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0022   1387           00060           BCF TRISC,7
+                      00061           BANK0
+0023   1283               M           BCF STATUS,5 ;Bank0 aktif olmasý için BCF ile 5.bit status yerine 0 deðerini veriyoruz.
+0024   1387           00062           BCF PORTC,7
+                      00063                 
+                      00064           
+                      00065 
+                      00066 
+0025                  00067 LOOP
+0025   1407           00068           BSF PORTC,0
+0026   2066           00069           CALL BEKLE ; alt program çaðrýlýyor.
+0027   1007           00070           BCF PORTC,0
+0028   2066           00071           CALL BEKLE
+                      00072 
+0029   1487           00073           BSF PORTC,1
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+002A   2066           00074           CALL BEKLE ; alt program çaðrýlýyor.
+002B   1087           00075           BCF PORTC,1
+002C   2066           00076           CALL BEKLE
+                      00077 
+002D   1507           00078           BSF PORTC,2
+002E   2066           00079           CALL BEKLE ; alt program çaðrýlýyor.
+002F   1107           00080           BCF PORTC,2
+0030   2066           00081           CALL BEKLE
+                      00082 
+0031   1587           00083           BSF PORTC,3
+0032   2066           00084           CALL BEKLE ; alt program çaðrýlýyor.
+0033   1187           00085           BCF PORTC,3
+0034   2066           00086           CALL BEKLE
+                      00087 
+0035   1607           00088           BSF PORTC,4
+0036   2066           00089           CALL BEKLE ; alt program çaðrýlýyor.
+0037   1207           00090           BCF PORTC,4
+0038   2066           00091           CALL BEKLE
+                      00092 
+0039   1687           00093           BSF PORTC,5
+003A   2066           00094           CALL BEKLE ; alt program çaðrýlýyor.
+003B   1287           00095           BCF PORTC,5
+003C   2066           00096           CALL BEKLE
+                      00097 
+003D   1707           00098           BSF PORTC,6
+003E   2066           00099           CALL BEKLE ; alt program çaðrýlýyor.
+003F   1307           00100           BCF PORTC,6
+0040   2066           00101           CALL BEKLE
+                      00102 
+0041   1787           00103           BSF PORTC,7
+0042   2066           00104           CALL BEKLE ; alt program çaðrýlýyor.
+0043   1387           00105           BCF PORTC,7
+0044   2066           00106           CALL BEKLE
+                      00107 
+0045   1787           00108           BSF PORTC,7
+0046   2066           00109           CALL BEKLE ; alt program çaðrýlýyor.
+0047   1387           00110           BCF PORTC,7
+0048   2066           00111           CALL BEKLE
+                      00112 
+0049   1707           00113           BSF PORTC,6
+004A   2066           00114           CALL BEKLE ; alt program çaðrýlýyor.
+004B   1307           00115           BCF PORTC,6
+004C   2066           00116           CALL BEKLE
+                      00117 
+004D   1687           00118           BSF PORTC,5
+004E   2066           00119           CALL BEKLE ; alt program çaðrýlýyor.
+004F   1287           00120           BCF PORTC,5
+0050   2066           00121           CALL BEKLE
+                      00122 
+0051   1607           00123           BSF PORTC,4
+0052   2066           00124           CALL BEKLE ; alt program çaðrýlýyor.
+0053   1207           00125           BCF PORTC,4
+0054   2066           00126           CALL BEKLE
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00127 
+0055   1587           00128           BSF PORTC,3
+0056   2066           00129           CALL BEKLE ; alt program çaðrýlýyor.
+0057   1187           00130           BCF PORTC,3
+0058   2066           00131           CALL BEKLE
+                      00132 
+0059   1507           00133           BSF PORTC,2
+005A   2066           00134           CALL BEKLE ; alt program çaðrýlýyor.
+005B   1107           00135           BCF PORTC,2
+005C   2066           00136           CALL BEKLE
+                      00137 
+005D   1487           00138           BSF PORTC,1
+005E   2066           00139           CALL BEKLE ; alt program çaðrýlýyor.
+005F   1087           00140           BCF PORTC,1
+0060   2066           00141           CALL BEKLE
+                      00142 
+0061   1407           00143           BSF PORTC,0
+0062   2066           00144           CALL BEKLE ; alt program çaðrýlýyor.
+0063   1007           00145           BCF PORTC,0
+0064   2066           00146           CALL BEKLE
+                      00147 
+0065   2825           00148       GOTO LOOP
+                      00149 
+0066                  00150 BEKLE
+0066   3064           00151           MOVLW .100
+0067   00A0           00152           MOVWF SAYAC0
+0068                  00153 BEKLE1
+0068   3064           00154           MOVLW .100
+0069   00A1           00155           MOVWF SAYAC1
+006A                  00156 BEKLE2
+006A   3032           00157           MOVLW .50
+006B   00A2           00158           MOVWF SAYAC2
+006C                  00159 BEKLE3
+006C   0BA2           00160           DECFSZ SAYAC2,F
+006D   286C           00161           GOTO BEKLE3
+006E   0BA1           00162           DECFSZ SAYAC1,F
+006F   286A           00163           GOTO BEKLE2
+0070   0BA0           00164           DECFSZ SAYAC0,F
+0071   2868           00165           GOTO BEKLE1
+Warning[203]: Found opcode in column 1. (RETURN)
+0072   0008           00166 RETURN
+Warning[205]: Found directive in column 1. (END)
+                      00167 END
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+BANK0                             
+BANK1                             
+BCLIE                             00000003
+BCLIF                             00000003
+BEKLE                             00000066
+BEKLE1                            00000068
+BEKLE2                            0000006A
+BEKLE3                            0000006C
+BF                                00000000
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000003
+CHS1                              00000004
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP                              00000025
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+OPTION_REG                        00000081
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+R                                 00000002
+RBIE                              00000003
+RBIF                              00000000
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_W                               00000002
+S                                 00000003
+SAYAC0                            00000020
+SAYAC1                            00000021
+SAYAC2                            00000022
+SEN                               00000000
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+START                             00000005
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1CS                            00000001
+TMR1H                             0000000F
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISB                             00000086
+TRISC                             00000087
+TRISD                             00000088
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_HS_OSC                           00003FFE
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDT_OFF                          00003FFB
+MPASM  4.02 Released                          YURUYEN_LED.ASM   7-12-2020  20:52:00         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXX-------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   112
+Program Memory Words Free:  8080
+
+
+Errors   :     0
+Warnings :     5 reported,     0 suppressed
+Messages :     8 reported,     0 suppressed
+
+

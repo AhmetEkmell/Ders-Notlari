@@ -1,0 +1,129 @@
+LIST P=16F877A
+INCLUDE <P16F877A.INC>
+__CONFIG _CP_OFF &_WDT_OFF &_HS_OSC &_PWRTE_OFF &_LVP_OFF
+
+;Bu uygulama bir dijital olarak sayaç uygulamasýdýr.
+;Sayaç 0 dan 9999'a kadar sayma iþlemini display de gösterecek.
+
+SAYI0  EQU 0x20
+SAYI1  EQU 0x21
+SAYI2  EQU 0x22
+TEMP   EQU 0x23
+BIRLER EQU 0x24
+ONLAR  EQU 0x25
+YUZLER EQU 0x26
+BINLER EQU 0x27
+TEMP1  EQU 0x28
+TEMP2  EQU 0x29
+TEMP3  EQU 0x2A
+TEMP4  EQU 0x2B
+
+    ORG 0
+    GOTO START 
+    
+    ORG 4
+    GOTO START 
+
+BANK0 MACRO 
+	BCF STATUS,5
+	ENDM 
+BANK1 MACRO 
+	BSF STATUS,5
+	ENDM 
+START 
+	BANK1
+	CLRF TRISB
+	CLRF TRISD
+    BANK0
+    CLRF PORTB
+    CLRF PORTD
+    MOVLW .0
+    MOVWF BINLER
+    MOVLW .0
+    MOVWF YUZLER 
+    MOVLW .0
+    MOVWF ONLAR
+    MOVLW .0
+    MOVWF BIRLER
+   
+LOOP 
+	MOVLW .10    ; BURADA templer 0-9 a kadar artýrma yaparken kontrol saðlýyorlar.
+	MOVWF TEMP1
+LOOP1 
+	MOVLW .10
+	MOVWF TEMP2
+LOOP2 
+	MOVLW .10
+	MOVWF TEMP3
+LOOP3 
+	MOVLW .10
+	MOVWF TEMP4
+LOOP4 
+	MOVLW .3        ; sayma hýz ayarý 
+	MOVWF TEMP
+LOOP5 
+	CALL GOSTER     ; 12 ms zaman alýr. 83*12 = yaklaþýk 1000 ms yani 1 sn de artýþ gerçekleþiyor.
+	DECFSZ TEMP,F
+	GOTO LOOP5
+	INCF BIRLER,F   ; birler = birler + 1
+	DECFSZ TEMP4,F  ; temp4 = temp4 - 1 eðer temp4 = 0 ise 1 komut atla devam et.
+	GOTO LOOP4
+	CLRF BIRLER
+	INCF ONLAR,F
+	DECFSZ TEMP3,F
+	GOTO LOOP3
+	CLRF ONLAR
+	INCF YUZLER,F
+	DECFSZ TEMP2,F
+	GOTO LOOP2
+	CLRF YUZLER
+	INCF BINLER,F
+	DECFSZ TEMP1,F
+	GOTO LOOP1
+	CLRF BINLER
+	GOTO LOOP
+
+GOSTER ; burada seçilen displaylere deðerler gönderiliyor ve
+	   ; aktif olan display de sonuç yazdýrýlýyor.
+	MOVLW B'00001000'
+	MOVWF PORTB
+	MOVF BIRLER,W
+	MOVWF PORTD
+	CALL BEKLE
+	MOVLW B'00000100'
+	MOVWF PORTB
+	MOVF ONLAR,W
+	MOVWF PORTD
+	CALL BEKLE
+	MOVLW B'00000010'
+	MOVWF PORTB
+	MOVF YUZLER,W
+	MOVWF PORTD
+	CALL BEKLE
+	MOVLW B'00000001'
+	MOVWF PORTB
+	MOVF BINLER,W
+	MOVWF PORTD
+	CALL BEKLE
+	RETURN
+
+;Programda gecikme yaparak sonucun gözle görülebilir düzeye
+;getirilme iþlemleri yapýlýyor.
+BEKLE
+	MOVLW .1
+	MOVWF SAYI0
+BEKLE0 
+	MOVLW .50
+	MOVWF SAYI1
+BEKLE1
+	MOVLW .50
+	MOVWF SAYI2
+BEKLE2
+	DECFSZ SAYI2,F
+	GOTO BEKLE2
+	DECFSZ SAYI1,F
+	GOTO BEKLE1
+	DECFSZ SAYI0,F
+	GOTO BEKLE0
+	RETURN
+  END
