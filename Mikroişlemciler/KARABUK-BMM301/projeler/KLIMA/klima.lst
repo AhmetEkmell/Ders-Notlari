@@ -1,0 +1,713 @@
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (LIST)
+                      00001 LIST P=16F877A
+Warning[205]: Found directive in column 1. (INCLUDE)
+                      00002 INCLUDE <P16F877A.INC>
+                      00001         LIST
+                      00002 ; P16F877A.INC  Standard Header File, Version 1.00    Microchip Technology, Inc.
+                      00398         LIST
+Warning[205]: Found directive in column 1. (__CONFIG)
+2007   3F7A           00003 __CONFIG _CP_OFF &_WDT_OFF &_HS_OSC &_PWRTE_OFF &_LVP_OFF
+                      00004 
+  00000020            00005 SAYAC0  EQU 0x20
+  00000021            00006 SAYAC1  EQU 0x21
+  00000022            00007 SAYAC2  EQU 0x22
+  00000023            00008 TEMP    EQU 0x23
+  00000024            00009 BIRLER  EQU 0x24
+  00000025            00010 ONLAR   EQU 0x25
+  00000026            00011 YUZLER  EQU 0x26
+  00000027            00012 BINLER  EQU 0x27
+  00000028            00013 TEMP1   EQU 0x28
+  00000029            00014 TEMP2   EQU 0x29
+  0000002A            00015 TEMP3   EQU 0x2A
+  0000002B            00016 TEMP4   EQU 0x2B
+  0000002C            00017 ISTENEN EQU 0x2C
+  0000002D            00018 ISI     EQU 0x2D
+                      00019 ;****** RESET VECTOR *****
+0000                  00020         ORG 0
+0000   2805           00021         GOTO START
+                      00022 ;****** INTERRUPT VECTOR*****
+0004                  00023         ORG 4
+0004   2805           00024         GOTO START
+                      00025 ;*** MACRO TANIMLAMA *****
+                      00026 BANK0 MACRO
+                      00027           BCF STATUS,5 
+                      00028           ENDM
+                      00029 BANK1 MACRO
+                      00030           BSF STATUS,5
+                      00031           ENDM
+                      00032 ;**** ALT PROGRAMLAR YAZILABÝLÝR *****
+                      00033 
+                      00034 START BANK1
+0005   1683               M           BSF STATUS,5
+0006   30F0           00035           MOVLW B'11110000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0007   0088           00036           MOVWF TRISD   ;RD0,....,RD3 ÇIKIÞ OLDU. RD4,...,RD7 INPUT OLDU.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0008   0186           00037           CLRF TRISB    ;PORTB LER OUTPUT OLDU.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0009   0187           00038           CLRF TRISC    ;PORTC LER OUTPUT OLDU.
+                      00039           BANK0
+000A   1283               M           BCF STATUS,5 
+000B   0187           00040           CLRF PORTC    ; ISITICI VE SOÐUTUCU PASSIVE
+000C   0186           00041           CLRF PORTB    ; DISPLAYLER PASSIVE/KAPALI
+000D   0188           00042           CLRF PORTD    ; DATA HATTINDA 0 DEÐERÝ VAR
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000E   3000           00043           MOVLW .0
+000F   00A7           00044           MOVWF BINLER
+0010   3000           00045           MOVLW .0
+0011   00A6           00046           MOVWF YUZLER
+0012   3000           00047           MOVLW .0
+0013   00A5           00048           MOVWF ONLAR
+0014   3000           00049           MOVLW .0
+0015   00A4           00050           MOVWF BIRLER
+0016   3014           00051           MOVLW .20
+0017   00AC           00052           MOVWF ISTENEN
+0018   3017           00053           MOVLW .23
+0019   00AD           00054           MOVWF ISI   ; ISI SENSÖRDEN GELEN ODA SICAKLIÐI
+                      00055 
+001A   2034           00056 LOOP CALL ISITSOGUT  ; ISITICI MI YOKSA SOÐUTUCU MU KARAR ALT PROGRAMI
+001B   2045           00057          CALL TUSTARA    ; 12 ms ZAMAN ALIR B2(YUKARI) B6(AÞAÐI) OLACAK ÞEKÝLDE ISTENEN DEÐÝÞECEK
+001C   201F           00058          CALL BASAMAKBUL ; BIRLER VE ONLAR REG'LERÝ ISTENEN DEN ELDE EDÝLMELÝ
+001D   20C3           00059          CALL GOSTER     ; 15 KEZ*12ms ZAMAN ALIR.
+001E   281A           00060          GOTO LOOP
+                      00061 ;**** ALT PROGRAMLAR YAZILABÝLÝR ******
+                      00062 
+001F                  00063 BASAMAKBUL
+001F   01A5           00064          CLRF  ONLAR
+0020   01A4           00065          CLRF  BIRLER
+0021   082C           00066          MOVF  ISTENEN,W
+0022   00A3           00067          MOVWF TEMP
+                      00068 
+0023                  00069 BASAMAKBUL1
+0023   1003           00070          BCF STATUS,C
+0024   1103           00071          BCF STATUS,Z
+0025   300A           00072          MOVLW .10
+0026   0223           00073          SUBWF TEMP,W  ;W=TEMP-W(10)
+0027   1903           00074          BTFSC STATUS,Z
+0028   282E           00075          GOTO ESITLIK1  ;Z=1 ESITLIK DURUMU VAR
+0029   1803           00076          BTFSC STATUS,C ;Z=0 BUYUKLUK/KUCUKLUK VAR
+002A   2830           00077          GOTO BUYUKLUK1 ;C=1 ODUNC ALMA YOK BUYUKLUK VAR
+                      00078 ;****** KUCUKLUK BLOGU ******* 
+002B   0823           00079          MOVF TEMP,W
+002C   00A4           00080          MOVWF BIRLER
+002D   0008           00081          RETURN
+002E                  00082 ESITLIK1
+002E   0AA5           00083          INCF ONLAR,F
+002F   0008           00084          RETURN
+0030                  00085 BUYUKLUK1
+0030   0AA5           00086          INCF ONLAR,F ;ONLAR++
+0031   300A           00087          MOVLW .10
+0032   02A3           00088          SUBWF TEMP,F ;TEMP=TEMP-10
+0033   2823           00089          GOTO BASAMAKBUL1
+0034                  00090 ISITSOGUT
+0034   1003           00091          BCF STATUS,C
+0035   1103           00092          BCF STATUS,Z
+0036   082D           00093          MOVF ISI,W
+0037   022C           00094          SUBWF ISTENEN,W ; W=ISTENEN-W(ISI)
+0038   1903           00095          BTFSC STATUS,Z
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0039   283F           00096          GOTO ESITLIK   ;Z=1 ESITLIK DURUMU VAR
+003A   1803           00097          BTFSC STATUS,C ;Z=0 BUYUKLUK/KUCUKLUK VAR
+003B   2842           00098          GOTO BUYUKLUK  ;C=1 ODUNC ALMA YOK BUYUKLUK VAR
+                      00099          ;BUYUKLUK BLOGU C=0 ODUNC ALMA VAR KUCUKLUK BLOGU
+003C   1087           00100          BCF PORTC,1   ;RC1=0 OLDU ISITICI DURDU
+003D   1407           00101          BSF PORTC,0   ;RC0=1 OLDU SOÐUTUCU ÇALIÞTI
+003E   0008           00102          RETURN
+003F                  00103 ESITLIK
+003F   1087           00104          BCF PORTC,1 ;RC1=0 OLDU ISITICI DURDU
+0040   1007           00105          BCF PORTC,0 ;RC0=0 OLDU SOÐUTUCU DURDU
+0041   0008           00106          RETURN
+0042                  00107 BUYUKLUK
+0042   1487           00108          BSF PORTC,1 ;RC1=1 OLDU ISITICI ÇALIÞTI
+0043   1007           00109          BCF PORTC,0 ;RC0=0 OLDU SOÐUTUCU DURDU
+0044   0008           00110          RETURN
+                      00111 
+0045                  00112 TUSTARA
+                      00113 ;******** 1.SATIR TARAMA BAÞLADI **********
+0045   30F7           00114          MOVLW B'11110111'
+0046   0088           00115          MOVWF PORTD   ;RD3=0 OLDU 1.SATIR SEÇÝLDÝ
+0047   20DD           00116          CALL BEKLE    ;1.5ms BEKLER
+0048   1A08           00117 B1       BTFSC PORTD,4 ;EÐER RD4=0 ÝSE 1 ATLA
+0049   284F           00118          GOTO B2
+004A   3000           00119          MOVLW .0
+004B   00A5           00120          MOVWF ONLAR
+004C   3001           00121          MOVLW .1
+004D   00A4           00122          MOVWF BIRLER
+004E   0008           00123          RETURN
+004F   1A88           00124 B2       BTFSC PORTD,5 ;EÐER RD5=0 ÝSE 1 ATLA
+0050   2857           00125          GOTO B3
+                      00126          ; YUKARI BLOGU
+Warning[202]: Argument out of range.  Least significant bits used.
+0051   0A03           00127          INCF STATUS,Z
+0052   3021           00128          MOVLW .33  ; W=33 OLDU
+0053   022C           00129          SUBWF ISTENEN,W ;W=ISTENEN-33(W)
+0054   1903           00130          BTFSC STATUS,Z  ;EÐER Z=0 ÝSE 1 ATLA
+0055   03AC           00131          DECF ISTENEN,F  ;Z=1 ESITLIK VAR ISTENEN 33 OLMUÞ => ISTENEN=ISTENEN-1 AL
+0056   0008           00132          RETURN
+0057   1B08           00133 B3       BTFSC PORTD,6   ;EÐER RD6=0 ÝSE 1 ATLA
+0058   285E           00134          GOTO B4
+0059   3000           00135          MOVLW .0
+005A   00A5           00136          MOVWF ONLAR
+005B   3003           00137          MOVLW .3
+005C   00A4           00138          MOVWF BIRLER
+005D   0008           00139          RETURN
+005E   1B88           00140 B4       BTFSC PORTD,7   ;EÐER RD7=0 ÝSE 1 ATLA
+005F   2865           00141          GOTO B5
+0060   3000           00142          MOVLW .0
+0061   00A5           00143          MOVWF ONLAR
+0062   3004           00144          MOVLW .4
+0063   00A4           00145          MOVWF BIRLER
+0064   0008           00146          RETURN
+                      00147 ;******* 1.SATIR TARAMA BÝTTÝ ***************
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00148 ;******* 2.SATIR TARAMA BAÞLADI *************
+0065   30FB           00149 B5       MOVLW B'11111011'
+0066   0088           00150          MOVWF PORTD   ;RD2=0 OLDU 2.SATIR SEÇÝLDÝ
+0067   20DD           00151          CALL BEKLE    ;1.5ms BEKLER
+0068   1A08           00152          BTFSC PORTD,4 ;EÐER RD4=0 ÝSE 1 ATLA
+0069   286F           00153          GOTO B6
+006A   3000           00154          MOVLW .0
+006B   00A5           00155          MOVWF ONLAR
+006C   3006           00156          MOVLW .6
+006D   00A4           00157          MOVWF BIRLER
+006E   0008           00158          RETURN
+006F   1A88           00159 B6       BTFSC PORTD,5 ;EÐER RD5=0 ÝSE 1 ATLA
+0070   2877           00160          GOTO B7
+                      00161          ; AÞAÐI BLOGU
+Warning[202]: Argument out of range.  Least significant bits used.
+0071   0303           00162          DECF STATUS,Z
+0072   300F           00163          MOVLW .15  ; W=15 OLDU
+0073   022C           00164          SUBWF ISTENEN,W ;W=ISTENEN-15(W)
+0074   1903           00165          BTFSC STATUS,Z  ;EÐER Z=0 ÝSE 1 ATLA
+0075   0AAC           00166          INCF ISTENEN,F  ;Z=1 ESITLIK VAR ISTENEN 15 OLMUÞ => ISTENEN=ISTENEN+1 AL
+0076   0008           00167          RETURN
+0077   1B08           00168 B7       BTFSC PORTD,6   ;EÐER RD6=0 ÝSE 1 ATLA
+0078   287E           00169          GOTO B8
+0079   3000           00170          MOVLW .0
+007A   00A5           00171          MOVWF ONLAR
+007B   3007           00172          MOVLW .7
+007C   00A4           00173          MOVWF BIRLER
+007D   0008           00174          RETURN
+007E   1B88           00175 B8       BTFSC PORTD,7   ;EÐER RD7=0 ÝSE 1 ATLA
+007F   2885           00176          GOTO B9
+0080   3000           00177          MOVLW .0
+0081   00A5           00178          MOVWF ONLAR
+0082   3008           00179          MOVLW .8
+0083   00A4           00180          MOVWF BIRLER
+0084   0008           00181          RETURN
+                      00182 ;********** 2.SATIR BÝTTÝ ***************
+                      00183 ;******* 3.SATIR TARAMA BAÞLADI *************
+0085   30FD           00184 B9       MOVLW B'11111101'
+0086   0088           00185          MOVWF PORTD   ;RD1=0 OLDU 2.SATIR SEÇÝLDÝ
+0087   20DD           00186          CALL BEKLE    ;1.5ms BEKLER
+0088   1A08           00187          BTFSC PORTD,4 ;EÐER RD4=0 ÝSE 1 ATLA
+0089   288F           00188          GOTO B10
+008A   3000           00189          MOVLW .0
+008B   00A5           00190          MOVWF ONLAR
+008C   3009           00191          MOVLW .9
+008D   00A4           00192          MOVWF BIRLER
+008E   0008           00193          RETURN
+008F   1A88           00194 B10  BTFSC PORTD,5 ;EÐER RD5=0 ÝSE 1 ATLA
+0090   2896           00195          GOTO B11
+0091   3001           00196          MOVLW .1 
+0092   00A5           00197          MOVWF ONLAR
+0093   3000           00198          MOVLW .0
+0094   00A4           00199          MOVWF BIRLER
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0095   0008           00200          RETURN
+0096   1B08           00201 B11      BTFSC PORTD,6   ;EÐER RD6=0 ÝSE 1 ATLA
+0097   289D           00202          GOTO B12
+0098   3001           00203          MOVLW .1
+0099   00A5           00204          MOVWF ONLAR
+009A   3001           00205          MOVLW .1
+009B   00A4           00206          MOVWF BIRLER
+009C   0008           00207          RETURN
+009D   1B88           00208 B12      BTFSC PORTD,7   ;EÐER RD7=0 ÝSE 1 ATLA
+009E   28A4           00209          GOTO B13
+009F   3001           00210          MOVLW .1
+00A0   00A5           00211          MOVWF ONLAR
+00A1   3002           00212          MOVLW .2
+00A2   00A4           00213          MOVWF BIRLER
+00A3   0008           00214          RETURN
+                      00215 ;********** 3.SATIR BÝTTÝ ***************
+                      00216 ;******* 4.SATIR TARAMA BAÞLADI *************
+00A4   30FE           00217 B13      MOVLW B'11111110'
+00A5   0088           00218          MOVWF PORTD   ;RD0=0 OLDU 2.SATIR SEÇÝLDÝ
+00A6   20DD           00219          CALL BEKLE    ;1.5ms BEKLER
+00A7   1A08           00220          BTFSC PORTD,4 ;EÐER RD4=0 ÝSE 1 ATLA
+00A8   28AE           00221          GOTO B14
+00A9   3001           00222          MOVLW .1
+00AA   00A5           00223          MOVWF ONLAR
+00AB   3003           00224          MOVLW .3
+00AC   00A4           00225          MOVWF BIRLER
+00AD   0008           00226          RETURN
+00AE   1A88           00227 B14      BTFSC PORTD,5 ;EÐER RD5=0 ÝSE 1 ATLA
+00AF   28B5           00228          GOTO B15        
+00B0   3001           00229          MOVLW .1  
+00B1   00A5           00230          MOVWF ONLAR
+00B2   3004           00231          MOVLW .4
+00B3   00A4           00232          MOVWF BIRLER
+00B4   0008           00233          RETURN
+00B5   1B08           00234 B15      BTFSC PORTD,6   ;EÐER RD6=0 ÝSE 1 ATLA
+00B6   28BC           00235          GOTO B16
+00B7   3001           00236          MOVLW .1
+00B8   00A5           00237          MOVWF ONLAR
+00B9   3005           00238          MOVLW .5
+00BA   00A4           00239          MOVWF BIRLER
+00BB   0008           00240          RETURN
+00BC   1B88           00241 B16      BTFSC PORTD,7   ;EÐER RD7=0 ÝSE 1 ATLA
+00BD   0008           00242          RETURN 
+00BE   3001           00243          MOVLW .1
+00BF   00A5           00244          MOVWF ONLAR
+00C0   3006           00245          MOVLW .6
+00C1   00A4           00246          MOVWF BIRLER
+00C2   0008           00247          RETURN
+                      00248 ;********** 4.SATIR BÝTTÝ ***************
+                      00249 
+00C3                  00250 GOSTER 
+00C3   300F           00251         MOVLW .15
+00C4   00A8           00252         MOVWF TEMP1
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00C5                  00253 GOSTER1
+00C5   0827           00254         MOVF BINLER,W
+00C6   0088           00255         MOVWF PORTD   ;PORTD = W  => DATA BUS = BINLER
+00C7   3001           00256         MOVLW B'00000001'
+00C8   0086           00257         MOVWF PORTB   ;RB0=1 OLDU BINLER DISPLAY AKTÝF
+00C9   20DD           00258         CALL BEKLE    ;3ms bekler
+00CA   0826           00259         MOVF YUZLER,W
+00CB   0088           00260         MOVWF PORTD   ;PORTD = W  => DATA BUS = YUZLER
+00CC   3002           00261         MOVLW B'00000010'
+00CD   0086           00262         MOVWF PORTB   ;RB1=1 OLDU BINLER DISPLAY AKTÝF
+00CE   20DD           00263         CALL BEKLE
+00CF   0825           00264         MOVF ONLAR,W
+00D0   0088           00265         MOVWF PORTD   ;PORTD = W  => DATA BUS = ONLAR
+00D1   3004           00266         MOVLW B'00000100'
+00D2   0086           00267         MOVWF PORTB   ;RB2=1 OLDU BINLER DISPLAY AKTÝF
+00D3   20DD           00268         CALL BEKLE
+00D4   0824           00269         MOVF BIRLER,W
+00D5   0088           00270         MOVWF PORTD   ;PORTD = W  => DATA BUS = BIRLER
+00D6   3008           00271         MOVLW B'00001000'
+00D7   0086           00272         MOVWF PORTB   ;RB3=1 OLDU BINLER DISPLAY AKTÝF
+00D8   20DD           00273         CALL BEKLE
+00D9   0BA8           00274         DECFSZ TEMP1,F ;TEMP1 = TEMP1-1 EÐER TEMP1=0 ÝSE 1 ATLA
+00DA   28C5           00275         GOTO GOSTER1
+00DB   0186           00276         CLRF PORTB    ; DISPLAY MODULU PASSIVE TUM DISPLAYLER KAPALI
+00DC   0008           00277         RETURN
+                      00278 
+00DD                  00279 BEKLE
+00DD   3032           00280         MOVLW .50
+00DE   00A0           00281         MOVWF SAYAC0
+00DF                  00282 BEKLE0
+00DF   3032           00283         MOVLW .50
+00E0   00A1           00284         MOVWF SAYAC1
+00E1                  00285 BEKLE1
+00E1   3032           00286         MOVLW .50
+00E2   00A2           00287         MOVWF SAYAC2
+00E3                  00288 BEKLE2
+00E3   0BA2           00289         DECFSZ SAYAC2,F
+00E4   28E3           00290         GOTO BEKLE2
+00E5   0BA1           00291         DECFSZ SAYAC1,F
+00E6   28E1           00292         GOTO BEKLE1
+00E7   0BA0           00293         DECFSZ SAYAC0,F
+00E8   28DF           00294         GOTO BEKLE0
+00E9   0008           00295         RETURN
+                      00296         END
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+B1                                00000048
+B10                               0000008F
+B11                               00000096
+B12                               0000009D
+B13                               000000A4
+B14                               000000AE
+B15                               000000B5
+B16                               000000BC
+B2                                0000004F
+B3                                00000057
+B4                                0000005E
+B5                                00000065
+B6                                0000006F
+B7                                00000077
+B8                                0000007E
+B9                                00000085
+BANK0                             
+BANK1                             
+BASAMAKBUL                        0000001F
+BASAMAKBUL1                       00000023
+BCLIE                             00000003
+BCLIF                             00000003
+BEKLE                             000000DD
+BEKLE0                            000000DF
+BEKLE1                            000000E1
+BEKLE2                            000000E3
+BF                                00000000
+BINLER                            00000027
+BIRLER                            00000024
+BRGH                              00000002
+BUYUKLUK                          00000042
+BUYUKLUK1                         00000030
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+EEIF                              00000004
+EEPGD                             00000007
+ESITLIK                           0000003F
+ESITLIK1                          0000002E
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GOSTER                            000000C3
+GOSTER1                           000000C5
+GO_DONE                           00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+ISI                               0000002D
+ISITSOGUT                         00000034
+ISTENEN                           0000002C
+LOOP                              0000001A
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+ONLAR                             00000025
+OPTION_REG                        00000081
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+R                                 00000002
+RBIE                              00000003
+RBIF                              00000000
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_W                               00000002
+S                                 00000003
+SAYAC0                            00000020
+SAYAC1                            00000021
+SAYAC2                            00000022
+SEN                               00000000
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+START                             00000005
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TEMP                              00000023
+TEMP1                             00000028
+TEMP2                             00000029
+TEMP3                             0000002A
+TEMP4                             0000002B
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISB                             00000086
+TRISC                             00000087
+TRISD                             00000088
+TRISE                             00000089
+TRISE0                            00000000
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TUSTARA                           00000045
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+YUZLER                            00000026
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_HS_OSC                           00003FFE
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+MPASM  4.02 Released                                KLIMA.ASM   7-20-2020  22:37:28         PAGE 13
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXX------ ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   231
+Program Memory Words Free:  7961
+
+
+Errors   :     0
+Warnings :     5 reported,     0 suppressed
+Messages :     3 reported,     0 suppressed
+
+
