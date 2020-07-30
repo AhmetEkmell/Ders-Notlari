@@ -1,0 +1,750 @@
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001       LIST P=16F877A
+                      00002      INCLUDE <P16F877A.INC>
+                      00001         LIST
+                      00002 ; P16F877A.INC  Standard Header File, Version 1.00    Microchip Technology, Inc.
+                      00398         LIST
+2007   3F7A           00003      __CONFIG _CP_OFF &_WDT_OFF &_HS_OSC &_PWRTE_OFF &_LVP_OFF
+                      00004 
+  00000020            00005 SAYI0   EQU 20H
+  00000021            00006 SAYI1   EQU 21H
+  00000022            00007 SAYI2   EQU 22H
+  00000023            00008 TEMP    EQU 23H
+  00000024            00009 BIRLER  EQU 24H
+  00000025            00010 ONLAR   EQU 25H
+  00000026            00011 YUZLER  EQU 26H
+  00000027            00012 BINLER  EQU 27H
+  00000028            00013 ISI     EQU 28H
+  00000029            00014 ISTENEN EQU 29H 
+  0000002A            00015 TEMP5   EQU 2AH 
+  0000002B            00016 TEMP6   EQU 2BH
+                      00017 
+0000                  00018     ORG 0
+0000   2805           00019     GOTO START 
+                      00020     
+0004                  00021     ORG 4
+0004   2805           00022     GOTO START 
+                      00023 
+                      00024 BANK0 MACRO 
+                      00025         BCF STATUS,5
+                      00026         ENDM 
+                      00027 BANK1 MACRO 
+                      00028         BSF STATUS,5
+                      00029         ENDM 
+0005                  00030 START 
+                      00031         BANK1
+0005   1683               M         BSF STATUS,5
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0006   019F           00032         CLRF ADCON1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0007   0186           00033         CLRF TRISB
+0008   30F0           00034     MOVLW B'11110000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0009   0088           00035     MOVWF TRISD
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000A   0187           00036     CLRF TRISC
+                      00037     BANK0
+000B   1283               M         BCF STATUS,5
+000C   3029           00038         MOVLW B'00101001'
+000D   009F           00039         MOVWF ADCON0
+000E   0186           00040     CLRF PORTB
+000F   0188           00041     CLRF PORTD
+0010   0187           00042     CLRF PORTC
+0011   3000           00043     MOVLW .0
+0012   00A7           00044     MOVWF BINLER
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0013   3000           00045     MOVLW .0
+0014   00A6           00046     MOVWF YUZLER 
+0015   3000           00047     MOVLW .0
+0016   00A5           00048     MOVWF ONLAR
+0017   3000           00049     MOVLW .0
+0018   00A4           00050     MOVWF BIRLER
+0019   3014           00051     MOVLW .20 
+001A   00A9           00052     MOVWF ISTENEN
+001B   3080           00053     MOVLW .128
+001C   00A8           00054     MOVWF ISI
+001D                  00055 LOOP 
+001D   2022           00056         CALL ADCOKU
+001E   204E           00057      CALL YONTESPIT
+001F   2028           00058      CALL BASAMAKBUL
+0020   20E2           00059      CALL GOSTER
+0021   281D           00060      GOTO LOOP
+0022                  00061 ADCOKU
+0022   151F           00062         BSF ADCON0,2
+0023                  00063 ADCOKU1 
+0023   191F           00064         BTFSC ADCON0,2
+0024   2823           00065         GOTO ADCOKU1
+0025   081E           00066         MOVF ADRESH,W
+0026   00A9           00067         MOVWF ISTENEN 
+0027   0008           00068         RETURN
+0028                  00069 BASAMAKBUL
+0028   01A6           00070         CLRF YUZLER
+0029   01A5           00071         CLRF ONLAR
+002A   01A4           00072         CLRF BIRLER
+002B   082B           00073         MOVF TEMP6,W
+002C   00AA           00074         MOVWF TEMP5
+002D                  00075 BASAMAKBUL2
+002D   1003           00076         BCF STATUS,C
+002E   1103           00077         BCF STATUS,Z
+002F   3064           00078         MOVLW .100
+0030   022A           00079         SUBWF TEMP5,W
+0031   1903           00080         BTFSC STATUS,Z
+0032   2836           00081         GOTO ESITLIK2
+0033   1803           00082         BTFSC STATUS,C
+0034   2838           00083         GOTO BUYUKLUK2
+0035   283C           00084         GOTO BASAMAKBUL1
+0036                  00085 ESITLIK2
+0036   0AA6           00086         INCF YUZLER,F
+0037   0008           00087         RETURN
+0038                  00088 BUYUKLUK2
+0038   0AA6           00089         INCF YUZLER,F
+0039   3064           00090         MOVLW .100
+003A   02AA           00091         SUBWF TEMP5,F
+003B   282D           00092         GOTO BASAMAKBUL2
+003C                  00093 BASAMAKBUL1
+003C   1003           00094         BCF STATUS,C
+003D   1103           00095         BCF STATUS,Z
+003E   300A           00096         MOVLW .10
+003F   022A           00097         SUBWF TEMP5,W
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0040   1903           00098         BTFSC STATUS,Z
+0041   2847           00099         GOTO ESITLIK1
+0042   1803           00100         BTFSC STATUS,C
+0043   2849           00101         GOTO BUYUKLUK1
+0044   082A           00102         MOVF TEMP5,W
+0045   00A4           00103         MOVWF BIRLER
+0046   0008           00104         RETURN
+                      00105 
+0047                  00106 ESITLIK1
+0047   0AA5           00107         INCF ONLAR,F
+0048   0008           00108         RETURN
+0049                  00109 BUYUKLUK1
+0049   0AA5           00110         INCF ONLAR,F
+004A   300A           00111         MOVLW .10
+004B   02AA           00112         SUBWF TEMP5,F
+004C   283C           00113         GOTO BASAMAKBUL1
+004D   0008           00114         RETURN
+004E                  00115 YONTESPIT
+004E   1003           00116         BCF STATUS,C
+004F   1103           00117         BCF STATUS,Z
+0050   0828           00118         MOVF ISI,W
+0051   0229           00119         SUBWF ISTENEN,W
+0052   1903           00120         BTFSC STATUS,Z
+0053   285B           00121         GOTO ESITLIK
+0054   1803           00122         BTFSC STATUS,C
+0055   285D           00123         GOTO BUYUKLUK
+0056   0829           00124         MOVF ISTENEN,W
+0057   3C7F           00125         SUBLW .127
+0058   00AB           00126         MOVWF TEMP6
+0059   0DAB           00127         RLF TEMP6,F
+005A   0008           00128         RETURN
+005B                  00129 ESITLIK
+005B   01AB           00130         CLRF TEMP6
+005C   0008           00131         RETURN
+005D                  00132 BUYUKLUK
+005D   3080           00133         MOVLW .128
+005E   0229           00134         SUBWF ISTENEN,W
+005F   00AB           00135         MOVWF TEMP6
+0060   0DAB           00136         RLF TEMP6,F
+0061   0008           00137         RETURN
+0062                  00138 TUSTARA
+0062   30F7           00139         MOVLW B'11110111'
+0063   0088           00140         MOVWF PORTD 
+0064   20FC           00141         CALL BEKLE
+0065   1A08           00142         BTFSC PORTD,4
+0066   286C           00143         GOTO B2
+0067   3000           00144         MOVLW .0
+0068   00A5           00145         MOVWF ONLAR
+0069   3001           00146         MOVLW .1
+006A   00A4           00147         MOVWF BIRLER
+006B   0008           00148         RETURN
+006C                  00149 B2
+006C   1A88           00150         BTFSC PORTD,5
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006D   2873           00151         GOTO B3
+006E   3000           00152         MOVLW .0
+006F   00A5           00153         MOVWF ONLAR
+0070   3002           00154         MOVLW .2
+0071   00A4           00155         MOVWF BIRLER 
+0072   0008           00156         RETURN
+0073                  00157 B3
+0073   1B08           00158         BTFSC PORTD,6
+0074   287A           00159         GOTO B4
+0075   3000           00160         MOVLW .0
+0076   00A5           00161         MOVWF ONLAR
+0077   3003           00162         MOVLW .3
+0078   00A4           00163         MOVWF BIRLER 
+0079   0008           00164         RETURN
+007A                  00165 B4
+007A   1B88           00166         BTFSC PORTD,7
+007B   2881           00167         GOTO B5
+007C   3000           00168         MOVLW .0
+007D   00A5           00169         MOVWF ONLAR
+007E   3004           00170         MOVLW .4
+007F   00A4           00171         MOVWF BIRLER 
+0080   0008           00172         RETURN
+0081                  00173 B5      
+0081   30FB           00174         MOVLW B'11111011'
+0082   0088           00175         MOVWF PORTD
+0083   20FC           00176         CALL BEKLE
+0084   1A08           00177         BTFSC PORTD,4
+0085   288B           00178         GOTO B6
+0086   3000           00179         MOVLW .0
+0087   00A5           00180         MOVWF ONLAR
+0088   3005           00181         MOVLW .5
+0089   00A4           00182         MOVWF BIRLER 
+008A   0008           00183         RETURN
+008B                  00184 B6
+008B   1A88           00185         BTFSC PORTD,5
+008C   2894           00186         GOTO B7
+008D   0AA9           00187         INCF ISTENEN,F
+008E   1103           00188         BCF STATUS,Z
+008F   3021           00189         MOVLW .33
+0090   0229           00190         SUBWF ISTENEN,W
+0091   1903           00191         BTFSC STATUS,Z
+0092   03A9           00192         DECF ISTENEN,F
+0093   0008           00193         RETURN
+0094                  00194 B7
+0094   1B08           00195         BTFSC PORTD,6
+0095   289B           00196         GOTO B8
+0096   3000           00197         MOVLW .0
+0097   00A5           00198         MOVWF ONLAR
+0098   3007           00199         MOVLW .7
+0099   00A4           00200         MOVWF BIRLER 
+009A   0008           00201         RETURN
+009B                  00202 B8
+009B   1B88           00203         BTFSC PORTD,7
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+009C   28A2           00204         GOTO B9
+009D   3000           00205         MOVLW .0
+009E   00A5           00206         MOVWF ONLAR
+009F   3008           00207         MOVLW .8
+00A0   00A4           00208         MOVWF BIRLER 
+00A1   0008           00209         RETURN
+00A2                  00210 B9
+00A2   30FD           00211         MOVLW B'11111101'
+00A3   0088           00212         MOVWF PORTD
+00A4   20FC           00213         CALL BEKLE
+00A5   1A08           00214         BTFSC PORTD,4
+00A6   28AC           00215         GOTO B10
+00A7   3000           00216         MOVLW .0
+00A8   00A5           00217         MOVWF ONLAR
+00A9   3009           00218         MOVLW .9
+00AA   00A4           00219         MOVWF BIRLER 
+00AB   0008           00220         RETURN
+00AC                  00221 B10
+00AC   1A88           00222         BTFSC PORTD,5
+00AD   28B5           00223         GOTO B11
+00AE   03A9           00224         DECF ISTENEN,F
+00AF   1103           00225         BCF STATUS,Z
+00B0   300F           00226         MOVLW .15
+00B1   0229           00227         SUBWF ISTENEN,W
+00B2   1903           00228         BTFSC STATUS,Z
+00B3   0AA9           00229         INCF ISTENEN,F
+00B4   0008           00230         RETURN
+00B5                  00231 B11
+00B5   1B08           00232         BTFSC PORTD,6
+00B6   28BC           00233         GOTO B12
+00B7   3001           00234         MOVLW .1
+00B8   00A5           00235         MOVWF ONLAR
+00B9   3001           00236         MOVLW .1
+00BA   00A4           00237         MOVWF BIRLER 
+00BB   0008           00238         RETURN
+00BC                  00239 B12
+00BC   1B88           00240         BTFSC PORTD,7
+00BD   28C3           00241         GOTO B13
+00BE   3001           00242         MOVLW .1
+00BF   00A5           00243         MOVWF ONLAR
+00C0   3002           00244         MOVLW .2
+00C1   00A4           00245         MOVWF BIRLER 
+00C2   0008           00246         RETURN
+00C3                  00247 B13
+00C3   30FE           00248         MOVLW B'11111110'
+00C4   0088           00249         MOVWF PORTD
+00C5   20FC           00250         CALL BEKLE
+00C6   1A08           00251         BTFSC PORTD,4
+00C7   28CD           00252         GOTO B14
+00C8   3001           00253         MOVLW .1
+00C9   00A5           00254         MOVWF ONLAR
+00CA   3003           00255         MOVLW .3
+00CB   00A4           00256         MOVWF BIRLER 
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00CC   0008           00257         RETURN
+00CD                  00258 B14
+00CD   1A88           00259         BTFSC PORTD,5
+00CE   28D4           00260         GOTO B15
+00CF   3001           00261         MOVLW .1
+00D0   00A5           00262         MOVWF ONLAR
+00D1   3004           00263         MOVLW .4
+00D2   00A4           00264         MOVWF BIRLER 
+00D3   0008           00265         RETURN
+00D4                  00266 B15
+00D4   1B08           00267         BTFSC PORTD,6
+00D5   28DB           00268         GOTO B16
+00D6   3001           00269         MOVLW .1
+00D7   00A5           00270         MOVWF ONLAR
+00D8   3005           00271         MOVLW .5
+00D9   00A4           00272         MOVWF BIRLER 
+00DA   0008           00273         RETURN
+00DB                  00274 B16
+00DB   1B88           00275         BTFSC PORTD,7
+00DC   0008           00276         RETURN
+00DD   3001           00277         MOVLW .1
+00DE   00A5           00278         MOVWF ONLAR
+00DF   3006           00279         MOVLW .6
+00E0   00A4           00280         MOVWF BIRLER 
+00E1   0008           00281         RETURN
+00E2                  00282 GOSTER
+00E2   3014           00283         MOVLW .20
+00E3   00A3           00284         MOVWF TEMP
+00E4                  00285 GOSTER1
+00E4   3008           00286         MOVLW B'00001000'
+00E5   0086           00287         MOVWF PORTB
+00E6   0824           00288         MOVF BIRLER,W
+00E7   0088           00289         MOVWF PORTD
+00E8   20FC           00290         CALL BEKLE
+00E9   3004           00291         MOVLW B'00000100'
+00EA   0086           00292         MOVWF PORTB
+00EB   0825           00293         MOVF ONLAR,W
+00EC   0088           00294         MOVWF PORTD
+00ED   20FC           00295         CALL BEKLE
+00EE   3002           00296         MOVLW B'00000010'
+00EF   0086           00297         MOVWF PORTB
+00F0   0826           00298         MOVF YUZLER,W
+00F1   0088           00299         MOVWF PORTD
+00F2   20FC           00300         CALL BEKLE
+00F3   3001           00301         MOVLW B'00000001'
+00F4   0086           00302         MOVWF PORTB
+00F5   0827           00303         MOVF BINLER,W
+00F6   0088           00304         MOVWF PORTD
+00F7   20FC           00305         CALL BEKLE
+Message[305]: Using default destination of 1 (file).
+00F8   0BA3           00306         DECFSZ TEMP
+00F9   28E4           00307         GOTO GOSTER1
+00FA   0186           00308         CLRF PORTB
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00FB   0008           00309         RETURN
+00FC                  00310 BEKLE
+00FC   3001           00311         MOVLW .1
+00FD   00A0           00312         MOVWF SAYI0
+00FE                  00313 BEKLE0 
+00FE   3032           00314         MOVLW .50
+00FF   00A1           00315         MOVWF SAYI1
+0100                  00316 BEKLE1
+0100   3032           00317         MOVLW .50
+0101   00A2           00318         MOVWF SAYI2
+0102                  00319 BEKLE2
+0102   0BA2           00320         DECFSZ SAYI2,F
+0103   2902           00321         GOTO BEKLE2
+0104   0BA1           00322         DECFSZ SAYI1,F
+0105   2900           00323         GOTO BEKLE1
+0106   0BA0           00324         DECFSZ SAYI0,F
+0107   28FE           00325         GOTO BEKLE0
+0108   0008           00326         RETURN
+                      00327   END
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCOKU                            00000022
+ADCOKU1                           00000023
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+B10                               000000AC
+B11                               000000B5
+B12                               000000BC
+B13                               000000C3
+B14                               000000CD
+B15                               000000D4
+B16                               000000DB
+B2                                0000006C
+B3                                00000073
+B4                                0000007A
+B5                                00000081
+B6                                0000008B
+B7                                00000094
+B8                                0000009B
+B9                                000000A2
+BANK0                             
+BANK1                             
+BASAMAKBUL                        00000028
+BASAMAKBUL1                       0000003C
+BASAMAKBUL2                       0000002D
+BCLIE                             00000003
+BCLIF                             00000003
+BEKLE                             000000FC
+BEKLE0                            000000FE
+BEKLE1                            00000100
+BEKLE2                            00000102
+BF                                00000000
+BINLER                            00000027
+BIRLER                            00000024
+BRGH                              00000002
+BUYUKLUK                          0000005D
+BUYUKLUK1                         00000049
+BUYUKLUK2                         00000038
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+ESITLIK                           0000005B
+ESITLIK1                          00000047
+ESITLIK2                          00000036
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GOSTER                            000000E2
+GOSTER1                           000000E4
+GO_DONE                           00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+ISI                               00000028
+ISTENEN                           00000029
+LOOP                              0000001D
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+ONLAR                             00000025
+OPTION_REG                        00000081
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+R                                 00000002
+RBIE                              00000003
+RBIF                              00000000
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_W                               00000002
+S                                 00000003
+SAYI0                             00000020
+SAYI1                             00000021
+SAYI2                             00000022
+SEN                               00000000
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+START                             00000005
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TEMP                              00000023
+TEMP5                             0000002A
+TEMP6                             0000002B
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISB                             00000086
+TRISC                             00000087
+TRISD                             00000088
+TRISE                             00000089
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TUSTARA                           00000062
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+YONTESPIT                         0000004E
+YUZLER                            00000026
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_HS_OSC                           00003FFE
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+MPASM  4.02 Released                             JOYSTICK.ASM   7-23-2020  22:48:23         PAGE 14
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXX------- ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   262
+Program Memory Words Free:  7930
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     5 reported,     0 suppressed
+
+
