@@ -1,0 +1,74 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     goster.sayac
+021     main.s
+022     main.d
+023-024 main.i
+025     goster.saat
+026     goster.dakika
+027     goster.k
+028     goster.s_onlar
+029     goster.s_birler
+02A     goster.d_onlar
+02B     goster.d_birler
+02C     @delay_ms1.P1
+02C     @DIV88.P2
+02D     @DIV88.P1
+02E     @DIV88.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @DIV88
+000019  @delay_ms1
+00002D  goster
+00008C  main
+00008C  @cinit1
+000093  @cinit2
+
+Project Directory:
+    C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\MOD10000\
+
+Project Files:
+    mod10000.c                                              [14-Aðu-20 21:52  CRC=09782225]
+    mod10000.h                                              [14-Aðu-20 21:35  CRC=CF12E969]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [21-Haz-13 16:04  CRC=4E65664C]
+
+Source signature=7555D826
+
+Units:
+    mod10000 (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   mod10000.xsym
+    Errors:      mod10000.err
+    Ext Symbols: mod10000.esym
+    INHX8:       mod10000.hex
+    Symbols:     mod10000.sym
+    List:        mod10000.lst
+    Debug/COFF:  mod10000.cof
+    Project:     mod10000.ccspjt
+    Call Tree:   mod10000.tre
+    Statistics:  mod10000.STA

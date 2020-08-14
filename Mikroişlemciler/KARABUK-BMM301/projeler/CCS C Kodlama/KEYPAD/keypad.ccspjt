@@ -1,0 +1,22 @@
+[PROJECT]
+Target=keypad.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.007
+Compiler=PCM
+CCSVersion=5.007
+[Target Data]
+FileList=keypad.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\KEYPAD\
+[C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\KEYPAD\keypad]
+Type=4
+[mru-list]
+1=keypad.c
+[Opened Files]
+1=keypad.c
+2=
+[keypad.c]
+Type=4
+[Units]
+Count=1
+1=keypad (main)

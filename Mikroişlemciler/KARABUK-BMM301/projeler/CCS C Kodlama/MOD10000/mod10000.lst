@@ -1,0 +1,266 @@
+CCS PCM C Compiler, Version 5.007, 61971               14-Aðu-20 21:52
+
+               Filename:   C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\MOD10000\mod10000.lst
+
+               ROM used:   189 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   10 (3%) at main() level
+                           20 (5%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   08C
+0003:  NOP
+.................... #include <mod10000.h> 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+0004:  MOVF   2D,W
+0005:  CLRF   78
+0006:  SUBWF  2C,W
+0007:  BTFSC  03.0
+0008:  GOTO   00C
+0009:  MOVF   2C,W
+000A:  MOVWF  77
+000B:  GOTO   018
+000C:  CLRF   77
+000D:  MOVLW  08
+000E:  MOVWF  2E
+000F:  RLF    2C,F
+0010:  RLF    77,F
+0011:  MOVF   2D,W
+0012:  SUBWF  77,W
+0013:  BTFSC  03.0
+0014:  MOVWF  77
+0015:  RLF    78,F
+0016:  DECFSZ 2E,F
+0017:  GOTO   00F
+0018:  RETURN
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=20000000) 
+0019:  MOVLW  2C
+001A:  MOVWF  04
+001B:  BCF    03.7
+001C:  MOVF   00,W
+001D:  BTFSC  03.2
+001E:  GOTO   02C
+001F:  MOVLW  06
+0020:  MOVWF  78
+0021:  CLRF   77
+0022:  DECFSZ 77,F
+0023:  GOTO   022
+0024:  DECFSZ 78,F
+0025:  GOTO   021
+0026:  MOVLW  7B
+0027:  MOVWF  77
+0028:  DECFSZ 77,F
+0029:  GOTO   028
+002A:  DECFSZ 00,F
+002B:  GOTO   01F
+002C:  RETURN
+....................  
+....................  
+....................  
+.................... void goster(int8,int8,int1); // sembolik tanim. 
+....................  
+.................... void main() 
+*
+008C:  BSF    03.5
+008D:  BSF    1F.0
+008E:  BSF    1F.1
+008F:  BSF    1F.2
+0090:  BCF    1F.3
+0091:  MOVLW  07
+0092:  MOVWF  1C
+0093:  BCF    03.7
+0094:  MOVLW  1F
+0095:  ANDWF  03,F
+.................... {  int8 s,d; 
+....................    int16 i; 
+....................  
+....................    while(TRUE) 
+....................    { 
+....................       for(s=0;s<=99;s++) 
+*
+0098:  CLRF   21
+0099:  MOVF   21,W
+009A:  SUBLW  63
+009B:  BTFSS  03.0
+009C:  GOTO   0BB
+....................          for(d=0;d<=99;d++) 
+009D:  CLRF   22
+009E:  MOVF   22,W
+009F:  SUBLW  63
+00A0:  BTFSS  03.0
+00A1:  GOTO   0B9
+....................             for(i=1;i<=100;i++) // yaklasik 40 ms araliklarla degisecek sekilde ayarlandi. 
+00A2:  CLRF   24
+00A3:  MOVLW  01
+00A4:  MOVWF  23
+00A5:  MOVF   24,F
+00A6:  BTFSS  03.2
+00A7:  GOTO   0B7
+00A8:  MOVF   23,W
+00A9:  SUBLW  64
+00AA:  BTFSS  03.0
+00AB:  GOTO   0B7
+....................                goster(s,d,1);   // yaklasik 4ms zaman alir. 
+00AC:  MOVF   21,W
+00AD:  MOVWF  25
+00AE:  MOVF   22,W
+00AF:  MOVWF  26
+00B0:  MOVLW  01
+00B1:  MOVWF  27
+00B2:  GOTO   02D
+00B3:  INCF   23,F
+00B4:  BTFSC  03.2
+00B5:  INCF   24,F
+00B6:  GOTO   0A5
+00B7:  INCF   22,F
+00B8:  GOTO   09E
+00B9:  INCF   21,F
+00BA:  GOTO   099
+00BB:  GOTO   098
+....................    } 
+....................    
+.................... } 
+....................  
+00BC:  SLEEP
+.................... void goster(int8 saat, int8 dakika, int1 k) 
+.................... { 
+....................    int8 s_onlar, s_birler, d_onlar, d_birler; 
+....................    static int8 sayac; 
+*
+0096:  BCF    03.5
+0097:  CLRF   20
+....................    sayac++; 
+*
+002D:  INCF   20,F
+....................    if(sayac>=250) sayac = 0; 
+002E:  MOVF   20,W
+002F:  SUBLW  F9
+0030:  BTFSS  03.0
+0031:  CLRF   20
+....................    s_onlar  = saat / 10; 
+0032:  MOVF   25,W
+0033:  MOVWF  2C
+0034:  MOVLW  0A
+0035:  MOVWF  2D
+0036:  CALL   004
+0037:  MOVF   78,W
+0038:  MOVWF  28
+....................    s_birler = saat % 10; 
+0039:  MOVF   25,W
+003A:  MOVWF  2C
+003B:  MOVLW  0A
+003C:  MOVWF  2D
+003D:  CALL   004
+003E:  MOVF   77,W
+003F:  MOVWF  29
+....................    d_onlar  = dakika / 10; 
+0040:  MOVF   26,W
+0041:  MOVWF  2C
+0042:  MOVLW  0A
+0043:  MOVWF  2D
+0044:  CALL   004
+0045:  MOVF   78,W
+0046:  MOVWF  2A
+....................    d_birler = dakika % 10; 
+0047:  MOVF   26,W
+0048:  MOVWF  2C
+0049:  MOVLW  0A
+004A:  MOVWF  2D
+004B:  CALL   004
+004C:  MOVF   77,W
+004D:  MOVWF  2B
+....................    output_b(0b00000001); 
+004E:  BSF    03.5
+004F:  CLRF   06
+0050:  MOVLW  01
+0051:  BCF    03.5
+0052:  MOVWF  06
+....................    output_d(s_onlar); 
+0053:  BSF    03.5
+0054:  CLRF   08
+0055:  BCF    03.5
+0056:  MOVF   28,W
+0057:  MOVWF  08
+....................    delay_ms(1); 
+0058:  MOVLW  01
+0059:  MOVWF  2C
+005A:  CALL   019
+....................    output_b(0b00000010); 
+005B:  BSF    03.5
+005C:  CLRF   06
+005D:  MOVLW  02
+005E:  BCF    03.5
+005F:  MOVWF  06
+....................    if(sayac<=125 && k) s_birler = s_birler | 0b00010000; 
+0060:  MOVF   20,W
+0061:  SUBLW  7D
+0062:  BTFSS  03.0
+0063:  GOTO   067
+0064:  MOVF   27,F
+0065:  BTFSS  03.2
+0066:  BSF    29.4
+....................    output_d(s_birler); 
+0067:  BSF    03.5
+0068:  CLRF   08
+0069:  BCF    03.5
+006A:  MOVF   29,W
+006B:  MOVWF  08
+....................    delay_ms(1); 
+006C:  MOVLW  01
+006D:  MOVWF  2C
+006E:  CALL   019
+....................    output_b(0b00000100); 
+006F:  BSF    03.5
+0070:  CLRF   06
+0071:  MOVLW  04
+0072:  BCF    03.5
+0073:  MOVWF  06
+....................    output_d(d_onlar); 
+0074:  BSF    03.5
+0075:  CLRF   08
+0076:  BCF    03.5
+0077:  MOVF   2A,W
+0078:  MOVWF  08
+....................    delay_ms(1); 
+0079:  MOVLW  01
+007A:  MOVWF  2C
+007B:  CALL   019
+....................    output_b(0b00001000); 
+007C:  BSF    03.5
+007D:  CLRF   06
+007E:  MOVLW  08
+007F:  BCF    03.5
+0080:  MOVWF  06
+....................    output_d(d_birler); 
+0081:  BSF    03.5
+0082:  CLRF   08
+0083:  BCF    03.5
+0084:  MOVF   2B,W
+0085:  MOVWF  08
+....................    delay_ms(1); 
+0086:  MOVLW  01
+0087:  MOVWF  2C
+0088:  CALL   019
+0089:  BCF    0A.3
+008A:  BCF    0A.4
+008B:  GOTO   0B3 (RETURN)
+....................  
+.................... } 
+
+Configuration Fuses:
+   Word  1: 3F32   HS NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

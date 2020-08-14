@@ -1,0 +1,52 @@
+
+ROM used:   311/8192 (4%)
+            311/8192 (4%) including unused fragments
+
+            0.4 Average locations per line
+            4.8 Average locations per statement
+
+RAM used:   7/368 (2%) at main() level
+            17/368 (5%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   74    65 100  keypad.c
+   10     0   0  keypad.h
+  661     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h
+----- -----
+  745    65 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     20   6    1             @delay_ms1
+0     22   7    1    54  1.8  main
+0    149  48    2  1459  3.4  tusAlgila
+0     95  31    7   743  6.6  goster
+0     21   7    3             @DIV88
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               3
+    Statements              65
+    Comments                118
+    Volume (V)              2673
+    Difficulty (D)          12.1
+    Effort to implement (E) 32237
+    Time to implement (T)   30 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   18
+    Maintainability (MI)    70
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   307  1737  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

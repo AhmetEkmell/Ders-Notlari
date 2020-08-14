@@ -1,0 +1,421 @@
+CCS PCM C Compiler, Version 5.007, 61971               14-Aðu-20 22:33
+
+               Filename:   C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\KEYPAD\keypad.lst
+
+               ROM used:   311 words (4%)
+                           Largest free fragment is 2048
+               RAM used:   7 (2%) at main() level
+                           17 (5%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  01
+0001:  MOVWF  0A
+0002:  GOTO   121
+0003:  NOP
+.................... #include <keypad.h> 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+*
+00AD:  MOVF   2A,W
+00AE:  CLRF   78
+00AF:  SUBWF  29,W
+00B0:  BTFSC  03.0
+00B1:  GOTO   0B5
+00B2:  MOVF   29,W
+00B3:  MOVWF  77
+00B4:  GOTO   0C1
+00B5:  CLRF   77
+00B6:  MOVLW  08
+00B7:  MOVWF  2B
+00B8:  RLF    29,F
+00B9:  RLF    77,F
+00BA:  MOVF   2A,W
+00BB:  SUBWF  77,W
+00BC:  BTFSC  03.0
+00BD:  MOVWF  77
+00BE:  RLF    78,F
+00BF:  DECFSZ 2B,F
+00C0:  GOTO   0B8
+00C1:  RETURN
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=20000000) 
+*
+0004:  MOVLW  29
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   017
+000A:  MOVLW  06
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  7B
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  DECFSZ 00,F
+0016:  GOTO   00A
+0017:  RETURN
+....................  
+....................  
+....................  
+.................... void goster(int8,int8,int1); // sembolik tanim. 
+.................... int8 tusAlgila(); // Sembolik tanim yapildi. 
+....................  
+....................  
+.................... void main() 
+*
+0121:  BSF    03.5
+0122:  BSF    1F.0
+0123:  BSF    1F.1
+0124:  BSF    1F.2
+0125:  BCF    1F.3
+0126:  MOVLW  07
+0127:  MOVWF  1C
+0128:  BCF    03.7
+0129:  MOVLW  1F
+012A:  ANDWF  03,F
+.................... { 
+....................  
+....................    while(TRUE) 
+....................    { 
+....................       goster(0,tusAlgila(),0); 
+*
+012D:  GOTO   018
+012E:  MOVF   78,W
+012F:  MOVWF  21
+0130:  CLRF   22
+0131:  MOVF   21,W
+0132:  MOVWF  23
+0133:  CLRF   24
+0134:  GOTO   0C2
+0135:  GOTO   12D
+....................    } 
+....................  
+.................... } 
+....................  
+0136:  SLEEP
+.................... int8 tusAlgila() 
+.................... { 
+....................    int8 key;  // int8 key = 0 ya da 1...16 degerlerinden farkli bir  deger verilebilir. 
+....................    output_d(0b11110111);  // RD3 = 0 olduðundan bu satir secildi. 
+*
+0018:  BSF    03.5
+0019:  CLRF   08
+001A:  MOVLW  F7
+001B:  BCF    03.5
+001C:  MOVWF  08
+....................    delay_ms(1); 
+001D:  MOVLW  01
+001E:  MOVWF  29
+001F:  CALL   004
+....................    if(input(PIN_D4)==0) key=1; 
+0020:  BSF    03.5
+0021:  BSF    08.4
+0022:  BCF    03.5
+0023:  BTFSC  08.4
+0024:  GOTO   027
+0025:  MOVLW  01
+0026:  MOVWF  21
+....................    if(input(PIN_D5)==0) key=2;  
+0027:  BSF    03.5
+0028:  BSF    08.5
+0029:  BCF    03.5
+002A:  BTFSC  08.5
+002B:  GOTO   02E
+002C:  MOVLW  02
+002D:  MOVWF  21
+....................    if(input(PIN_D6)==0) key=3;  
+002E:  BSF    03.5
+002F:  BSF    08.6
+0030:  BCF    03.5
+0031:  BTFSC  08.6
+0032:  GOTO   035
+0033:  MOVLW  03
+0034:  MOVWF  21
+....................    if(input(PIN_D7)==0) key=4;  
+0035:  BSF    03.5
+0036:  BSF    08.7
+0037:  BCF    03.5
+0038:  BTFSC  08.7
+0039:  GOTO   03C
+003A:  MOVLW  04
+003B:  MOVWF  21
+....................    output_d(0b11111011);  // RD2 = 0 olduðundan bu satir secildi. 
+003C:  BSF    03.5
+003D:  CLRF   08
+003E:  MOVLW  FB
+003F:  BCF    03.5
+0040:  MOVWF  08
+....................    delay_ms(1); 
+0041:  MOVLW  01
+0042:  MOVWF  29
+0043:  CALL   004
+....................    if(input(PIN_D4)==0) key=5; 
+0044:  BSF    03.5
+0045:  BSF    08.4
+0046:  BCF    03.5
+0047:  BTFSC  08.4
+0048:  GOTO   04B
+0049:  MOVLW  05
+004A:  MOVWF  21
+....................    if(input(PIN_D5)==0) key=6;  
+004B:  BSF    03.5
+004C:  BSF    08.5
+004D:  BCF    03.5
+004E:  BTFSC  08.5
+004F:  GOTO   052
+0050:  MOVLW  06
+0051:  MOVWF  21
+....................    if(input(PIN_D6)==0) key=7;  
+0052:  BSF    03.5
+0053:  BSF    08.6
+0054:  BCF    03.5
+0055:  BTFSC  08.6
+0056:  GOTO   059
+0057:  MOVLW  07
+0058:  MOVWF  21
+....................    if(input(PIN_D7)==0) key=8; 
+0059:  BSF    03.5
+005A:  BSF    08.7
+005B:  BCF    03.5
+005C:  BTFSC  08.7
+005D:  GOTO   060
+005E:  MOVLW  08
+005F:  MOVWF  21
+....................    output_d(0b11111101);  // RD1 = 0 olduðundan bu satir secildi. 
+0060:  BSF    03.5
+0061:  CLRF   08
+0062:  MOVLW  FD
+0063:  BCF    03.5
+0064:  MOVWF  08
+....................    delay_ms(1); 
+0065:  MOVLW  01
+0066:  MOVWF  29
+0067:  CALL   004
+....................    if(input(PIN_D4)==0) key=9; 
+0068:  BSF    03.5
+0069:  BSF    08.4
+006A:  BCF    03.5
+006B:  BTFSC  08.4
+006C:  GOTO   06F
+006D:  MOVLW  09
+006E:  MOVWF  21
+....................    if(input(PIN_D5)==0) key=10;  
+006F:  BSF    03.5
+0070:  BSF    08.5
+0071:  BCF    03.5
+0072:  BTFSC  08.5
+0073:  GOTO   076
+0074:  MOVLW  0A
+0075:  MOVWF  21
+....................    if(input(PIN_D6)==0) key=11;  
+0076:  BSF    03.5
+0077:  BSF    08.6
+0078:  BCF    03.5
+0079:  BTFSC  08.6
+007A:  GOTO   07D
+007B:  MOVLW  0B
+007C:  MOVWF  21
+....................    if(input(PIN_D7)==0) key=12; 
+007D:  BSF    03.5
+007E:  BSF    08.7
+007F:  BCF    03.5
+0080:  BTFSC  08.7
+0081:  GOTO   084
+0082:  MOVLW  0C
+0083:  MOVWF  21
+....................    output_d(0b11111110);  // RD0 = 0 olduðundan bu satir secildi. 
+0084:  BSF    03.5
+0085:  CLRF   08
+0086:  MOVLW  FE
+0087:  BCF    03.5
+0088:  MOVWF  08
+....................    delay_ms(1); 
+0089:  MOVLW  01
+008A:  MOVWF  29
+008B:  CALL   004
+....................    if(input(PIN_D4)==0) key=13; 
+008C:  BSF    03.5
+008D:  BSF    08.4
+008E:  BCF    03.5
+008F:  BTFSC  08.4
+0090:  GOTO   093
+0091:  MOVLW  0D
+0092:  MOVWF  21
+....................    if(input(PIN_D5)==0) key=14;  
+0093:  BSF    03.5
+0094:  BSF    08.5
+0095:  BCF    03.5
+0096:  BTFSC  08.5
+0097:  GOTO   09A
+0098:  MOVLW  0E
+0099:  MOVWF  21
+....................    if(input(PIN_D6)==0) key=15;  
+009A:  BSF    03.5
+009B:  BSF    08.6
+009C:  BCF    03.5
+009D:  BTFSC  08.6
+009E:  GOTO   0A1
+009F:  MOVLW  0F
+00A0:  MOVWF  21
+....................    if(input(PIN_D7)==0) key=16; 
+00A1:  BSF    03.5
+00A2:  BSF    08.7
+00A3:  BCF    03.5
+00A4:  BTFSC  08.7
+00A5:  GOTO   0A8
+00A6:  MOVLW  10
+00A7:  MOVWF  21
+....................     
+....................    return key; // basili olan hangi buton degeri varsa o return ediliyor. 
+00A8:  MOVF   21,W
+00A9:  MOVWF  78
+00AA:  BCF    0A.3
+00AB:  BCF    0A.4
+00AC:  GOTO   12E (RETURN)
+....................  
+.................... } 
+....................  
+.................... void goster(int8 saat, int8 dakika, int1 k) 
+.................... { 
+....................    int8 s_onlar, s_birler, d_onlar, d_birler; 
+....................    static int8 sayac; 
+*
+012B:  BCF    03.5
+012C:  CLRF   20
+....................    sayac++; 
+*
+00C2:  INCF   20,F
+....................    if(sayac>=250) sayac = 0; 
+00C3:  MOVF   20,W
+00C4:  SUBLW  F9
+00C5:  BTFSS  03.0
+00C6:  CLRF   20
+....................    s_onlar  = saat / 10; 
+00C7:  MOVF   22,W
+00C8:  MOVWF  29
+00C9:  MOVLW  0A
+00CA:  MOVWF  2A
+00CB:  CALL   0AD
+00CC:  MOVF   78,W
+00CD:  MOVWF  25
+....................    s_birler = saat % 10; 
+00CE:  MOVF   22,W
+00CF:  MOVWF  29
+00D0:  MOVLW  0A
+00D1:  MOVWF  2A
+00D2:  CALL   0AD
+00D3:  MOVF   77,W
+00D4:  MOVWF  26
+....................    d_onlar  = dakika / 10; 
+00D5:  MOVF   23,W
+00D6:  MOVWF  29
+00D7:  MOVLW  0A
+00D8:  MOVWF  2A
+00D9:  CALL   0AD
+00DA:  MOVF   78,W
+00DB:  MOVWF  27
+....................    d_birler = dakika % 10; 
+00DC:  MOVF   23,W
+00DD:  MOVWF  29
+00DE:  MOVLW  0A
+00DF:  MOVWF  2A
+00E0:  CALL   0AD
+00E1:  MOVF   77,W
+00E2:  MOVWF  28
+....................    output_b(0b00000001); 
+00E3:  BSF    03.5
+00E4:  CLRF   06
+00E5:  MOVLW  01
+00E6:  BCF    03.5
+00E7:  MOVWF  06
+....................    output_d(s_onlar); 
+00E8:  BSF    03.5
+00E9:  CLRF   08
+00EA:  BCF    03.5
+00EB:  MOVF   25,W
+00EC:  MOVWF  08
+....................    delay_ms(1); 
+00ED:  MOVLW  01
+00EE:  MOVWF  29
+00EF:  CALL   004
+....................    output_b(0b00000010); 
+00F0:  BSF    03.5
+00F1:  CLRF   06
+00F2:  MOVLW  02
+00F3:  BCF    03.5
+00F4:  MOVWF  06
+....................    if(sayac<=125 && k) s_birler = s_birler | 0b00010000; 
+00F5:  MOVF   20,W
+00F6:  SUBLW  7D
+00F7:  BTFSS  03.0
+00F8:  GOTO   0FC
+00F9:  MOVF   24,F
+00FA:  BTFSS  03.2
+00FB:  BSF    26.4
+....................    output_d(s_birler); 
+00FC:  BSF    03.5
+00FD:  CLRF   08
+00FE:  BCF    03.5
+00FF:  MOVF   26,W
+0100:  MOVWF  08
+....................    delay_ms(1); 
+0101:  MOVLW  01
+0102:  MOVWF  29
+0103:  CALL   004
+....................    output_b(0b00000100); 
+0104:  BSF    03.5
+0105:  CLRF   06
+0106:  MOVLW  04
+0107:  BCF    03.5
+0108:  MOVWF  06
+....................    output_d(d_onlar); 
+0109:  BSF    03.5
+010A:  CLRF   08
+010B:  BCF    03.5
+010C:  MOVF   27,W
+010D:  MOVWF  08
+....................    delay_ms(1); 
+010E:  MOVLW  01
+010F:  MOVWF  29
+0110:  CALL   004
+....................    output_b(0b00001000); 
+0111:  BSF    03.5
+0112:  CLRF   06
+0113:  MOVLW  08
+0114:  BCF    03.5
+0115:  MOVWF  06
+....................    output_d(d_birler); 
+0116:  BSF    03.5
+0117:  CLRF   08
+0118:  BCF    03.5
+0119:  MOVF   28,W
+011A:  MOVWF  08
+....................    delay_ms(1); 
+011B:  MOVLW  01
+011C:  MOVWF  29
+011D:  CALL   004
+011E:  BCF    0A.3
+011F:  BCF    0A.4
+0120:  GOTO   135 (RETURN)
+....................  
+.................... } 
+
+Configuration Fuses:
+   Word  1: 3F32   HS NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

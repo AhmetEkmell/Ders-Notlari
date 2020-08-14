@@ -1,0 +1,17 @@
+#include <mod10000.h>
+
+void goster(int8,int8,int1); // sembolik tanim.
+
+void main()
+{  int8 s,d;
+   int16 i;
+
+   while(TRUE)
+   {
+      for(s=0;s<=99;s++)
+         for(d=0;d<=99;d++)
+            for(i=1;i<=100;i++) // yaklasik 40 ms araliklarla degisecek sekilde ayarlandi.
+               goster(s,d,1);   // yaklasik 4ms zaman alir.
+   }
+
+}
