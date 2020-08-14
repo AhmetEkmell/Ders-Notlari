@@ -1,0 +1,167 @@
+CCS PCM C Compiler, Version 5.007, 61971               14-Aðu-20 13:13
+
+               Filename:   C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\YURUYEN_LED\yuruyen_led.lst
+
+               ROM used:   102 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   10 (3%) at main() level
+                           11 (3%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   018
+0003:  NOP
+.................... #include <yuruyen_led.h> 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=20000000) 
+0004:  MOVLW  25
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   017
+000A:  MOVLW  06
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  7B
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  DECFSZ 00,F
+0016:  GOTO   00A
+0017:  RETURN
+....................  
+....................  
+....................  
+.................... void main() 
+0018:  MOVLW  FF
+0019:  MOVWF  20
+001A:  BSF    03.5
+001B:  BSF    1F.0
+001C:  BSF    1F.1
+001D:  BSF    1F.2
+001E:  BCF    1F.3
+001F:  MOVLW  07
+0020:  MOVWF  1C
+0021:  BCF    03.7
+0022:  MOVLW  1F
+0023:  ANDWF  03,F
+0024:  MOVLW  01
+0025:  BCF    03.5
+0026:  MOVWF  21
+0027:  MOVLW  80
+0028:  MOVWF  22
+.................... { 
+....................  
+....................    int8 data = 1 , data2 = 128, i , new_data; 
+....................     
+....................    new_data = data | data2; // or mantiksal iþlemi uygulaniyor. 
+0029:  MOVF   21,W
+002A:  IORWF  22,W
+002B:  MOVWF  24
+....................     
+....................    output_c(0); 
+002C:  MOVLW  00
+002D:  MOVWF  20
+002E:  BSF    03.5
+002F:  CLRF   07
+0030:  BCF    03.5
+0031:  CLRF   07
+....................  
+....................    while(TRUE) 
+....................    { 
+....................        
+....................       for(i=1; i<=7; i++) 
+0032:  MOVLW  01
+0033:  MOVWF  23
+0034:  MOVF   23,W
+0035:  SUBLW  07
+0036:  BTFSS  03.0
+0037:  GOTO   04B
+....................       { 
+....................          output_c(new_data);   // toggle ile eger portC 0 ise 1, 1 ise 0 yapiyor. 
+0038:  MOVLW  00
+0039:  MOVWF  20
+003A:  BSF    03.5
+003B:  CLRF   07
+003C:  BCF    03.5
+003D:  MOVF   24,W
+003E:  MOVWF  07
+....................          delay_ms(250);    // 250ms gecikme uygulandi. 
+003F:  MOVLW  FA
+0040:  MOVWF  25
+0041:  CALL   004
+....................          data = data << 1; // sola kaydir 
+0042:  BCF    03.0
+0043:  RLF    21,F
+....................          data2 = data2 >> 1; 
+0044:  BCF    03.0
+0045:  RRF    22,F
+....................          new_data = data | data2; 
+0046:  MOVF   21,W
+0047:  IORWF  22,W
+0048:  MOVWF  24
+0049:  INCF   23,F
+004A:  GOTO   034
+....................       } 
+....................        
+....................       for(i=1; i<=7; i++) 
+004B:  MOVLW  01
+004C:  MOVWF  23
+004D:  MOVF   23,W
+004E:  SUBLW  07
+004F:  BTFSS  03.0
+0050:  GOTO   064
+....................       { 
+....................          output_c(new_data);   // toggle ile eger portC 0 ise 1, 1 ise 0 yapiyor. 
+0051:  MOVLW  00
+0052:  MOVWF  20
+0053:  BSF    03.5
+0054:  CLRF   07
+0055:  BCF    03.5
+0056:  MOVF   24,W
+0057:  MOVWF  07
+....................          delay_ms(250);    // 250ms gecikme uygulandý. 
+0058:  MOVLW  FA
+0059:  MOVWF  25
+005A:  CALL   004
+....................          data = data >> 1; // saga kaydir 
+005B:  BCF    03.0
+005C:  RRF    21,F
+....................          data2 = data2 << 1; 
+005D:  BCF    03.0
+005E:  RLF    22,F
+....................          new_data = data | data2; 
+005F:  MOVF   21,W
+0060:  IORWF  22,W
+0061:  MOVWF  24
+0062:  INCF   23,F
+0063:  GOTO   04D
+....................       } 
+0064:  GOTO   032
+....................     
+....................    } 
+....................  
+.................... } 
+0065:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F32   HS NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

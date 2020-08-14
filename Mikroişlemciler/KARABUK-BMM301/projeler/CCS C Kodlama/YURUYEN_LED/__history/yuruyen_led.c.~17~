@@ -1,0 +1,12 @@
+#include <yuruyen_led.h>
+
+void main()
+{
+
+   while(TRUE)
+   {
+      output_c(0);
+      delay_ms(250); // 250ms gecikme uygulandý.
+   }
+
+}

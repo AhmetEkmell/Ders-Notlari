@@ -1,0 +1,63 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     @TRIS_C
+021     main.data
+022     main.data2
+023     main.i
+024     main.new_data
+025     @delay_ms1.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @delay_ms1
+000018  @cinit1
+000018  main
+000021  @cinit2
+
+Project Directory:
+    C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\YURUYEN_LED\
+
+Project Files:
+    yuruyen_led.c                                           [14-Aðu-20 13:13  CRC=0322E5FE]
+    yuruyen_led.h                                           [14-Aðu-20 12:38  CRC=CF12E969]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [21-Haz-13 16:04  CRC=4E65664C]
+
+Source signature=6F009BFF
+
+Units:
+    yuruyen_led (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   yuruyen_led.xsym
+    Errors:      yuruyen_led.err
+    Ext Symbols: yuruyen_led.esym
+    INHX8:       yuruyen_led.hex
+    Symbols:     yuruyen_led.sym
+    List:        yuruyen_led.lst
+    Debug/COFF:  yuruyen_led.cof
+    Project:     yuruyen_led.ccspjt
+    Call Tree:   yuruyen_led.tre
+    Statistics:  yuruyen_led.STA

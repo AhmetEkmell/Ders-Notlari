@@ -1,0 +1,49 @@
+
+ROM used:   102/8192 (1%)
+            102/8192 (1%) including unused fragments
+
+            0.1 Average locations per line
+            5.7 Average locations per statement
+
+RAM used:   10/368 (3%) at main() level
+            11/368 (3%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   36    18 100  yuruyen_led.c
+   10     0   0  yuruyen_led.h
+  661     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h
+----- -----
+  707    18 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     20  20    1             @delay_ms1
+0     78  76    4   640  5.8  main
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              18
+    Comments                117
+    Volume (V)              644
+    Difficulty (D)          5.5
+    Effort to implement (E) 3575
+    Time to implement (T)   3 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   2
+    Maintainability (MI)    47
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF    98  1946  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

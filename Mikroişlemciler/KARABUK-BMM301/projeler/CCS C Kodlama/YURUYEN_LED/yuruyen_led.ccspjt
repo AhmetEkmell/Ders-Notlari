@@ -1,0 +1,22 @@
+[PROJECT]
+Target=yuruyen_led.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.007
+Compiler=PCM
+CCSVersion=5.007
+[Target Data]
+FileList=yuruyen_led.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\YURUYEN_LED\
+[C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\YURUYEN_LED\yuruyen_led]
+Type=4
+[mru-list]
+1=yuruyen_led.c
+[Opened Files]
+1=yuruyen_led.c
+2=
+[yuruyen_led.c]
+Type=4
+[Units]
+Count=1
+1=yuruyen_led (main)

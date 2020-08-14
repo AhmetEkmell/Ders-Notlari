@@ -1,0 +1,12 @@
+#include <yuruyen_led.h>
+
+void main()
+{
+
+   while(TRUE)
+   {
+      output_toggle(PIN_C0,PIN_C2,PIN_C3,PIN_C4,PIN_C5,PIN_C6,PIN_C7);  // toggle ile eger portC5 0 ise 1, 1 ise 0 yapiyor.
+      delay_ms(250); // 250ms gecikme uygulandý.
+   }
+
+}

@@ -1,0 +1,28 @@
+#include <yuruyen_led.h>
+
+void main()
+{
+
+   int8 i , data = 1;
+   output_c(0);
+
+   while(TRUE)
+   {
+      
+      for(i=1; i<=7; i++)
+      {
+         output_c(data);  // toggle ile eger portC5 0 ise 1, 1 ise 0 yapiyor.
+         delay_ms(250); // 250ms gecikme uygulandý.
+         data = data << 1;
+      }
+      
+      for(i=1; i<=7; i++)
+      {
+         output_c(data);  // toggle ile eger portC5 0 ise 1, 1 ise 0 yapiyor.
+         delay_ms(250); // 250ms gecikme uygulandý.
+         data = data >> 1;
+      }
+   
+   }
+
+}

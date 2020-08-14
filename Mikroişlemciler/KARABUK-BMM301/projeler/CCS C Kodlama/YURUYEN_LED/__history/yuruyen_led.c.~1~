@@ -1,0 +1,11 @@
+#include <yuruyen_led.h>
+
+void main()
+{
+
+	while(TRUE)
+	{
+		//TODO: User Code
+	}
+
+}
