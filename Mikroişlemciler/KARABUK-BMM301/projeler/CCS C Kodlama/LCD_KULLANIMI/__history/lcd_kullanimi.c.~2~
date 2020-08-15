@@ -1,0 +1,13 @@
+#include <lcd_kullanimi.h>
+
+#include <lcd.c>
+
+void main()
+{
+
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}

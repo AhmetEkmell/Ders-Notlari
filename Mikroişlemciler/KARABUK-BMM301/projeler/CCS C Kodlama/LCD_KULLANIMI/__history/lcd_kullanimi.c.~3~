@@ -1,0 +1,16 @@
+#include <lcd_kullanimi.h>
+
+#include <lcd.c>
+
+void main()
+{
+
+   while(TRUE)
+   {
+      int16 data = 0;
+      lcd_init();
+      data++;
+      //TODO: User Code
+   }
+
+}

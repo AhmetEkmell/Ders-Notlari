@@ -1,0 +1,22 @@
+[PROJECT]
+Target=ayarli_saat.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.007
+Compiler=PCM
+CCSVersion=5.007
+[Target Data]
+FileList=ayarli_saat.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\AYARLI_SAAT\
+[C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\AYARLI_SAAT\ayarli_saat]
+Type=4
+[mru-list]
+1=ayarli_saat.c
+[Opened Files]
+1=ayarli_saat.c
+2=
+[ayarli_saat.c]
+Type=4
+[Units]
+Count=1
+1=ayarli_saat (main)

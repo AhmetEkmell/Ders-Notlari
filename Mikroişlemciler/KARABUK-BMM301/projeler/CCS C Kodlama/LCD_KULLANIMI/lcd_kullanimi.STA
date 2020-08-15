@@ -1,0 +1,62 @@
+
+ROM used:   433/8192 (5%)
+            433/8192 (5%) including unused fragments
+
+            0.4 Average locations per line
+            4.4 Average locations per statement
+
+RAM used:   6/368 (2%) at main() level
+            20/368 (5%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   43    15  15  lcd_kullanimi.c
+   10     0   0  lcd_kullanimi.h
+  661     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h
+  456    84  85  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
+----- -----
+ 1170    99 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     20   5    1             @delay_ms1
+0      8   2    0             @const629
+ Inline         3   596  5.9  lcd_read_byte
+0      6   1    0    59  4.2  lcd_read_nibble
+0     17   4    1   179  3.3  lcd_send_nibble
+0     66  15    3   460  4.7  lcd_send_byte
+0     51  12    2   667  5.9  lcd_init
+0     18   4    4   208  6.3  lcd_gotoxy
+0     44  10    1   354  4.7  lcd_putc
+0     66  15    1   463  5.1  MAIN
+0      6   1    0    27  0.9  @const664
+0     77  18    4             @PSTRINGC7_647
+0     11   3    0             @const667
+0     39   9    2             @PSTRINGC_647
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               9
+    Statements              99
+    Comments                216
+    Volume (V)              4649
+    Difficulty (D)          39.7
+    Effort to implement (E) 184353
+    Time to implement (T)   2 hours, 51 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   10
+    Maintainability (MI)    148
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   429  1615  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

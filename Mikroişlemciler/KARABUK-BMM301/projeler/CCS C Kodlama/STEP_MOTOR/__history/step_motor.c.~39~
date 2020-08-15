@@ -1,0 +1,115 @@
+#include <step_motor.h>
+
+#include <lcd.c>
+
+void saga(int16);
+void sola(int16);
+void tusAlgila();
+
+void main()
+{
+      int8 sure = 50, Kontrol1 = 0, Kontrol2 = 0;
+      lcd_init();
+
+     while(TRUE)
+     {
+         switch(tusAlgila())  // 4ms zaman alýr
+               {      
+                  case 2:  // step motor hýz artýr
+                  sure=sure+5; 
+                  if(sure>=100) sure=100;
+                  delay_ms(120); // tuþ sekmesini önlemek için
+                  Kontrol1 = 0;
+                  Kontrol2 = 0;
+                  break;
+                  
+                  case 6:  // hýz azalt
+                  sure = sure-5;
+                  if(sure<=5) sure=5;
+                  delay_ms(120);
+                  Kontrol1 = 0;
+                  Kontrol2 = 0;
+                  break;
+                  
+                  case 3:  // buton basýlý ise saða döndür
+                  saga(sure);
+                  if(Kontrol1 == 0)
+                     printf(lcd_putc,"\fSaga Donuyor\n Hizi=%u",sure);
+                  Kontrol1 = 1;
+                  Kontrol2 = 0;
+                  break;
+                  
+                  case 7:  // buton basýlý ise sola döndür
+                  if(Kontrol2 == 0)
+                     printf(lcd_putc,"\fSola Donuyor\n Hizi=%u",sure);
+                  Kontrol2 = 1;
+                  Kontrol1 = 0;
+                  sola(sure);
+                  break;
+               }
+   
+      
+     }
+
+}
+
+void saga(int16 hiz)
+{
+   output_a(0b00001010);
+   delay_ms(hiz);
+   output_a(0b00000110);
+   delay_ms(hiz);
+   output_a(0b00000101);
+   delay_ms(hiz);
+   output_a(0b00001001);
+   delay_ms(hiz);
+   output_a(0); // bobinlerde 1 0 kalmasý engellendi.
+
+}
+
+void sola(int16 hiz)
+{
+   output_a(0b00001001);
+   delay_ms(hiz);
+   output_a(0b00000101);
+   delay_ms(hiz);
+   output_a(0b00000110);
+   delay_ms(hiz);
+   output_a(0b00001010);
+   delay_ms(hiz);
+   output_a(0); // bobinlerde 1 0 kalmasý engellendi.
+
+}
+
+int8 tusAlgila()
+{
+   int8 key = 0;  // int8 key = 0 ya da 1...16 degerlerinden farkli bir  deger verilebilir.
+   output_d(0b11110111);  // RD3 = 0 olduðundan bu satir secildi.
+   delay_ms(1);
+   if(input(PIN_D4)==0) key=1;
+   if(input(PIN_D5)==0) key=2; 
+   if(input(PIN_D6)==0) key=3; 
+   if(input(PIN_D7)==0) key=4; 
+   output_d(0b11111011);  // RD2 = 0 olduðundan bu satir secildi.
+   delay_ms(1);
+   if(input(PIN_D4)==0) key=5;
+   if(input(PIN_D5)==0) key=6; 
+   if(input(PIN_D6)==0) key=7; 
+   if(input(PIN_D7)==0) key=8;
+   output_d(0b11111101);  // RD1 = 0 olduðundan bu satir secildi.
+   delay_ms(1);
+   if(input(PIN_D4)==0) key=9;
+   if(input(PIN_D5)==0) key=10; 
+   if(input(PIN_D6)==0) key=11; 
+   if(input(PIN_D7)==0) key=12;
+   output_d(0b11111110);  // RD0 = 0 olduðundan bu satir secildi.
+   delay_ms(1);
+   if(input(PIN_D4)==0) key=13;
+   if(input(PIN_D5)==0) key=14; 
+   if(input(PIN_D6)==0) key=15; 
+   if(input(PIN_D7)==0) key=16;
+   
+   return key; // basili olan hangi buton degeri varsa o return ediliyor.
+
+}
+

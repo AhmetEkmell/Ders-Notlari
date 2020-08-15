@@ -1,0 +1,79 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     goster.sayac
+021     main.s
+022     main.d
+023     main.j
+024-025 main.i
+026     goster.saat
+026     tusAlgila.key
+027     goster.dakika
+027     tusAlgila.@SCRATCH1
+028     goster.k
+029     goster.s_onlar
+02A     goster.s_birler
+02B     goster.d_onlar
+02C     goster.d_birler
+02D     @DIV88.P1
+02D     @delay_ms1.P2
+02E     @DIV88.P1
+02F     @DIV88.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @delay_ms1
+000018  tusAlgila
+0000AE  @DIV88
+0000C3  goster
+000122  main
+000122  @cinit1
+000129  @cinit2
+000199  @goto10599
+
+Project Directory:
+    C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\AYARLI_SAAT\
+
+Project Files:
+    ayarli_saat.c                                           [15-Aðu-20 13:07  CRC=6E87DCDC]
+    ayarli_saat.h                                           [15-Aðu-20 13:05  CRC=CF12E969]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [21-Haz-13 16:04  CRC=4E65664C]
+
+Source signature=DA6592DD
+
+Units:
+    ayarli_saat (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   ayarli_saat.xsym
+    Errors:      ayarli_saat.err
+    Ext Symbols: ayarli_saat.esym
+    INHX8:       ayarli_saat.hex
+    Symbols:     ayarli_saat.sym
+    List:        ayarli_saat.lst
+    Debug/COFF:  ayarli_saat.cof
+    Project:     ayarli_saat.ccspjt
+    Call Tree:   ayarli_saat.tre
+    Statistics:  ayarli_saat.STA

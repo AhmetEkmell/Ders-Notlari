@@ -1,0 +1,37 @@
+#include <step_motor.h>
+
+#include <lcd.c>
+
+void saga(void);
+void sola(void);
+
+
+void main()
+{
+      int8 x;
+      lcd_init();
+
+  while(TRUE)
+  {
+
+
+   // 1.satýr için saðdan sola soldan saða kayan yazý
+   for(x=1; x<=6; x++)
+   {
+      printf(lcd_putc,"\f");
+      lcd_gotoxy(x,1);
+      printf(lcd_putc,"BILGISAYAR");
+      delay_ms(200);
+   }
+   
+   for(x=6; x>=1; x--)
+   {
+      printf(lcd_putc,"\f");
+      lcd_gotoxy(x,1);
+      printf(lcd_putc,"BILGISAYAR");
+      delay_ms(200);
+   }   
+   
+  }
+
+}

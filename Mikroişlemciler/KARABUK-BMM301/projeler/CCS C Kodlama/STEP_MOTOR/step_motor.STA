@@ -1,0 +1,67 @@
+
+ROM used:   839/8192 (10%)
+            839/8192 (10%) including unused fragments
+
+            0.7 Average locations per line
+            4.8 Average locations per statement
+
+RAM used:   8/368 (2%) at main() level
+            23/368 (6%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  116    89  51  step_motor.c
+   10     0   0  step_motor.h
+  661     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h
+  456    84  49  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
+----- -----
+ 1243   173 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     20   2    1             @delay_ms1
+0      8   1    0             @const629
+ Inline         3   596  5.9  lcd_read_byte
+0      6   1    0    59  4.2  lcd_read_nibble
+0     17   2    1   179  3.3  lcd_send_nibble
+0     66   8    3   460  4.7  lcd_send_byte
+0     51   6    2   667  5.9  lcd_init
+0     18   2    4   208  6.3  lcd_gotoxy
+0     44   5    1   354  4.7  lcd_putc
+0    105  13    3   963  7.6  MAIN
+0     12   1    0   463  5.1  @const670
+0     84  10    5   463  5.1  @PSTRINGCN7_647
+0     21   3    3   463  5.1  @DIV88
+0     53   6    2             @PRINTF_U_647
+0     12   1    0   186  1.4  @const679
+0     10   1    0   186  1.4  @goto10699
+0     79   9    3   186  1.4  saga
+0     79   9    3   186  1.4  sola
+0    150  18    2  1475  3.4  tusAlgila
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               16
+    Statements              173
+    Comments                224
+    Volume (V)              11747
+    Difficulty (D)          64.6
+    Effort to implement (E) 758324
+    Time to implement (T)   11 hours, 42 minutes
+    Est Delivered Bugs (B)  3
+    Cyclomatic Complexity   38
+    Maintainability (MI)    74
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   835  1209  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

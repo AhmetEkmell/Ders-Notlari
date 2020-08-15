@@ -1,0 +1,113 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     lcdlat
+008     PSP_DATA
+008     lcd
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+021     MAIN.sure
+022     MAIN.Kontrol1
+023     MAIN.Kontrol2
+024     @PSTRINGCN7_647.P1
+024     @PRINTF_U_647.P2
+024     lcd_init.i
+024     tusAlgila.key
+024-025 saga.hiz
+024-025 sola.hiz
+025     @PRINTF_U_647.P1
+025     lcd_init.@SCRATCH1
+025     @PSTRINGCN7_647.@SCRATCH1
+025     tusAlgila.@SCRATCH1
+026     @DIV88.P1
+026     @PSTRINGCN7_647.@SCRATCH2
+026     saga.@SCRATCH1
+026     sola.@SCRATCH1
+027     @DIV88.P1
+027     @PSTRINGCN7_647.@SCRATCH3
+028     @PSTRINGCN7_647.@SCRATCH4
+028     @DIV88.@SCRATCH1
+029     lcd_putc.c
+02A     lcd_gotoxy.x
+02A     @delay_ms1.P1
+02B     lcd_gotoxy.y
+02C     lcd_gotoxy.address
+02D     lcd_gotoxy.@SCRATCH1
+02E     lcd_send_byte.address
+02F     lcd_send_byte.n
+030     lcd_read_byte.low
+030     lcd_send_byte.@SCRATCH1
+031     lcd_read_byte.high
+031     lcd_send_nibble.n
+032     lcd_read_byte.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+088     lcdtris
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  LCD_INIT_STRING.call
+000008  LCD_INIT_STRING.data
+00000C  @const670.call
+000018  @const679.call
+000024  @delay_ms1
+000038  lcd_send_nibble
+000049  lcd_read_nibble
+00004F  lcd_send_byte
+000055  lcd_read_byte
+000091  lcd_init
+0000C4  tusAlgila
+00015A  saga
+0001A9  lcd_gotoxy
+0001BB  lcd_putc
+0001E7  @PSTRINGCN7_647
+00023B  @DIV88
+000250  @PRINTF_U_647
+000285  sola
+0002D4  MAIN
+0002D4  @cinit1
+0002DB  @cinit2
+00033D  @goto10699
+
+Project Directory:
+    C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\STEP_MOTOR\
+
+Project Files:
+    step_motor.c                                            [15-Aðu-20 18:24  CRC=5FB60783]
+    step_motor.h                                            [15-Aðu-20 17:54  CRC=CF12E969]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [21-Haz-13 16:04  CRC=4E65664C]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [23-Aðu-12 09:01  CRC=D28E8746]
+
+Source signature=224B65C4
+
+Units:
+    step_motor (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   step_motor.xsym
+    Errors:      step_motor.err
+    Ext Symbols: step_motor.esym
+    INHX8:       step_motor.hex
+    Symbols:     step_motor.sym
+    List:        step_motor.lst
+    Debug/COFF:  step_motor.cof
+    Project:     step_motor.ccspjt
+    Call Tree:   step_motor.tre
+    Statistics:  step_motor.STA

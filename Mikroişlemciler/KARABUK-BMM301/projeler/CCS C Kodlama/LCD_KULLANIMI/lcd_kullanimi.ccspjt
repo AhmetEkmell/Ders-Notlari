@@ -1,0 +1,23 @@
+[PROJECT]
+Target=lcd_kullanimi.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.007
+Compiler=PCM
+CCSVersion=5.007
+[Target Data]
+FileList=lcd_kullanimi.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\LCD_KULLANIMI\
+[C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\LCD_KULLANIMI\lcd_kullanimi]
+Type=4
+[mru-list]
+1=lcd_kullanimi.c
+[Opened Files]
+1=lcd_kullanimi.c
+2=..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c
+3=
+[lcd_kullanimi.c]
+Type=4
+[Units]
+Count=1
+1=lcd_kullanimi (main)

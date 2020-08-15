@@ -1,0 +1,18 @@
+#include <lcd_kullanimi.h>
+
+#include <lcd.c>
+
+void main()
+{
+      int16 data = 0;
+      lcd_init();
+
+   while(TRUE)
+   {
+      data++;
+      if(data == 10000) data = 0;
+      printf(lcd_putc,"\f BUSENURRRR = %04Lu",data);
+      delay_ms(200);
+   }
+
+}

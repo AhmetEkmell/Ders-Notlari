@@ -1,0 +1,11 @@
+#include <ayarli_saat.h>
+
+void main()
+{
+
+	while(TRUE)
+	{
+		//TODO: User Code
+	}
+
+}

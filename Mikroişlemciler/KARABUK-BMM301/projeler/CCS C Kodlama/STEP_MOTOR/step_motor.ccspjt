@@ -1,0 +1,23 @@
+[PROJECT]
+Target=step_motor.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.007
+Compiler=PCM
+CCSVersion=5.007
+[Target Data]
+FileList=step_motor.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\STEP_MOTOR\
+[C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\STEP_MOTOR\step_motor]
+Type=4
+[mru-list]
+1=step_motor.c
+[Opened Files]
+1=step_motor.c
+2=..\AYARLI_SAAT\ayarli_saat.c
+3=
+[step_motor.c]
+Type=4
+[Units]
+Count=1
+1=step_motor (main)
