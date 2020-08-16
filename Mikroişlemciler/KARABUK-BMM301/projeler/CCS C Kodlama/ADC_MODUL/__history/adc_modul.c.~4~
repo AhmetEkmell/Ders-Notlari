@@ -1,0 +1,13 @@
+#include <adc_modul.h>
+#include <lcd.c>
+void main()
+{
+
+   setup_adc_ports(AN0,AN1,AN4,AN5,AN6,AN7,VREF,VREF);
+
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}

@@ -1,0 +1,23 @@
+[PROJECT]
+Target=adc_modul.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.007
+Compiler=PCM
+CCSVersion=5.007
+[Target Data]
+FileList=adc_modul.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\ADC_MODUL\
+[C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\ADC_MODUL\adc_modul]
+Type=4
+[mru-list]
+1=adc_modul.c
+[Opened Files]
+1=adc_modul.c
+2=adc_modul.h
+3=
+[adc_modul.c]
+Type=4
+[Units]
+Count=1
+1=adc_modul (main)

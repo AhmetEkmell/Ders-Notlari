@@ -1,0 +1,107 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     lcdlat
+008     lcd
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+021-022 MAIN.x_data
+023-024 MAIN.y_data
+025-026 MAIN.xxData
+027-028 MAIN.yyData
+029     lcd_init.i
+029     @PSTRINGCN7_647.P1
+029-02A @PRINTF_LU_647.P2
+029     MAIN.@SCRATCH1
+02A     lcd_init.@SCRATCH1
+02A     MAIN.@SCRATCH2
+02A     @PSTRINGCN7_647.@SCRATCH1
+02B     @PSTRINGCN7_647.@SCRATCH2
+02B     @PRINTF_LU_647.@SCRATCH1
+02C     @PSTRINGCN7_647.@SCRATCH3
+02C     @PRINTF_LU_647.@SCRATCH2
+02D     @PSTRINGCN7_647.@SCRATCH4
+02D     @PRINTF_LU_647.@SCRATCH3
+02E     @PRINTF_LU_647.@SCRATCH4
+02F     @PRINTF_LU_647.@SCRATCH5
+030     @PRINTF_LU_647.@SCRATCH6
+031     @PRINTF_LU_647.@SCRATCH7
+032     lcd_putc.c
+033     lcd_gotoxy.x
+033     @delay_ms1.P1
+034     lcd_gotoxy.y
+035     lcd_gotoxy.address
+036     lcd_gotoxy.@SCRATCH1
+037     lcd_send_byte.address
+038     lcd_send_byte.n
+039     lcd_read_byte.low
+039     lcd_send_byte.@SCRATCH1
+03A     lcd_send_nibble.n
+03A     lcd_read_byte.high
+03B     lcd_read_byte.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+088     lcdtris
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  LCD_INIT_STRING.call
+000008  LCD_INIT_STRING.data
+00000C  @const666.call
+00001D  @delay_ms1
+000031  lcd_send_nibble
+000042  lcd_read_nibble
+000048  lcd_send_byte
+00004E  lcd_read_byte
+00008A  lcd_init
+0000BD  lcd_gotoxy
+0000CF  lcd_putc
+0000FB  @PSTRINGCN7_647
+000151  @PRINTF_LU_647
+0001B4  MAIN
+0001B4  @cinit1
+0001BB  @cinit2
+
+Project Directory:
+    C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\ADC_MODUL\
+
+Project Files:
+    adc_modul.c                                             [16-Aðu-20 16:23  CRC=9C8A1013]
+    adc_modul.h                                             [16-Aðu-20 11:22  CRC=CF12E969]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [21-Haz-13 16:04  CRC=4E65664C]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [23-Aðu-12 09:01  CRC=D28E8746]
+
+Source signature=5F1F6E54
+
+Units:
+    adc_modul (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   adc_modul.xsym
+    Errors:      adc_modul.err
+    Ext Symbols: adc_modul.esym
+    INHX8:       adc_modul.hex
+    Symbols:     adc_modul.sym
+    List:        adc_modul.lst
+    Debug/COFF:  adc_modul.cof
+    Project:     adc_modul.ccspjt
+    Call Tree:   adc_modul.tre
+    Statistics:  adc_modul.STA
