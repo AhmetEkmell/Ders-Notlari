@@ -1,0 +1,108 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     lcdlat
+008     lcd
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     @TRIS_C
+021-022 MAIN.y_data
+023-024 MAIN.data
+025     @PSTRINGCN7_647.P1
+025     lcd_init.i
+025-026 @PRINTF_LU_647.P1
+025     MAIN.@SCRATCH1
+026     lcd_init.@SCRATCH1
+026     MAIN.@SCRATCH2
+026     @PSTRINGCN7_647.@SCRATCH1
+027     @PSTRINGCN7_647.@SCRATCH2
+027     @PRINTF_LU_647.@SCRATCH1
+028     @PSTRINGCN7_647.@SCRATCH3
+028     @PRINTF_LU_647.@SCRATCH2
+029     @PSTRINGCN7_647.@SCRATCH4
+029     @PRINTF_LU_647.@SCRATCH3
+02A     @PRINTF_LU_647.@SCRATCH4
+02B     @PRINTF_LU_647.@SCRATCH5
+02C     @PRINTF_LU_647.@SCRATCH6
+02D     @PRINTF_LU_647.@SCRATCH7
+02E     lcd_putc.c
+02F     lcd_gotoxy.x
+02F     @delay_ms1.P1
+030     lcd_gotoxy.y
+031     lcd_gotoxy.address
+032     lcd_gotoxy.@SCRATCH1
+033     lcd_send_byte.address
+034     lcd_send_byte.n
+035     lcd_read_byte.low
+035     lcd_send_byte.@SCRATCH1
+036     lcd_read_byte.high
+036     lcd_send_nibble.n
+037     lcd_read_byte.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+088     lcdtris
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  LCD_INIT_STRING.call
+000008  LCD_INIT_STRING.data
+00000C  @const665.call
+000015  @const670.call
+00001E  @const671.call
+000027  @delay_ms1
+00003B  lcd_send_nibble
+00004C  lcd_read_nibble
+000052  lcd_send_byte
+000058  lcd_read_byte
+000094  lcd_init
+0000C7  lcd_gotoxy
+0000D9  lcd_putc
+000105  @PSTRINGCN7_647
+000159  @PRINTF_LU_647
+0001BC  MAIN
+0001BC  @cinit1
+0001C5  @cinit2
+
+Project Directory:
+    C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\PWM_MOTOR\
+
+Project Files:
+    pwm_motor.c                                             [17-Aðu-20 11:20  CRC=92195F4E]
+    pwm_motor.h                                             [17-Aðu-20 10:37  CRC=CF12E969]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [21-Haz-13 16:04  CRC=4E65664C]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [23-Aðu-12 09:01  CRC=D28E8746]
+
+Source signature=54AEBD8F
+
+Units:
+    pwm_motor (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   pwm_motor.xsym
+    Errors:      pwm_motor.err
+    Ext Symbols: pwm_motor.esym
+    INHX8:       pwm_motor.hex
+    Symbols:     pwm_motor.sym
+    List:        pwm_motor.lst
+    Debug/COFF:  pwm_motor.cof
+    Project:     pwm_motor.ccspjt
+    Call Tree:   pwm_motor.tre
+    Statistics:  pwm_motor.STA
