@@ -42,6 +42,7 @@ public class Eleman {
         liste.Indexten_Eleman_Sil(e3);
         System.out.println();
         liste.listeyi_Goster();
+        System.out.println("\nListede Eleman sayısı = "+liste.ElemanSayisi());
     }
     
 }

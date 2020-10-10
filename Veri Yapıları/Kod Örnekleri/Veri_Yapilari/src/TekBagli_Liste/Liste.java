@@ -129,7 +129,6 @@ class Liste {
             tmp = tmp.ileri;
             sayac++;
         }
-        
         return sayac;
     }
 }
