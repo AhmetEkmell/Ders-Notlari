@@ -1,4 +1,4 @@
-package Alistirmalar;
+package TekBagli_Liste;
 
 class Liste {
     
@@ -106,5 +106,30 @@ class Liste {
             once.ileri = null;
         }
         son = once;
+    }
+    
+    void Indexten_Eleman_Sil(Eleman s){
+        
+        Eleman tmp, elemanOnce;
+        tmp = bas;
+        elemanOnce = null;
+        
+        while(tmp != s){
+            elemanOnce = tmp;
+            tmp = tmp.ileri;
+        }
+        elemanOnce.ileri = s.ileri;
+    }
+    
+    int ElemanSayisi(){
+        int sayac = 0;
+        Eleman tmp;
+        tmp = bas;
+        while(tmp != null){
+            tmp = tmp.ileri;
+            sayac++;
+        }
+        
+        return sayac;
     }
 }

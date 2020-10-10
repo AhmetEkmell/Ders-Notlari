@@ -1,4 +1,4 @@
-package Alistirmalar;
+package TekBagli_Liste;
 
 public class Eleman {
     
@@ -33,7 +33,15 @@ public class Eleman {
         liste.Ortasina_Ekle(e7,e1);
 //        System.out.println(liste.Indexten_Elemani_Sec(4).icerik);
         liste.listeyi_Goster();
- 
+        liste.Sondan_Sil();
+        System.out.println();
+        liste.listeyi_Goster();
+        liste.Basi_Sil();
+        System.out.println();
+        liste.listeyi_Goster();
+        liste.Indexten_Eleman_Sil(e3);
+        System.out.println();
+        liste.listeyi_Goster();
     }
     
 }
