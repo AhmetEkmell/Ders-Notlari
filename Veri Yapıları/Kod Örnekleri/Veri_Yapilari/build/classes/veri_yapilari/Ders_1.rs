@@ -1,0 +1,2 @@
+veri_yapilari.ogrenci
+veri_yapilari.Ders_1
