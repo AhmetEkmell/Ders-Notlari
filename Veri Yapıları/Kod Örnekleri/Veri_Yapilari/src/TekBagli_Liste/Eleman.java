@@ -22,8 +22,7 @@ public class Eleman {
         Eleman e7 = new Eleman(7);
         
         
-        Liste liste = new Liste();
-        
+        Liste1 liste = new Liste1();
         liste.Basa_Ekle(e1);
         liste.Basa_Ekle(e2);
         liste.Basa_Ekle(e3);

@@ -1,10 +1,15 @@
 package TekBagli_Liste;
 
-class Liste {
+/**
+ *
+ * @author Ahmet
+ */
+
+public class Liste1 {
     
     Eleman bas, son;
     
-    public Liste(){
+    public Liste1(){
         bas = null;
         son = null;
     }
@@ -72,7 +77,7 @@ class Liste {
     void listeyi_Goster(){
        
         //karmaşıklık analizi O(N)'dir.
-        
+        System.out.print("Liste elemanları: ");
         Eleman tmp = bas;
         while(tmp != null){
             System.out.print(tmp.icerik+" ");
@@ -131,4 +136,5 @@ class Liste {
         }
         return sayac;
     }
+    
 }
