@@ -1,0 +1,3 @@
+3. Hafta Canlı derste yazılan kodlamalara Veri_Yapilari/src/TekBagli_Liste dizininden bakabilirsiniz.
+
+Bu derste listenin başından silme aşamasına kadar kodlama yapıldı.
