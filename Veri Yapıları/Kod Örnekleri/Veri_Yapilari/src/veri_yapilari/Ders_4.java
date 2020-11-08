@@ -52,11 +52,11 @@ class stack{
     }
     
     public void listele(){
-        
+        int i = ustDeger;
         if(!isEmpty()){
-            while(!isEmpty()){
-                int popDeger = pop();
-                System.out.println(popDeger);
+            while(i != -1){
+                System.out.println(dizi[i]);
+                i--;
             }
         }
         else{
@@ -74,6 +74,6 @@ public class Stack_Yigit_Cikin {
         s.push(5);
         s.push(4);
         s.push(1);
-        System.out.println("Silinen deger = "+s.pop());
+        s.listele();
     }
 }
