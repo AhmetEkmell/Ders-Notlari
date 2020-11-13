@@ -63,7 +63,7 @@ class Stack{
     }
 }
 
-public class Ders4_Stack_with_linkedList {
+public class Ders_4_StackWithLinkedList {
     
     public static void main(String[] args) {
         Stack s = new Stack();
