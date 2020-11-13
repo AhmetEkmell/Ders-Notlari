@@ -1,5 +1,3 @@
-package Odev3_Cevabi_Stack_Yigit;
-
 import java.util.Stack;
 
 /**
@@ -54,8 +52,9 @@ class Kuyruk{
         }
     }
     
+    Stack<Integer> stack = new Stack<Integer>();
+    
     public void kuyrukTersCevir(){
-        Stack<Integer> stack = new Stack<Integer>();
         while(!isEmpty()){
             stack.push(pop());
         }
@@ -63,6 +62,30 @@ class Kuyruk{
         while(!stack.isEmpty()){
             push(stack.pop());
         }
+    }
+    
+    public void N_KadarKuyrukTersCevir(int N){
+        for (int i = 0; i < N; i++) {
+            stack.push(pop());
+        }
+        
+        while(!stack.isEmpty()){
+            push(stack.pop());
+        }
+        
+        for (int i = 0; i < ElemanSayisi()-N; i++) {
+            push(pop());
+        }
+    }
+    
+    public int ElemanSayisi(){
+        Dugum temp = bas;
+        int sayac = 0;
+        while(temp != null){
+            sayac++;
+            temp = temp.ileri;
+        }
+        return sayac;
     }
 }
 
@@ -74,7 +97,10 @@ public class Ders_4 {
         }
         kuyruk.kuyrukGoster();
         System.out.println();
-        kuyruk.kuyrukTersCevir();
+//        kuyruk.kuyrukTersCevir();
+//        kuyruk.kuyrukGoster();
+//        System.out.println();
+        kuyruk.N_KadarKuyrukTersCevir(4);
         kuyruk.kuyrukGoster();
         System.out.println();
     }
