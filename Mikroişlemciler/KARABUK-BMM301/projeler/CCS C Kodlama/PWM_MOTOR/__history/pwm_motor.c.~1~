@@ -1,0 +1,11 @@
+#include <pwm_motor.h>
+
+void main()
+{
+
+	while(TRUE)
+	{
+		//TODO: User Code
+	}
+
+}

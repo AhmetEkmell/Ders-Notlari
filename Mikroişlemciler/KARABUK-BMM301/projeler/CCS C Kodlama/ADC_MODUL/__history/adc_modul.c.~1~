@@ -1,0 +1,11 @@
+#include <adc_modul.h>
+
+void main()
+{
+
+	while(TRUE)
+	{
+		//TODO: User Code
+	}
+
+}

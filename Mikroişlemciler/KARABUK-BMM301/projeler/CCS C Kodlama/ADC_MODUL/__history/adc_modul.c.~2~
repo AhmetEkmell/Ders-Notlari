@@ -1,0 +1,13 @@
+#include <adc_modul.h>
+
+void main()
+{
+
+   setup_adc_ports(ALL_ANALOG);
+
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}

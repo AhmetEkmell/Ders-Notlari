@@ -1,0 +1,23 @@
+[PROJECT]
+Target=pwm_motor.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.007
+Compiler=PCM
+CCSVersion=5.007
+[Target Data]
+FileList=pwm_motor.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\PWM_MOTOR\
+[C:\Users\Ahmet\Desktop\projeler\CCS C Kodlama\PWM_MOTOR\pwm_motor]
+Type=4
+[mru-list]
+1=pwm_motor.c
+[Opened Files]
+1=pwm_motor.c
+2=..\ADC_MODUL\adc_modul.c
+3=
+[pwm_motor.c]
+Type=4
+[Units]
+Count=1
+1=pwm_motor (main)

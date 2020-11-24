@@ -1,0 +1,14 @@
+#include <adc_modul.h>
+#include <lcd.c>
+void main()
+{
+ 
+   lcd_init();
+   setup_adc_ports(AN0_AN1_AN2_AN4_AN5_VSS_VREF);
+
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}
