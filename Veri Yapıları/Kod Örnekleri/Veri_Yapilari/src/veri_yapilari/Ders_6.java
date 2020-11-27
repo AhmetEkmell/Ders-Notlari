@@ -41,7 +41,7 @@ class hash{
         int indis = Ara(eleman);
         if(indis != -1 && dizi[indis] != 0){
             System.out.println("dizinin silinen elemanı => "+dizi[indis]);
-            dizi[indis] = 0;
+            dizi[indis] = -1; // Eğer -1 değilde 0 yaparsak kod patlıyor. Dolayısıyla Silinen eleman yerine 0 dan farklı bir değer vermek lazım.
         }
         else{
             System.out.println(eleman+" sayısı hash tabloda bulunmuyor");
