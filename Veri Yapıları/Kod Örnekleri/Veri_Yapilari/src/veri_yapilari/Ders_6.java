@@ -18,7 +18,6 @@ class hash{
             indis = (indis + 1) % 10;
         }
         dizi[indis] = sayi;
-        indis++;
     }
     
     int Ara(int eleman){
