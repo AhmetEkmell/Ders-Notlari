@@ -120,15 +120,15 @@ class Agac{
         if(Temp_Kok==null){
             return;
         }
+        System.out.println("InOrder => ");
         while(Temp_Kok!=null || !stack.isEmpty()){
             while(Temp_Kok!=null){
-                System.out.println("Temp_kok: "+Temp_Kok.icerik);
                 stack.push(Temp_Kok);
                 Temp_Kok = Temp_Kok.sol;
             }
             
             Temp_Kok= stack.pop();
-            System.out.println("Pop Kok: "+Temp_Kok.icerik);
+            System.out.println(Temp_Kok.icerik+" ");
             Temp_Kok = Temp_Kok.sag;
         }
         System.out.println();
@@ -137,7 +137,7 @@ class Agac{
 }
 
 
-public class Ders6 {
+public class Ders7 {
     public static void main(String[] args) {
         Agac agac = new Agac();
         agac.Ekleme(50);
