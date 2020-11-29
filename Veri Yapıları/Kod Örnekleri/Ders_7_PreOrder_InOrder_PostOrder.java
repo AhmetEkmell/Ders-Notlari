@@ -1,5 +1,3 @@
-package Odev4_Cevabi_RoundRobin;
-
 import java.util.Stack;
 
 /**
