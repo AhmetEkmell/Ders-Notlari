@@ -48,3 +48,15 @@ https://www.youtube.com/watch?v=oj5BrjChQHc&feature=youtu.be
 
 Hafta-8 Dengeli Arama Ağaçları
 https://www.youtube.com/watch?v=PlfkbgznOdg&feature=youtu.be
+
+Hafta-8 AVL Ağaçları
+https://www.youtube.com/watch?v=Mi_0xoCcwxc&feature=youtu.be
+
+Hafta-8 Splay Ağaçları
+https://www.youtube.com/watch?v=jNkmexWUSPQ&feature=youtu.be
+
+Hafta-9 B Ağaçları ve İfade Ağaçları
+https://www.youtube.com/watch?v=ODDv4j-L8P8&feature=youtu.be
+
+Hafta-9 Heap ve Dengeli Ağaçlar
+https://www.youtube.com/watch?v=h_FgyL81a3U&feature=youtu.be
