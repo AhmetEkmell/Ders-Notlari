@@ -27,8 +27,11 @@ public class database1 {
 //                System.out.println(sonuc.getString("ISIM")+" || "+sonuc.getString(2));
 //            }
             
-            String ekle = "insert into KISILER values('MelikŞah',1055)";
-            System.out.println("Ekleme yapıldı mı? => "+durum.executeUpdate(ekle));
+//            String ekle = "insert into KISILER values('MelikŞah',1055)";
+//            System.out.println("Ekleme yapıldı mı? => "+durum.executeUpdate(ekle));
+            
+            String guncelle = "update KISILER set DOGUMTARIHI=1055 Where DOGUMTARIHI=1050";
+            System.out.println("Güncelleme yapıldı mı? => "+durum.executeUpdate(guncelle));
             
         } catch (SQLException ex) {
             System.out.println("Bağlantı Hatası! ");
