@@ -79,6 +79,7 @@ public class Ders6 {
         hashcik.Ekle(41);
         hashcik.Ekle(51);
         hashcik.Ekle(61);
+        hashcik.listele();
         hashcik.Sil(1);
         hashcik.listele();
         hashcik.Sil(1);
