@@ -4,29 +4,35 @@
  */
 
 class hash{
-    int dizi[] = new int[29];
+    int dizi[];
+    int boyut;
     
-    int hash(int anahtar){
-        return anahtar % 29; // Asal bir sayı seçiyoruz ki sonsuz döngüye girmeyelim
+    hash(int boyut){
+        this.boyut = boyut;
+        dizi = new int[boyut];
+    }
+    
+    int hash_indis(int anahtar){
+        return anahtar % boyut;
     }
     
     int hash_2(int anahtar){
-        return ((anahtar%7)*3) % 29;
+        return ((anahtar%7)*3) % boyut;
     }
     
     void Ekle(int sayi){
-        int indis = hash(sayi);
+        int indis = hash_indis(sayi);
         int newIndis = indis;
         int katSayi = 0;
         while(dizi[newIndis] != 0){
-            newIndis = (indis + katSayi*hash_2(sayi)) % 11;
+            newIndis = (indis + katSayi*hash_2(sayi)) % boyut;
             katSayi++;
         }
         dizi[newIndis] = sayi;
     }
     
     int Ara(int eleman){
-        int indis = hash(eleman);
+        int indis = hash_indis(eleman);
         if(eleman == dizi[indis]){
             return indis;
         }
@@ -34,7 +40,7 @@ class hash{
             int newIndis = indis;
             int katSayi = 1;
             while(dizi[newIndis] != 0){
-                newIndis = (indis + katSayi *hash_2(eleman)) % 11;
+                newIndis = (indis + katSayi *hash_2(eleman)) % boyut;
                 if(eleman == dizi[newIndis]){
                     return newIndis;
                 }
@@ -63,9 +69,9 @@ class hash{
 }
 
 
-public class Ders6 {
+public class Hash_Double {
     public static void main(String[] args) {
-        hash hashcik = new hash();
+        hash hashcik = new hash(11); // boyut asal seçilmeli ki sonsuz döngüye girme durumu oluşmasın.
         hashcik.Ekle(1);
         hashcik.Ekle(11);
         hashcik.Ekle(21);
@@ -73,6 +79,7 @@ public class Ders6 {
         hashcik.Ekle(41);
         hashcik.Ekle(51);
         hashcik.Ekle(61);
+        hashcik.listele();
         hashcik.Sil(1);
         hashcik.listele();
         hashcik.Sil(1);

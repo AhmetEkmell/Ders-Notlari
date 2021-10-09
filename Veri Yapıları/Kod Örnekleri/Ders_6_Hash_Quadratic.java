@@ -59,7 +59,7 @@ class hash{
 }
 
 
-public class Ders6 {
+public class Hash_Quadratic {
     public static void main(String[] args) {
         hash hashcik = new hash();
         hashcik.Ekle(5);

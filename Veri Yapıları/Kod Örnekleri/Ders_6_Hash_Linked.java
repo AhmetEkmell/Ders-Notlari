@@ -80,7 +80,7 @@ class Hash{
 }
 
 
-public class Ders6 {
+public class Hash_Linked {
     public static void main(String[] args) {
         Hash h = new Hash();
         h.Ekle(26);
