@@ -1,0 +1,2768 @@
+========================================================================
+
+[ENGLISH]
+In a Von-Neumann architecture, the same memory and bus are used to
+store both data and instructions that run the program.
+
+[TÜRKÇE]
+Von-Neumann mimarisinde, aynı hafıza ve veri yolu hem veri hem de
+komutları depolamak için kullanılır ki bu komutlar programı çalıştırır.
+
+========================================================================
+
+[ENGLISH]
+Since you cannot access program memory and data memory simultaneously,
+the Von-Neumann architecture is susceptible to bottlenecks and system
+performance is affected.
+
+[TÜRKÇE]
+Program belleğine ve veri belleğine aynı anda erişemediğiniz için 
+Von-Neumann mimarisi darboğazlara açıktır ve sistem performansı etkilenir.
+
+========================================================================
+
+[ENGLISH]
+The Von-Neumann architecture has been around since the 1940s. 
+A clarifying trait is that a single bus used for both signal and storage.
+
+[TÜRKÇE]
+Von-Neumann mimarisi 1940'lardan beri mevcut. Ayırt edici özellik,
+hem sinyal hem de depolama için kullanılan tek bir veri yoludur.
+
+========================================================================
+
+[ENGLISH]
+The Harvard architecture stores machine instructions and data in separate
+memory units that are connected by different busses.
+
+[TÜRKÇE]
+Harvard mimarisi verilerini ve komutlarını farklı veri yollarıyla
+bağlanan ayrı bellek birimlerinde saklar.
+
+========================================================================
+
+[ENGLISH]
+In this case, there are at least two memory address spaces to work with,
+so there is a memory register for machine instructions and another memory
+register for data.
+
+[TÜRKÇE]
+Bu durumda, çalışmak için en az iki bellek adres uzayı vardır,
+bu nedenle makine komutları için bir bellek yazmacı ve veriler için
+başka bir bellek yazmacı vardır.
+
+========================================================================
+
+[ENGLISH]
+Computers designed with the Harvard architecture are able to run a
+program and access data independently, and therefore simultaneously.
+
+[TÜRKÇE]
+Harvar Mimarisi ile tasarlanan bilgisayarlar, bir programı çalıştırabilir
+ve verilere bağımsız ve dolayısıyla aynı anda erişebilir.
+
+========================================================================
+
+[ENGLISH]
+Harvard architecture has a strict separation between data and code.
+
+[TÜRKÇE]
+Harvard mimarisinin veri ve kod arasında kesin bir ayrımı vardır.
+
+========================================================================
+
+[ENGLISH]
+Thus, Harvard architecture is more complicated but separate pipelines
+remove the bottleneck that Von-Neumann creates.
+
+[TÜRKÇE]
+Bu nedenle, Harvard mimarisi daha karmaşıktır, ancak ayrı veri hatları
+Von-Neumann'ın oluşturduğu darboğazları ortadan kaldırır.
+
+========================================================================
+
+[ENGLISH]
+The Harvard architecture has a separate bus for signals and storage.
+
+[TÜRKÇE]
+Harvard mimarisinde sinyaller ve depolama için ayrı bir veri yolu vardır.
+
+========================================================================
+
+[ENGLISH]
+The majority of modern computers have no pyhsical separation between the
+memory spaces used by both data and programs/code/machine instructions,
+and therefore could be described technically as Von-Neumann for this reason.
+
+[TÜRKÇE]
+Günümüz bilgisayarların çoğunda, hem veri hem de programlar/kod/makine
+komutları tarafından kullanılan bellek boşluğu arasında fiziksel bir
+ayrım yoktur ve bu nedenle teknik olarak Von-Neumann olarak tanımlanabilir.
+
+========================================================================
+
+[ENGLISH]
+However, the better way to represent the majority of modern computers is a
+"modified Harvard architecture."
+
+[TÜRKÇE]
+Ancak, günümüz bilgisayarların çoğunu temsil etmenin en iyi yolu bir
+"Değiştirilmiş Harvard Mimarisi"dir.
+
+========================================================================
+
+[ENGLISH]
+Modern processors might share memory but have mechanisms like special
+instructions that keep data from being mistaken for code.
+
+[TÜRKÇE]
+Günümüzdeki işlemciler belleği paylaşabilir ancak verilerin kodla 
+karıştırılmasını önleyen özel komutlar gibi mekanizmalara sahiptir.
+
+========================================================================
+
+[ENGLISH]
+However, modified Harvard architecture does have two separate pathways
+(busses) for signal (code) and storage (memory), while the memory itself
+is one shared, physical piece.
+
+[TÜRKÇE]
+Bununla birlikte, değiştirilmiş Harvard mimarisinde sinyal(kod) ve depolama
+(bellek) için iki ayrı yol(veri yolları) bulunurken, oysa belleğin kendisi
+paylaşılan fiziksel bir parçadır.
+
+========================================================================
+
+[ENGLISH]
+The memory controller is where the modification is seated, since it handles
+the memory and how it used.
+
+[TÜRKÇE]
+Bellek denetleyicisi, belleği ve nasıl kullanıldığını işlediği için 
+değişikliğin merkezindedir.
+
+========================================================================
+
+[ENGLISH]
+If a Von-Neumann machine wants to perform an operation on some data in
+memory it has to move the data across the bus into the CPU.
+
+[TÜRKÇE]
+Bir Von-Neumann makinesi bellekteki bazı veriler üzerinde işlem yapmak
+istiyorsa, veriyi veri yolu üstünden CPU'ya taşımak zorundadır.
+
+========================================================================
+
+[ENGLISH]
+When the computation is done, it needs to move outputs of the computation
+to memory across the same bus.
+
+[TÜRKÇE]
+Hesaplama tamamlandığında, hesapma çıktıları için aynı veri yolu üzerinden
+belleğe taşımak gerekir.
+
+========================================================================
+
+[ENGLISH]
+The amount of data the bus can transfer at one time (speed and bandwith)
+plays a large part in how fast the Von-Neumann architecture can be.
+
+[TÜRKÇE]
+Veri yolunun tek seferde aktarabileceği veri miktarı (hız ve bant genişliği)
+Von-Neumann mimarisinin ne kadar hızlı olabileceği konusunda önemli bir rol
+oynar.
+
+========================================================================
+
+[ENGLISH]
+The throughput of a computer is related to how false the processors are
+as well as the rate of data transfer across the bus.
+
+[TÜRKÇE]
+Bilgisayarın verimi, işlemcilerin ne kadar hatalı olduğu gibi 
+veri yolundaki veri aktarım hızıyla da ilgilidir.
+
+========================================================================
+
+[ENGLISH]
+The processor can be idle while waiting for a memory fetch, or it can
+perform something called speculative processing, based on what the 
+processor might next need to do after the current compulation is finished
+(once data is fetched and computations are performed).
+
+[TÜRKÇE]
+İşlemci, bellek alımı beklenirken boşta kalabilir veya geçerli hesaplama
+tamamlandıktan sonra (veriler getirildikten ve hesaplamalar yapıldıktan
+sonra) işlemcinin daha sonra ne yapması gerektiğine bağlı olarak spekülatif
+yürütme adı verilen bir şey gerçekleştirebilir.
+
+========================================================================
+
+[ENGLISH]
+The Von-Neumann bottleneck occurs when data taken in or out of memory
+must wait while the current memory operation is completed.
+
+[TÜRKÇE]
+Von-Neumann darboğazı, belleğin içine veya dışına alınan verilerin 
+geçerli bellek işlemi tamamlanırken beklemesi gerektiğinde ortaya çıkar.
+
+========================================================================
+
+[ENGLISH]
+That is, if the processor just completed a computation and is ready to 
+perform the next, it has to write the finished computation into memory
+(which occupies the bus) before it can fetch new data out of memory 
+(which also uses the bus).
+
+[TÜRKÇE]
+Yani, işlemci yeni bir hesaplamayı tamamladıysa ve bir sonrakini yapmaya
+hazırsa, yeni verileri hafızadan (-ki yine veri yolunu kullanır) almadan
+önce bitmiş hesaplamayı belleğe (-ki veri yolunu işgal eder) yazmalıdır.
+
+========================================================================
+
+[ENGLISH]
+The Von-Neumann bottleneck has increased over time because processors have
+improved in speed while memory has not progressed as fast.
+
+[TÜRKÇE]
+Von-Neumann darboğazı zaman içinde arttı, çünkü bellek o kadar hızlı 
+ilerlemezken, işlemciler gelişti.
+
+========================================================================
+
+[ENGLISH]
+Some techniques to reduce the impact of the bottleneck are to keep memory
+in cache to minimize data movement, hardware acceleration, and speculative
+execution.
+
+[TÜRKÇE]
+Darboğazların etkisini azaltmak için bazı teknikler, veri hareketini en aza
+indirmek için hafızayı önbellekte tutmak, donanım hızlandırma ve spekülatif
+yürütmedir.
+
+========================================================================
+
+[ENGLISH]
+It is interesting to note that speculative execution is the conduit for one
+of the latest security flaws discovered by Google Project Zero,
+named Spectre.
+
+[TÜRKÇE]
+Spekülatif yürütmenin, Spectre adlı Google Project Zero tarafından 
+keşfedilen en son güvenlik açıklarından biri için yol olması ilginçtir.
+
+========================================================================
+
+[ENGLISH]
+Data management is a general term that covers a broad range of data 
+applications.
+
+[TÜRKÇE]
+Veri yönetimi, çok çeşitli veri uygulamalarını kapsayan genel bir terimdir.
+
+========================================================================
+
+[ENGLISH]
+It may refer to basic data management concepts or to specific technologies.
+
+[TÜRKÇE]
+Bu temel veri yönetimi kavramlarına veya belirli teknolojilerine karşılık
+gelebilir.
+
+========================================================================
+
+[ENGLISH]
+Some notable applications include 1) data design, 2) data storage, and
+3) data security.
+
+[TÜRKÇE]
+Bazı önemli uygulamalar 1) veri tasarımı, 2) veri depolama ve 3) veri
+güvenliğini içerir.
+
+========================================================================
+
+[ENGLISH]
+Data design, or data architecture, refers to the way data is structured.
+
+[TÜRKÇE]
+Veri tasarımı veya veri mimarisi, verilerin yapılandırma biçimini ifade 
+eder.
+
+========================================================================
+
+[ENGLISH]
+For example, when creating a file format for an application, the developer
+must decide how to organize the data in the file.
+
+[TÜRKÇE]
+Örneğin, bir uygulama için doya biçimi oluştururken, geliştirici dosyadaki
+verilerin nasıl düzenleneceğine karar vermelidir.
+
+========================================================================
+
+[ENGLISH]
+For some applications, it may make sense to store data in a text format,
+while other programs may benefit from a binary file format.
+
+[TÜRKÇE]
+Bazı uygulamalar için, verileri metin biçiminde saklamak mantıklı olabilirken
+diğer programlar ikili dosya biçiminden yararlanabilir.
+
+========================================================================
+
+[ENGLISH]
+Regardless of what format the developer uses, the data must be organized
+within the file in a structure that can be recognized by the associated
+program.
+
+[TÜRKÇE]
+Geliştiricinin hangi biçimi kullandığına bakılmaksızın, veriler dosya içinde
+ilişkili program tarafından tanınabilecek bir yapıda organize edilmelidir.
+
+========================================================================
+
+[ENGLISH]
+Data storage refers to the many different ways of storing data.
+
+[TÜRKÇE]
+Veri depolama, veri depolamanın birçok farklı yolunu ifade eder.
+
+========================================================================
+
+[ENGLISH]
+This includes hard drives, flash memory, optical media, and temporary
+RAM storage.
+
+[TÜRKÇE]
+Bu, sabit sürücüleri, flash belleği, optik ortamı ve geçici RAM
+depolamayı içerir.
+
+========================================================================
+
+[ENGLISH-34]
+When selecting an appropriate data storage medium, concepts such as 
+data access and data integrity are important to consider. 
+
+[TÜRKÇE-34]
+Uygun bir veri depolama ortamı seçildiğinde, veri erişimi ve veri bütünlüğü
+gibi kavramların dikkate alınması önemlidir. 
+
+========================================================================
+
+[ENGLISH-35]
+For example, data that is accessed and modified on a regular basis 
+should be stored on a hard drive or flash media. 
+
+[TÜRKÇE-35]
+Örneğin, düzenli olarak erişilen ve değiştirilen veriler bir sabit 
+diskte veya flash ortamda depolanmalıdır.
+
+
+========================================================================
+
+[ENGLISH-36]
+This is because these types of media provide quick access and allow 
+the data to be moved or changed. 
+
+[TÜRKÇE-36]
+Bunun nedeni, bu tür ortamların hızlı erişim sağlaması ve verilerin 
+taşınmasına veya değiştirilmesine izin vermesidir.
+
+========================================================================
+
+[ENGLISH-37]
+Archived data, on the other hand, may be stored on optical media, 
+such as CDs and DVDs, since the data does not need to be changed.
+
+[TÜRKÇE-37]
+Arşivlenen veriler ise, verilerin değiştirilmesi gerekmediği için 
+CD ve DVD gibi optik ortamlarda saklanabilir. 
+
+========================================================================
+
+[ENGLISH-38]
+Optical discs also maintain data integrity longer than hard drives, 
+which makes them a good choice for archival purposes.
+
+[TÜRKÇE-38]
+Optik diskler ayrıca veri bütünlüğünü sabit sürücülerden daha uzun süre 
+korur, bu da onları arşivleme amaçları için iyi bir seçim yapar.
+
+========================================================================
+
+[ENGLISH-39]
+Data security involves protecting computer data.
+
+[TÜRKÇE-39]
+Veri güvenliği bilgisayar verilerinin korunmasını içerir.
+
+========================================================================
+
+[ENGLISH]
+Many individuals and businesses store valuable data on computer systems. 
+
+[TÜRKÇE]
+Birçok kişi ve işletme, bilgisayar sistemlerinde değerli veriler depolar.
+
+========================================================================
+
+[ENGLISH]
+If you've ever felt like your life is stored on your computer, 
+you understand how important data can be. 
+
+[TÜRKÇE]
+Hayatınızın bilgisayarınızda depolandığını hissettiyseniz, 
+verilerin ne kadar önemli olabileceğini anlarsınız.
+
+========================================================================
+
+[ENGLISH]
+Therefore, it is wise to take steps to protect the privacy and 
+integrity of your data.
+
+[TÜRKÇE]
+Bu nedenle, verilerinizin gizliliğini ve bütünlüğünü korumak için 
+adımlar atmanız akıllıca olacaktır.
+
+========================================================================
+
+[ENGLISH]
+Some steps include installing a firewall to prevent unauthorized access to 
+your computer and encrypting personal data that is submitted online or 
+shared with other users. 
+
+[TÜRKÇE]
+Bazı adımlar, bilgisayarınıza yetkisiz erişimi önlemek için bir 
+güvenlik duvarı kurmak ve çevrimiçi gönderilen veya diğer kullanıcılarla 
+paylaşılan kişisel verilerin şifrelenmesini içerir. 
+
+========================================================================
+
+[ENGLISH]
+It is also important to backup your data so that you will be able to 
+recover your files in case your primary storage device fails.
+
+[TÜRKÇE]
+Birincil depolama cihazınızın arızalanması durumunda dosyalarınızı 
+kurtarabilmeniz için verilerinizi yedeklemeniz de önemlidir.
+
+
+========================================================================
+
+[ENGLISH]
+Data mining is the process of analyzing large amounts of data in order to 
+discover patterns and other information.
+
+[TÜRKÇE]
+Veri madenciliği, şablonları ve diğer bilgileri keşfetmek için büyük 
+miktarda veriyi analiz etme işlemidir. 
+
+========================================================================
+
+[ENGLISH]
+It is typically performed on databases, which store data in a 
+structured format.
+
+[TÜRKÇE]
+Genellikle verileri yapılandırılmış bir biçimde depolayan 
+veritabanlarında gerçekleştirilir. 
+
+========================================================================
+
+[ENGLISH]
+By "mining" large amounts of data, hidden information can be 
+discovered and used for other purposes.
+
+[TÜRKÇE]
+Büyük miktarda veri ile "madencilik", gizli bilgiler keşfedilebilir ve 
+başka amaçlar için kullanılabilir.
+
+========================================================================
+
+[ENGLISH]
+A credit card company might use data mining to learn more about their 
+members' buying habits. 
+
+[TÜRKÇE]
+Bir kredi kartı şirketi, üyelerinin satın alma alışkanlıkları hakkında 
+daha fazla bilgi edinmek için veri madenciliğini kullanabilir.
+
+========================================================================
+
+[ENGLISH]
+By analyzing purchases from cardholders across the United States, 
+the company may discover shopping habits for different demographics, 
+such as age, race, and location. 
+
+[TÜRKÇE]
+Şirket, ABD'deki kart sahiplerinden yapılan satın alımları analiz ederek 
+yaş, ırk ve konum gibi farklı demografik özelliklere ilişkin alışveriş 
+alışkanlıklarını keşfedebilir.
+
+========================================================================
+
+[ENGLISH]
+This information could be useful in offering individuals specific 
+promotions.
+
+[TÜRKÇE]
+Bu bilgiler kişilere özel promosyonlar sunmada faydalı olabilir.
+
+========================================================================
+
+[ENGLISH]
+The same data may also reveal shopping patterns in different regions 
+of the country. 
+
+[TÜRKÇE]
+Aynı veriler, ülkenin farklı bölgelerindeki alışveriş modellerini de 
+ortaya çıkarabilir. 
+
+========================================================================
+
+[ENGLISH]
+This information could be valuable to companies looking to advertise or 
+start businesses in specific states.
+
+[TÜRKÇE]
+Bu bilgiler, belirli eyaletlerde reklam vermek veya işletme başlatmak 
+isteyen şirketler için değerli olabilir.
+
+========================================================================
+
+[ENGLISH]
+Online services, such as Google and Facebook, mine enormous amounts of 
+data to provide targeted content and advertisements to their users. 
+
+[TÜRKÇE]
+Google ve Facebook gibi çevrimiçi hizmetler, kullanıcılarına hedefli 
+içerik ve reklamlar sağlamak için çok büyük miktarda veri kullanır. 
+
+========================================================================
+
+[ENGLISH]
+Google, for example, might analyze search queries to discover popular 
+searches for certain areas and move those to the top of the autocomplete 
+list (the suggestions that appear as you type). 
+
+[TÜRKÇE]
+Örneğin Google, belirli alanlar için popüler aramaları keşfetmek ve 
+bunları otomatik tamamlama listesinin (siz yazarken görünen öneriler) 
+en üstüne taşımak için arama sorgularını analiz edebilir. 
+
+========================================================================
+
+[ENGLISH]
+By mining user activity data, Facebook might discover popular topics 
+among different age groups and provide targeted ads based on this 
+information.
+
+[TÜRKÇE]
+Kullanıcı etkinlik verilerini inceleyerek, Facebook farklı yaş grupları 
+arasında popüler konuları keşfedebilir ve bu bilgilere dayanarak hedefli 
+reklamlar sağlayabilir.
+
+========================================================================
+
+[ENGLISH]
+While data mining is commonly used for marketing purposes, 
+it has many other uses as well. 
+
+[TÜRKÇE]
+Veri madenciliği pazarlama amacıyla yaygın olarak kullanılsa da, 
+başka birçok kullanımı da vardır. 
+
+========================================================================
+
+[ENGLISH]
+For instance, healthcare companies may use data mining to discover links 
+between certain genes and diseases. 
+
+[TÜRKÇE]
+Örneğin, sağlık şirketleri, belirli genler ve hastalıklar arasındaki 
+bağlantıları keşfetmek için veri madenciliğini kullanabilir. 
+
+========================================================================
+
+[ENGLISH]
+Weather companies can mine data to discover weather patterns that may 
+help predict future meteorologic events. 
+
+[TÜRKÇE]
+Hava durumu şirketleri, gelecekteki meteorolojik olayları tahmin etmeye 
+yardımcı olabilecek hava durumu modellerini keşfetmek için 
+veri işleyebilir. 
+
+========================================================================
+
+[ENGLISH]
+Traffic management institutions can mine automotive data to forecast 
+future traffic levels and create appropriate plans for highways and 
+streets.
+
+[TÜRKÇE]
+Trafik yönetimi kurumları, gelecekteki trafik seviyelerini tahmin etmek 
+ve otoyollar ve sokaklar için uygun planlar oluşturmak üzere 
+otomotiv verilerini kullanabilir.
+
+========================================================================
+
+[ENGLISH]
+Data mining requires two things — lots of data and lots of computing power.
+
+
+[TÜRKÇE]
+Veri madenciliği iki şey gerektirir - çok fazla veri ve çok fazla bilgi 
+işlem gücü. 
+
+========================================================================
+
+[ENGLISH]
+The more organized the data, the easier it is to mine it for useful 
+information. 
+
+[TÜRKÇE]
+Veriler ne kadar düzenli olursa, yararlı bilgiler için onu çıkarmak 
+o kadar kolay olur. 
+
+========================================================================
+
+[ENGLISH]
+Therefore it is important for any organization that wants to engage 
+in data mining to be proactive in selecting what data to log and how to 
+store it. 
+
+[TÜRKÇE]
+Bu nedenle, veri madenciliğine katılmak isteyen herhangi bir kuruluşun, 
+hangi verilerin günlüğe kaydedileceğini ve nasıl saklanacağını seçmede 
+proaktif olması önemlidir. 
+
+========================================================================
+
+[ENGLISH]
+When it comes to mining the data, supercomputers and computing clusters 
+may be used to process petabytes of data.
+
+[TÜRKÇE]
+Veri madenciliği söz konusu olduğunda, petabayt veri işlemek için 
+süper bilgisayarlar ve bilgi işlem kümeleri kullanılabilir.
+
+========================================================================
+
+[ENGLISH]
+Data science is the study of where information comes from, 
+what it represents and how it can be turned into a valuable resource 
+in the creation of business and IT strategies. 
+
+[TÜRKÇE]
+Veri bilimi, bilginin nereden geldiği, neyi temsil ettiği,  
+işletme ve BT stratejilerinin oluşturulmasında nasıl değerli bir 
+kaynağa dönüştürülebileceği üzerine yapılan çalışmadır. 
+
+========================================================================
+
+[ENGLISH]
+Mining large amounts of structured and unstructured data to identify 
+patterns can help an organization rein in costs, increase efficiencies, 
+recognize new market opportunities and increase the organization's 
+competitive advantage.
+
+[TÜRKÇE]
+Modelleri tanımlamak için büyük miktarlarda yapılandırılmış ve 
+yapılandırılmamış verilerin madenciliği, bir kuruluşun maliyetlerin 
+kontrolüne, verimliliklerin artmasına, yeni pazar fırsatlarının 
+fark edilmesine ve kuruluşun rekabet üstünlüğünün artmasına 
+yardımcı olabilir.
+
+========================================================================
+
+[ENGLISH]
+The data science field employs mathematics, statistics and 
+computer science disciplines, and incorporates techniques like machine 
+learning, cluster analysis, data mining and visualization.
+
+[TÜRKÇE]
+Veri bilimi alanında matematik, istatistik ve bilgisayar bilimleri 
+disiplinleri kullanılır ve makine öğrenmesi, küme analizi, 
+veri madenciliği ve görselleştirme gibi teknikler bulunur.
+
+========================================================================
+
+[ENGLISH]
+As the amount of data generated by the typical modern business increases,
+so does the prominence of data scientists hired by organizations to
+help them turn raw data into valuable business information.
+
+[TÜRKÇE]
+Tipik modern işletmeler tarafından üretilen veri miktarı arttıkça, 
+ham verileri değerli işletme bilgilerine dönüştürmelerine yardımcı olmak 
+için kuruluşlar tarafından tutulan veri bilimcilerinin önemi de artmaktadır.
+
+========================================================================
+
+[ENGLISH]
+Data extraction is the act of retrieving specific data from unstructured 
+or poorly structured data sources for further processing and investigation. 
+
+[TÜRKÇE]
+Veri çıkarma, ileri işleme ve inceleme için yapılandırılmamış veya 
+yetersiz yapılandırılmış veri kaynaklarından belirli verileri 
+alma işlemidir. 
+
+========================================================================
+
+[ENGLISH]
+Data scientists must possess a combination of analytic, machine learning, 
+data mining and statistical skills, as well as experience with algorithms 
+and coding. 
+
+[TÜRKÇE]
+Veri bilimcileri, analitik, makine öğrenimi, veri madenciliği ve 
+istatistiksel becerilerin yanı sıra algoritma ve kodlama deneyimine 
+sahip olmalıdır. 
+
+========================================================================
+
+[ENGLISH]
+Along with managing and interpreting large amounts of data, 
+many data scientists are also tasked with creating data visualization 
+models that help illustrate the business value of digital information.
+
+[TÜRKÇE]
+Büyük miktarda veriyi yönetmenin ve yorumlamanın yanı sıra, 
+birçok veri bilimcisi de dijital bilgilerin iş değerini göstermeye 
+yardımcı olan veri görselleştirme modelleri oluşturmakla 
+görevlendirilmiştir.
+
+========================================================================
+
+[ENGLISH]
+To be effective, however, data scientists must possess emotional 
+intelligence in addition to education and experience in data analytics. 
+
+[TÜRKÇE]
+Etkili olmak için, bununla birlikte, veri bilimcilerinin veri analitiği 
+konusunda eğitim ve deneyime ek olarak duygusal zekaya sahip olmaları 
+gerekir. 
+
+========================================================================
+
+[ENGLISH]
+Perhaps the most important skill a data scientist must possess is the 
+ability to present the data insights to others, including C-suite 
+executives, and explain the significance of the data in a way that 
+can be easily understood.
+
+[TÜRKÇE]
+Belki de bir veri bilimcisinin sahip olması gereken en önemli beceri, 
+üst kademe yöneticiler de dahil olmak üzere veri kavrayışlarını 
+başkalarına sunma ve verilerin önemini kolayca anlaşılabilecek 
+şekilde açıklama yeteneğidir.
+
+========================================================================
+
+[ENGLISH]
+Data scientists draw the digital information they are studying 
+from a growing list of channels and sources, including smartphones, 
+internet of things (IoT) devices, social media, surveys, purchases, 
+and internet searches and behavior.
+
+[TÜRKÇE]
+Veri bilimcileri, inceledikleri dijital bilgileri, akıllı telefonlar, 
+nesnelerin interneti (IoT) cihazları, sosyal medya, anketler, 
+satın alma işlemleri ve internet aramaları ve davranışları da 
+dahil olmak üzere gittikçe büyüyen bir kanal ve kaynak listesinden alıyor.
+
+========================================================================
+
+[ENGLISH]
+By sorting through these large data sets, data scientists can identify 
+patterns to solve problems through data analysis -- a process known as 
+data mining.
+
+[TÜRKÇE]
+Bu büyük veri kümeleri arasında sıralama yaparak, veri bilimcileri 
+veri analizi (veri madenciliği) olarak bilinen bir süreç olan veri analizi 
+yoluyla sorunları çözmek için modelleri belirleyebilirler.
+
+========================================================================
+
+[ENGLISH]
+The main advantage of enlisting data science in an organization is the 
+empowerment and facilitation of decision-making. 
+
+[TÜRKÇE]
+Bir kuruluşa veri bilimini dahil etmenin temel avantajı, karar vermenin 
+güçlendirilmesi ve kolaylaştırılmasıdır. 
+
+========================================================================
+
+[ENGLISH]
+Organizations with data scientists can factor in quantifiable, 
+data-based evidence into their business decisions. 
+
+[TÜRKÇE]
+Veri bilimcileri olan kuruluşlar, işletme kararlarında ölçülebilir, 
+veri temelli kanıtları hesaba katabilir. 
+
+========================================================================
+
+[ENGLISH]
+These data-driven decisions can ultimately lead to increased profitability 
+and improved operational efficiency, business performance and workflows.
+
+[TÜRKÇE]
+Bu veri odaklı kararlar sonuçta artan karlılık ve iyileştirilmiş 
+operasyonel verimlilik, iş performansı ve iş akışlarına yol açabilir. 
+
+========================================================================
+
+[ENGLISH]
+In customer-facing organizations, data science helps identify and 
+refine target audiences. 
+
+[TÜRKÇE]
+Müşteriye dönük organizasyonlarda, veri bilimi hedef kitlelerin 
+belirlenmesine ve geliştirilmesine yardımcı olur. 
+
+========================================================================
+
+[ENGLISH]
+Data science can also assist recruitment: Internal processing of 
+applications and data-driven aptitude tests and games can help an 
+organization's human resources team make quicker and more accurate 
+selections during the hiring process.
+
+[TÜRKÇE]
+Veri bilimi de işe alınmaya yardımcı olabilir: Başvuruların dahili olarak 
+işlenmesi ve veriye dayalı yetenek testleri ve oyunlar, bir kuruluşun 
+insan kaynakları ekibinin işe alım sürecinde daha hızlı ve daha doğru 
+seçimler yapmasına yardımcı olabilir.
+
+========================================================================
+
+[ENGLISH]
+The specific benefits of data science vary depending on the company's 
+goal and the industry. 
+
+[TÜRKÇE]
+Veri biliminin özel faydaları, şirketin hedefine ve sektöre göre değişir. 
+
+========================================================================
+
+[ENGLISH]
+Sales and marketing departments, for example, can mine customer data to 
+improve conversion rates or create one-to-one marketing campaigns. 
+
+[TÜRKÇE]
+Örneğin, satış ve pazarlama departmanları, dönüşüm oranlarını artırmak 
+veya birebir pazarlama kampanyaları oluşturmak için müşteri verilerini 
+kullanabilir. 
+
+========================================================================
+
+[ENGLISH]
+Banking institutions are mining data to enhance fraud detection.
+
+[TÜRKÇE]
+Bankacılık kurumları dolandırıcılık tespitini geliştirmek için veri 
+madenciliği yaparlar. 
+
+========================================================================
+
+[ENGLISH]
+Streaming services like Netflix mine data to determine what its users 
+are interested in, and use that data to determine what TV shows or 
+films to produce. 
+
+[TÜRKÇE]
+Netflix gibi yayın hizmetleri, kullanıcılarının neyle ilgilendiğini 
+belirlemek için veri kullanır ve bu verileri hangi TV şovlarının veya 
+filmlerinin üretileceğini belirlemek için kullanır. 
+
+========================================================================
+
+[ENGLISH]
+Data-based algorithms are also used at Netflix to create personalized 
+recommendations based on a user's viewing history. 
+
+[TÜRKÇE]
+Veri temelli algoritmalar, Netflix'te kullanıcının görüntüleme geçmişine 
+dayalı kişiselleştirilmiş öneriler oluşturmak için de kullanılır.
+
+========================================================================
+
+[ENGLISH]
+DHL, FedEx and UPS use data science to find the best delivery routes and 
+times, as well as the best modes of transport for their shipments. 
+
+[TÜRKÇE]
+DHL, FedEx ve UPS gibi sevkiyat şirketleri, en iyi teslimat rotalarını 
+ve zamanlarını ve ayrıca gönderileri için en iyi ulaşım yöntemlerini 
+bulmak için veri bilimini kullanır.
+
+========================================================================
+
+[ENGLISH]
+Data science is still an emerging field within the enterprise because 
+the identification and analysis of vast amounts of unstructured data 
+can prove too complex, expensive and time-consuming for companies.
+
+[TÜRKÇE]
+Veri bilimi, işletme içinde hala gelişmekte olan bir alandır, 
+çünkü büyük miktarda yapılandırılmamış verilerin tanımlanması ve 
+analizi şirketler için çok karmaşık, pahalı ve zaman alıcı olabilir.
+
+========================================================================
+
+[ENGLISH]
+Machine learning is often incorporated in data science. 
+
+[TÜRKÇE]
+Makine öğrenimi genellikle veri bilimine dahil edilir. 
+
+========================================================================
+
+[ENGLISH]
+Machine learning is an artificial intelligence (AI) tool that essentially 
+automates the data-processing portion of data science. 
+
+[TÜRKÇE]
+Makine öğrenimi, temel olarak veri biliminin veri işleme bölümünü 
+otomatikleştiren yapay bir zeka (AI) aracıdır. 
+
+========================================================================
+
+[ENGLISH]
+Machine learning integrates advanced algorithms that learn on their own 
+and can process massive amounts of data in a fraction of the time it 
+would take a human. 
+
+[TÜRKÇE]
+Makine öğrenimi, kendi kendine öğrenen ve bir insanın alacağı zamanın 
+çok kısa bir bölümünde büyük miktarda veri işleyebilen gelişmiş 
+algoritmaları barındırır.
+
+========================================================================
+
+[ENGLISH]
+Machine language, or machine code, is a low-level language comprised of 
+binary digits (ones and zeros). 
+
+[TÜRKÇE]
+Makine dili veya makine kodu, ikili rakamlardan (sıfırlar) oluşan düşük 
+seviye bir dildir. 
+
+========================================================================
+
+[ENGLISH]
+High-level languages, such as Swift and C++ must be compiled into machine 
+language before the code is run on a computer.
+
+[TÜRKÇE]
+Kod bilgisayarda çalıştırılmadan önce Swift ve C ++ gibi üst düzey diller 
+makine dilinde derlenmelidir.
+
+========================================================================
+
+[ENGLISH]
+Since computers are digital devices, they only recognize binary data. 
+
+[TÜRKÇE]
+Bilgisayarlar dijital aygıt olduğundan, yalnızca ikili verileri tanırlar. 
+
+========================================================================
+
+[ENGLISH]
+Every program, video, image, and character of text is represented in binary.
+
+[TÜRKÇE]
+Her program, video, görüntü ve yazı karakteri ikili olarak temsil edilir.
+
+========================================================================
+
+[ENGLISH]
+This binary data, or machine code, is processed as input by the CPU. 
+
+[TÜRKÇE]
+Bu ikili veri veya makine kodu CPU tarafından girdi olarak işlenir. 
+
+========================================================================
+
+[ENGLISH]
+The resulting output is sent to the operating system or an application, 
+which displays the data visually. 
+
+[TÜRKÇE]
+Ortaya çıkan çıktı, verileri görsel olarak görüntüleyen işletim sistemine
+veya bir uygulamaya gönderilir. 
+
+========================================================================
+
+[ENGLISH]
+For example, the ASCII value for the letter "A" is 01000001 in machine 
+code, but this data is displayed as "A" on the screen. 
+
+[TÜRKÇE]
+Örneğin, "A" harfinin ASCII değeri makine kodunda 01000001'dir, 
+ancak bu veriler ekranda "A" olarak görüntülenir. 
+
+========================================================================
+
+[ENGLISH]
+An image may have thousands or even millions of binary values that 
+determine the color of each pixel.
+
+[TÜRKÇE]
+Bir görüntünün, her pikselin rengini belirleyen binlerce hatta 
+milyonlarca ikili değeri olabilir.
+
+========================================================================
+
+[ENGLISH]
+While machine code is comprised of 1s and 0s, different processor 
+architectures use different machine code. 
+
+[TÜRKÇE]
+Makine kodu 1 ve 0'lardan oluşurken, farklı işlemci mimarileri 
+farklı makine kodu kullanır. 
+
+========================================================================
+
+[ENGLISH]
+For example, a PowerPC processor, which has a RISCarchitecture, 
+requires different code than an Intel x86 processor, which has a 
+CISCarchitecture. 
+
+[TÜRKÇE]
+Örneğin, RISC mimarisine sahip bir PowerPC işlemci, CISC mimarisine 
+sahip bir Intel x86 işlemciden farklı bir kod gerektirir. 
+
+========================================================================
+
+[ENGLISH]
+A compiler must compile high-level source code for the correct processor
+architecture in order for a program to run correctly.
+
+[TÜRKÇE]
+Bir derleyici, bir programın düzgün çalışması için doğru işlemci mimarisi
+için üst seviyeli kaynak kodunu derlemelidir. 
+
+========================================================================
+
+[ENGLISH]
+Machine language and assembly language are both low-level languages, 
+but machine code is below assembly in the hierarchy of computer languages.
+
+[TÜRKÇE]
+Makine dili ve Assembly dili her ikisi de alt seviye dillerdir, 
+ancak bilgisayar dili hiyerarşisinde makine kodu assembly nin altındadır. 
+
+
+========================================================================
+
+[ENGLISH]
+Assembly language includes human-readable commands, such as mov, add, 
+and sub, while machine language does not contain any words or even letters. 
+
+[TÜRKÇE]
+Assembly dili, mov, add ve sub gibi insan tarafından okunabilen komutları 
+içerirken, makine dili herhangi bir kelime veya hatta harf içermez. 
+
+========================================================================
+
+[ENGLISH]
+Some developers manually write assembly language to optimize a program, 
+but they do not write machine code. 
+
+[TÜRKÇE]
+Bazı geliştiriciler bir programı en iyi duruma getirmek için Assembly 
+dilini elle yazar, ancak makine kodu yazmazlar. 
+
+========================================================================
+
+[ENGLISH]
+Only developers who write software compilers need to worry about 
+machine language.
+
+[TÜRKÇE]
+Yalnızca yazılım derleyicileri yazan geliştiricilerin makine dili 
+hakkında endişelenmeleri gerekir.
+
+========================================================================
+
+[ENGLISH]
+NOTE: While machine code is technically comprised of binary data, 
+it may also be represented in hexadecimal values. 
+
+[TÜRKÇE]
+NOT: Makine kodu teknik olarak ikili verilerden oluşurken, 
+onaltılık değerlerle de temsil edilebilir. 
+
+========================================================================
+
+[ENGLISH]
+For example, the letter "Z," which is 01011010 in binary, may be 
+displayed as 5A in hexadecimal code.
+
+[TÜRKÇE]
+Örneğin, ikili dosyada 01011010 olan "Z" harfi, onaltılı kodda 5A 
+olarak görüntülenebilir.
+
+========================================================================
+
+[ENGLISH]
+A microprocessor is an integrated circuit (IC) which incorporates core 
+functions of a computer’s central processing unit (CPU). 
+
+
+[TÜRKÇE]
+Mikroişlemci, bir bilgisayarın merkezi işlem biriminin (CPU) 
+temel işlevlerini içeren entegre bir devredir (IC). 
+
+========================================================================
+
+[ENGLISH]
+It is a programmable multipurpose silicon chip, clock driven, 
+register based, accepts binary data as input and provides output after
+processing it as per the instructions stored in the memory.
+
+[TÜRKÇE]
+Programlanabilir çok amaçlı bir silikon çip, saat güdümlü, 
+yazmaç(kayıtçı) tabanlı, giriş olarak ikili verileri kabul eder ve 
+bellekte saklanan talimatlara göre işledikten sonra çıktı sağlar.
+
+========================================================================
+
+[ENGLISH]
+A processor is the brain of a computer which basically consists of 
+Arithmetical and Logical Unit (ALU), Control Unit and Register Array. 
+
+[TÜRKÇE]
+Bir işlemci, temel olarak Aritmetik ve Mantıksal Birim (ALU), 
+Kontrol Birimi ve Yazmaç Dizisinden oluşan bilgisayarın beynidir. 
+
+========================================================================
+
+[ENGLISH]
+As the name indicates ALU performs all arithmetic and logical operations 
+on the data received from input devices or memory. 
+
+[TÜRKÇE]
+Adından da anlaşılacağı gibi ALU, giriş cihazlarından veya bellekten 
+alınan veriler üzerinde tüm aritmetik ve mantıksal işlemleri gerçekleştirir.
+
+========================================================================
+
+[ENGLISH]
+Register array consists of a series of registers like accumulator 
+(A), B, C, D etc. which acts as temporary fast access memory locations 
+for processing data. 
+
+
+[TÜRKÇE]
+Yazmaç dizisi, biriktirici (A), B, C, D vb. gibi verilerin işlenmesi için 
+geçici hızlı erişimli bellek konumları görevi gören bir dizi 
+yazmaçtan oluşur. 
+
+========================================================================
+
+[ENGLISH]
+As the name indicates, control unit controls the flow of instructions and 
+data throughout the system.
+
+[TÜRKÇE]
+Adından da anlaşılacağı gibi, kontrol ünitesi sistemdeki talimatların 
+ve verilerin akışını kontrol eder. 
+
+========================================================================
+
+[ENGLISH]
+So basically a microprocessor takes input from input devices, 
+process it as per instructions given in the memory and produces output.
+
+[TÜRKÇE]
+Temel olarak bir mikroişlemci giriş cihazlarından girdi alır, 
+bellekte verilen talimatlara göre işler ve çıktı üretir.
+
+========================================================================
+
+[ENGLISH]
+Microprocessors are available at low cost due to integrated circuit 
+technology. 
+
+[TÜRKÇE]
+Entegre devre teknolojisi sayesinde mikroişlemciler düşük maliyetle 
+sunulmaktadır.
+
+========================================================================
+
+[ENGLISH]
+Which will reduce the cost of a computer system.
+
+[TÜRKÇE]
+Bu da bir bilgisayar sisteminin maliyetini düşürecektir.
+
+========================================================================
+
+[ENGLISH]
+Microprocessor chips can work at very high speed due to the 
+technology involved in it. 
+
+[TÜRKÇE]
+Mikroişlemci yongaları, içerdiği teknoloji sayesinde çok yüksek 
+hızda çalışabilir.
+
+========================================================================
+
+[ENGLISH]
+It is capable of executing millions of instructions per second.
+
+[TÜRKÇE]
+Saniyede milyonlarca komut yürütebilir.
+
+========================================================================
+
+[ENGLISH]
+Due to very large scale and ultra large scale integration technology, 
+a microprocessor is fabricated in a very less footprint. 
+
+[TÜRKÇE]
+Çok büyük ölçekli ve ultra büyük ölçekli entegrasyon teknolojisi 
+sayesinde, bir mikroişlemci çok daha az yer kaplar. 
+
+========================================================================
+
+[ENGLISH]
+This will reduce the size of the entire computer system.
+
+[TÜRKÇE]
+Bu, tüm bilgisayar sisteminin boyutunu küçültecektir.
+
+========================================================================
+
+[ENGLISH]
+Microprocessors are very versatile, the same chip can be used for a 
+number of applications by simply changing the program 
+(instructions stored in the memory).
+
+[TÜRKÇE]
+Mikroişlemciler çok yönlüdür, aynı çip, programı değiştirerek 
+(bellekte saklanan talimatlar) birkaç uygulama için kullanılabilir.
+
+========================================================================
+
+[ENGLISH]
+Microprocessors are usually manufactured using metal oxide semiconductor 
+technology, in which MOSFETs (Metal Oxide Semiconductor Field Effect 
+Transistors) are working in saturation and cut off modes. 
+
+[TÜRKÇE]
+Mikroişlemciler genellikle MOSFET'lerin (Metal Oksit Yarıiletken Alan 
+Etkili Transistörler) doygunluk ve kesme modlarında çalıştığı metal oksit 
+yarı iletken teknolojisi kullanılarak üretilir.
+
+========================================================================
+
+[ENGLISH]
+So the power consumption is very low compared to others.
+
+[TÜRKÇE]
+Yani güç tüketimi diğerlerine göre çok düşük.
+
+========================================================================
+
+[ENGLISH]
+Compared to vacuum tube devices, semiconductor devices won’t emit 
+that much heat.
+
+[TÜRKÇE]
+Vakum tüplü cihazlara kıyasla, yarı iletken cihazlar o kadar 
+fazla ısı yaymaz.
+
+========================================================================
+
+[ENGLISH]
+Microprocessors are very reliable, failure rate is very less as 
+semiconductor technology is used.
+
+[TÜRKÇE]
+Mikroişlemciler çok güvenilirdir, yarı iletken teknolojisi kullanıldığı 
+için arıza oranı çok daha azdır.
+
+========================================================================
+
+[ENGLISH]
+Devices or computer system made with microprocessors can be made 
+portable due to the small size and low power consumption.
+
+[TÜRKÇE]
+Mikroişlemcilerle yapılan cihazlar veya bilgisayar sistemi, küçük boyut 
+ve düşük güç tüketimi nedeniyle taşınabilir hale getirilebilir.
+
+========================================================================
+
+[ENGLISH]
+Here are some common terms that we will use in microprocessor field.
+
+[TÜRKÇE]
+İşte mikroişlemci alanında kullanacağımız bazı yaygın terimler.
+
+========================================================================
+
+[ENGLISH]
+A bus is a set of conductors intended to transmit data, address or 
+control information to different elements in a microprocessor. 
+
+[TÜRKÇE]
+Veri yolu, bir mikroişlemcideki farklı öğelere veri, adres veya 
+kontrol bilgisi iletmeyi amaçlayan bir grup iletkendir. 
+
+========================================================================
+
+[ENGLISH]
+Usually a microprocessor will have 3 types of buses : Data Bus, Control 
+Bus and Address Bus. 
+
+[TÜRKÇE]
+Genellikle bir mikroişlemcide 3 tip veri yolu bulunur: Veri Yolu, 
+Kontrol Veri Yolu ve Adres Veri Yolu. 
+
+========================================================================
+
+[ENGLISH]
+An 8-bit processor will be using 8-bit wide bus.
+
+[TÜRKÇE]
+Bir 8 bit işlemci 8 bit genişliğinde bir veri yolu kullanır.
+
+========================================================================
+
+[ENGLISH]
+Instruction set is the group of commands that a microprocessor can 
+understand. 
+
+[TÜRKÇE]
+Komut kümesi, bir mikroişlemcinin anlayabileceği komut grubudur.
+
+========================================================================
+
+[ENGLISH]
+So instruction set is an interface between hardware and software (program). 
+
+[TÜRKÇE]
+Yani komut kümesi donanım ve yazılım (program) arasındaki bir arayüzdür.
+
+========================================================================
+
+[ENGLISH]
+An instruction commands the processor to switch relevant transistors 
+for doing some processing in data. 
+
+[TÜRKÇE]
+Bir talimat, işlemciye, verilerde bazı işlemler yapmak için ilgili 
+transistörleri değiştirme komutu verir. 
+
+========================================================================
+
+[ENGLISH]
+For eg. ADD A, B; is used to add two numbers stored in the register 
+A and B.
+
+[TÜRKÇE]
+Örneğin. ADD A, B; A ve B yazmaçlarında saklanan iki sayıyı eklemek için 
+kullanılır.
+
+========================================================================
+
+[ENGLISH]
+Word Length is the number of bits in the internal data bus of a processor 
+or it is the number of bits a processor can process at a time. 
+
+[TÜRKÇE]
+Kelime Uzunluğu bir işlemcinin dahili veri yolundaki bit sayısı veya 
+bir işlemcinin bir anda işleyebileceği bit sayısıdır. 
+
+========================================================================
+
+[ENGLISH]
+For eg. An 8-bit processor will have an 8-bit data bus, 8-bit registers 
+and will do 8-bit processing at a time. 
+
+[TÜRKÇE]
+Örneğin, 8-bit işlemcide 8-bit veri yolu, 8-bit yazmaçlar bulunur ve 
+bir seferde 8-bit işlem yapılır. 
+
+========================================================================
+
+[ENGLISH]
+For doing higher bits (32-bit, 16-bit) operations, it will split that 
+into a series of 8-bit operations.
+
+[TÜRKÇE]
+Daha yüksek bit (32 bit, 16 bit) işlemleri yapmak için, bunu 8 bitlik 
+işlemlere ayıracaktır.
+
+========================================================================
+
+[ENGLISH]
+Cache memory is a random access memory that is integrated into the 
+processor. 
+
+[TÜRKÇE]
+Önbellek, işlemciye entegre edilmiş rasgele erişim belleğidir. 
+
+========================================================================
+
+[ENGLISH]
+So the processor can access data in the cache memory more quickly than 
+from a regular RAM. 
+
+[TÜRKÇE]
+Böylece işlemci, önbellekteki veriye normal bir RAM'den daha hızlı 
+erişebilir. 
+
+========================================================================
+
+[ENGLISH]
+It is also known as CPU Memory. 
+
+[TÜRKÇE]
+CPU Belleği olarak da bilinir. 
+
+========================================================================
+
+[ENGLISH]
+Cache memory is used to store data or instructions that are frequently 
+referenced by the software or program during the operation. 
+
+[TÜRKÇE]
+Önbellek, işlem sırasında yazılım veya program tarafından sıkça 
+başvurulan verileri veya talimatları saklamak için kullanılır. 
+
+========================================================================
+
+[ENGLISH]
+So it will increase the overall speed of the operation.
+
+[TÜRKÇE]
+Böylece işlemin genel hızını artıracaktır.
+
+========================================================================
+
+[ENGLISH]
+Microprocessors uses a clock signal to control the rate at which 
+instructions are executed, synchronize other internal components and 
+to control the data transfer between them. 
+
+[TÜRKÇE]
+Mikroişlemciler, talimatların yürütülme hızını kontrol etmek, diğer 
+dahili bileşenleri senkronize etmek ve aralarındaki veri aktarımını 
+kontrol etmek için bir saat sinyali kullanır. 
+
+========================================================================
+
+[ENGLISH]
+So clock speed refers to the speed at which a microprocessor executes 
+instructions. 
+
+[TÜRKÇE]
+Dolayısıyla saat hızı, bir mikroişlemcinin talimatları yürütme hızını 
+ifade eder. 
+
+========================================================================
+
+[ENGLISH]
+It is usually measured in Hertz and are expressed in megahertz (MHz), 
+gigahertz (GHz) etc.
+
+[TÜRKÇE]
+Genellikle Hertz cinsinden ölçülür ve megahertz (MHz), gigahertz (GHz) 
+vb. olarak ifade edilir.
+
+========================================================================
+
+[ENGLISH]
+Hope you read about word length above. 
+
+[TÜRKÇE]
+Umarım yukarıdaki kelime uzunluğunu okursunuz. 
+
+========================================================================
+
+[ENGLISH]
+So based on the word length of a processor we can have 8-bit, 16-bit, 
+32-bit and 64-bit processors.
+
+[TÜRKÇE]
+İşlemcinin kelime uzunluğuna bağlı olarak 8 bit, 16 bit, 32 bit ve 
+64 bit işlemcilere sahip olabiliriz.
+
+========================================================================
+
+[ENGLISH]
+RISC is a type of microprocessor architecture which uses small, 
+general purpose and highly optimized instruction set rather than more 
+specialized set of instructions found in others. 
+
+[TÜRKÇE]
+RISC, diğerlerinde bulunan daha özel talimatlar kümesi yerine küçük, 
+genel amaçlı ve yüksek düzeyde optimize edilmiş komut seti kullanan 
+bir tür mikroişlemci mimarisidir. 
+
+========================================================================
+
+[ENGLISH]
+RISC offers high performance over its opposing architecture CISC 
+(see below). 
+
+[TÜRKÇE]
+RISC, karşıt mimarisi CISC'ye göre yüksek performans sunar 
+(aşağıya bakınız). 
+
+========================================================================
+
+[ENGLISH]
+In a processor, execution of each instruction require a special circuit 
+to load and process the data. 
+
+[TÜRKÇE]
+İşlemcide, her komutun yürütülmesi, verilerin yüklenmesi ve işlenmesi 
+için özel bir devre gerektirir. 
+
+========================================================================
+
+[ENGLISH]
+So by reducing instructions, the processor will be using simple 
+circuits and faster in operation.
+
+[TÜRKÇE]
+Bu nedenle, talimatları azaltarak, işlemci basit devreler kullanacak 
+ve daha hızlı çalışacaktır.
+
+========================================================================
+
+[ENGLISH]
+CISC is the opposing microprocessor architecture for RISC. 
+
+[TÜRKÇE]
+CISC, RISC'nin karşıt mikroişlemci mimarisidir. 
+
+========================================================================
+
+[ENGLISH]
+It is made to reduce the number of instructions per program, 
+ignoring the number of cycles per instruction. 
+
+[TÜRKÇE]
+Program başına komut sayısını azaltmak ve talimat başına döngü 
+sayısını göz ardı etmek için yapılır. 
+
+========================================================================
+
+[ENGLISH]
+So complex instructions are directly made into hardware making 
+the processor complex and slower in operation.
+
+
+[TÜRKÇE]
+Bu nedenle, karmaşık talimatlar doğrudan donanıma yapılır ve 
+işlemciyi karmaşık ve yavaş çalışır hale getirir.
+
+
+========================================================================
+
+[ENGLISH]
+This architecture is actually designed to reduce the cost of memory 
+by reducing the program length.
+
+[TÜRKÇE]
+Bu mimari aslında program uzunluğunu azaltarak bellek maliyetini 
+azaltmak için tasarlanmıştır.
+
+========================================================================
+
+[ENGLISH]
+Data Computers are capable of representing any information that can be 
+discretized and digitized. 
+
+[TÜRKÇE]
+Veri Bilgisayarlar ayrıklaştırılabilen ve sayısallaştırılabilen 
+herhangi bir bilgiyi temsil yeteneğine sahiptirler. 
+			
+========================================================================
+
+[ENGLISH]
+Algorithms can process or transform such digitally represented 
+information in a dizzying variety of ways. 
+
+[TÜRKÇE]
+Algoritmalar dijital olarak temsil edilen bilgiyi şaşırtıcı şekilde 
+çeşitli yollarla işleyebilir ya da dönüştürebilir. 
+
+========================================================================
+
+[ENGLISH]
+The result of this is not merely the shuffling of digital data from 
+one part of the computer to another; computer algorithms enable 
+us to search for patterns, to create simulations, and to cor-relate 
+connections in ways that generate new knowledge and insight. 
+
+[TÜRKÇE]
+Bunun sonucu, sadece bilgisayarın bir bölümünden diğerine dijital 
+verilerin karıştırılması değildir; bilgisayar algoritmaları örüntü arama, 
+simülasyonlar oluşturma ve yeni bilgi ve anlayış üretme yolunda 
+bağlantılar kurmada bize imkan vermektedir. 
+
+========================================================================
+
+[ENGLISH]
+Massive storage capacities, high-speed computer networks, and powerful 
+computational tools are driving discoveries in many other disciplines 
+of science, engineering and the humanities. 
+
+[TÜRKÇE]
+Büyük depolama kapasiteleri, yüksek hızda bilgisayar ağlan ve güçlü 
+hesaplama araçları mühendislik ve beşeri bilimler gibi bilimin diğer 
+alanlarında keşiflere sevk etmektedir. 
+
+========================================================================
+
+[ENGLISH]
+Whether predicting the effects of a new drug by simulating complex 
+protein folding, statistically analyzing the evolution of language 
+across centuries of digitized books, or rendering 3D images of 
+internal organs from a noninvasive medical scan, data is driving 
+modern discovery across the breadth of human endeavors. 
+
+[TÜRKÇE]
+Kompleks protein katlanmasını simüle ederek yeni bir ilacın etkilerini 
+tahmin olsun, dijital kitaplar sayesinde yüzyıllar boyunca dilin 
+evrimini istatistiksel olarak analiz etmek olsun, iç organların 3D 
+görüntülerini tıbbi bir taramadan yorumlamak olsun, veri,
+insan çabalarının genişliği karşısında modern keşif yapmamızı sağlıyor. 
+
+========================================================================
+
+[ENGLISH]
+Some of the questions about data that we will explore in our study 
+include 
+
+[TÜRKÇE]
+Bizim çalışmamızda inceleyeceğimiz verilerle ilgili sorulardan 
+bazıları şunlardır
+
+========================================================================
+
+[ENGLISH]
+How do computers store data about common digital artifacts, 
+such as numbers, text, images, sounds, and video? 
+
+[TÜRKÇE]
+Bilgisayarlar, sayılar, metin, resimler, sesler ve video gibi ortak 
+sayı-sal yapılar hakkındaki verileri nasıl saklarlar? 
+
+========================================================================
+
+[ENGLISH]
+How do computers approximate data about analog artifacts in the 
+real world?
+
+[TÜRKÇE]
+Gerçek dünyadaki analog eserler hakkındaki verilere bilgisayarlar 
+nasıl yaklaşıyor? 
+
+========================================================================
+
+[ENGLISH]
+How do computers detect and prevent errors in data?
+
+[TÜRKÇE]
+Bilgisayarlar verilerdeki hataları nasıl tespit eder ve engeller? 
+
+========================================================================
+
+[ENGLISH]
+What are the ramifications of an ever-growing and interconnected 
+digital universe of data at our disposal? 
+
+[TÜRKÇE]
+Bizim tüketimimizde bulunan, sürekli büyüyen ve birbirine dijital 
+evrende bağlı olan verilerin yansımaları nelerdir? 
+
+========================================================================
+
+[ENGLISH]
+Optical Systems Another class of mass storage systems applies optical 
+technology. An example is the compact disk (CD). 
+
+[TÜRKÇE]
+Optik Sistemler Yığın depolama sistemlerinin bir diğer sınıfı optik 
+teknolojisini uygulamaktadır. Buna bir örnek kompak 
+disk (compact disc - CD) verilebilir. 
+
+========================================================================
+
+[ENGLISH]
+These disks are 12 centimeters (approximately 5 inches) in diameter and 
+consist of reflective material covered with a clear protective coat-ing. 
+
+[TÜRKÇE]
+Bu diskler 12 cm (yaklaşık 5 inç) çapındadır ve berrak koruyucu kaplama 
+ile kaplanmış yansıtıcı bir malzemeden oluşmaktadır. 
+
+========================================================================
+
+[ENGLISH]
+Information is recorded on them by creating variations in their 
+reflective surfaces. 
+
+[TÜRKÇE]
+Bilgi, yansıtıcı yüzeylerinde varyasyonlar oluşturularak kayıt 
+edilmektedir. 
+
+========================================================================
+
+[ENGLISH]
+This information can then be retrieved by means of a laser that 
+detects irregularities on the reflective surface of the CD as it spins. 
+
+[TÜRKÇE]
+Bu bilgi daha sonra CD döndükçe yansıtıcı yüzeyinin üzerindeki 
+düzensizlikleri tespit eden bir lazer aracılığı ile elde edilebilmektedir.
+
+========================================================================
+
+[ENGLISH]
+CD technology was originally applied to audio recordings using a 
+recording format known as CD-DA (compact disk-digital audio), 
+and the CDs used today for computer data storage use essentially 
+the same format. 
+
+[TÜRKÇE]
+CD teknolojisi, aslında CD-DA (compact disk-digital audio, kompak 
+disk-dijital ses) olarak bilinen bir kayıtlama formatı kullanılarak 
+ses kayıtlamalarına uygulanmıştır ve günümüzde bilgisayar veri 
+depolama için kullanılan CD'ler temelde aynı formatı kullanmaktadır. 
+
+========================================================================
+
+[ENGLISH]
+In particular, information on these CDs is stored on a single track 
+that spirals around the CD like a groove in an old-fashioned 
+phonograph record, however, unlike old-fashioned phonograph records, 
+the track on a CD spirals from the inside out (Figure 1.10). 
+
+[TÜRKÇE]
+Özellikle, bu CD'ler üzerindeki bilgi eski moda bir fonograf kaydındaki 
+bir oluğa benzeyen CD etrafında dönerek giden tek bir iz üzerinde 
+depolanmaktadır, fakat eski moda fonograf kayıtlarından farklı olarak, 
+CD üzerindeki iz içten dışa doğru dönerek gitmektedir (Şekil 1.10). 
+
+========================================================================
+
+[ENGLISH]
+This track is divided into units called sectors, each with its own 
+identifying markings and a capacity of 21C13 of data, which equates 
+to 1/75 of a second of music in the case of audio recordings. 
+
+[TÜRKÇE]
+Bu iz, her biri kendi tanımlayıcı işaretlemesi olan ve ses kayıtlama 
+durumunda bir saniyedeki müziğin 1 /75'ine eşit olan 2KBilık veri 
+kapasitesi ile sektör adı verilen birimlere bölünmektedir. 
+
+========================================================================
+
+[ENGLISH]
+Programming Translating human intentions into executable computer 
+algorithms is now broadly referred to as programming, although the 
+proliferation of languages and tools available now bear little 
+resemblance to the programmable comput-ers of the 1950s and early 1960s. 
+
+
+[TÜRKÇE]
+Programlama Dillerin çoğalması ve araçların uygunluğu 1950 ve 1960'ların 
+başlarındaki programlanabilir bilgisayarlara biraz benzerlik göstermesine 
+rağmen, insanların niyetlerinin yürütülebilir bilgisayar algoritmalarına 
+çevrilmesi artık programlama olarak adlandırılmaktadır. 
+
+========================================================================
+
+[ENGLISH]
+While computer science consists of much more than computer programming, 
+the ability to solve problems by devising executable algorithms 
+(programs) remains a foundational skill for all computer scientists. 
+
+[TÜRKÇE]
+Bilgisayar bilimleri bilgisayar Programlamanın daha fazlasını içerirken,
+bilgisayar algoritmaları (programlar) oluşturulmasıyla problemleri çözme 
+yeteneği bilgisayar bilimcileri için temel bir beceri olarak kalmaktadır. 
+
+========================================================================
+
+[ENGLISH]
+Internet The Internet connects computers and electronic devices around 
+the world and has had a profound impact in the way that our technological 
+society stores, retrieves, and shares information. 
+
+[TÜRKÇE]
+İnternet İnternet bütün dünyadaki bilgisayar ve elektronik aletlere 
+bağlanır ve bilgiyi saklayan, geri alan ve paylaşan teknolojik 
+toplumumuzda derin bir etkiye sebep olmuştur. 
+
+========================================================================
+
+[ENGLISH]
+Commerce, news, entertainment, and communication now depend increasingly 
+on this interconnected web of smaller computer networks. 
+
+[TÜRKÇE]
+Ticaret, haberler, eğlence ve iletişim şimdi bu küçük bilgisayar 
+ağlarının birbirine bağlı web'ine bağlıdırlar. 
+
+========================================================================
+
+[ENGLISH]
+Our discussion will not only describe the mechanisms of the Internet 
+as an artifact, but will also touch on the many aspects of human society 
+that are now intertwined with the global network. 
+
+[TÜRKÇE]
+Bizim açıklamalarımız internetin mekanizmasını sadece bir yapı gibi 
+açıklamayacaktır aynı zamanda, küresel ağ ile iç içe olan insan 
+toplumunun birçok yönüne de değinecektir.
+
+========================================================================
+
+[ENGLISH]
+The reach of the Internet also has profound implications for our privacy 
+and the security of our personal information. 
+
+[TÜRKÇE]
+Ayrıca internete erişimin bizim gizliliğimiz ve kişisel bilgilerimizin 
+güvenliği için derin etkileri vardır. 
+
+========================================================================
+
+[ENGLISH]
+Cyberspace harbors many dangers. Consequently, cryptography and 
+cybersecurity are of growing importance in our connected world. 
+
+[TÜRKÇE]
+Siber birçok tehlikeyi barındırmaktadır. Sonuç olarak, birbirine bağlı 
+dünyamızda şifreleme ve siber güvenliğin önemi artmaktadır. 
+
+========================================================================
+
+[ENGLISH]
+Impact Computer science not only has profound impacts on the technologies 
+we use to communicate, work, and play, it also has enormous social 
+repercussions. 
+
+[TÜRKÇE]
+Etki Bilgisayar biliminin sadece iletişim, iş ve oyun için kullandığımız 
+teknolojiler üzerinde derin etkileri yoktur, aynı zamanda muazzam sosyal 
+etkileri de vardır. 
+
+========================================================================
+
+[ENGLISH]
+Progress in computer science is blurring many distinctions on which our 
+society has based decisions in the past and is challenging many of 
+society's long-held principles. 
+
+[TÜRKÇE]
+Bilgisayar bilimindeki ilerleme toplumumuzda geçmişte yer etmiş kararları 
+bulanıklaştırmakta ve toplumumuzun uzun süredir sahip olduğu ilkelere 
+meydan okumaktadır. 
+
+========================================================================
+
+[ENGLISH]
+In law, it generates questions regarding the degree to which intellectual 
+property can be owned and the rights and liabilities that accompany 
+that ownership. 
+
+[TÜRKÇE]
+Hukuk içinde, fikri mülkiyet sahibi derecesinde hak ve yükümlülükler 
+ile ilgili sorular üretir. 
+
+========================================================================
+
+[ENGLISH]
+In ethics, it generates numerous options that challenge the traditional 
+principles on which social behavior is based. 
+
+[TÜRKÇE]
+Etik olarak, sosyal davranışların temel alındığı geleneksel ilkelere 
+meydan okuyan çok sayıda seçenek oluşturur. 
+
+========================================================================
+
+[ENGLISH]
+In government, it generates debates regarding the extent to which 
+computer technology and its applications should be regulated. 
+
+[TÜRKÇE]
+Devlet içinde, hangi bilgisayar teknolojileri ve uygulamaların 
+düzenlenmesi konusunda tartışmalar üretir. 
+
+========================================================================
+
+[ENGLISH]
+In philosophy, it generates contention between the presence of 
+intelligent behavior and the presence of intelligence itself. 
+
+[TÜRKÇE]
+Felsefesinde, zeki davranışın varlığı ve zekanın kendisinin varlığı 
+arasında çekişme yaratır. 
+
+========================================================================
+
+[ENGLISH]
+And, throughout society, it generates disputes concerning whether new 
+applications represent new freedoms or new controls.
+
+[TÜRKÇE]
+Ve toplumun genelinde yeni uygulamaların yeni özgürlükleri veya yeni 
+kontrolleri temsil edip etmediği ile ilgili anlaşmazlıkları üretir.
+
+========================================================================
+
+[ENGLISH]
+Such topics are important for those contemplating careers in computing 
+or computer-related fields. Revelations within science have sometimes 
+found controversial applications, causing serious discontent for the 
+researchers involved. 
+
+
+[TÜRKÇE]
+Bu tür konular bilgisayar ya da bilgisayarla ilgili alanlarda kariyer 
+düşünenler için önemlidir. Tartışmalı uygulamalar bazen bilimin içinde 
+açığa çıkar, katılan araştırmacılar için ciddi hoşnutsuzluklar oluşturur. 
+
+========================================================================
+
+[ENGLISH]
+Moreover, an otherwise successful career can quickly be derailed by an 
+ethical misstep. 
+
+[TÜRKÇE]
+Ayrıca, aksi halde başarılı bir kariyer etik olmayan yanlış bir adımla 
+raydan çıkabilir. 
+
+========================================================================
+
+[ENGLISH]
+The ability to deal with the dilemmas posed by advancing computer 
+technology is also important for those outside its immediate realm. 
+
+[TÜRKÇE]
+İlerleyen bilgisayar teknolojisinin yarattığı ikilemler ile başa çıkma
+yeteneği, ayrıca onun alanı dışında olanlar için de önemlidir. 
+
+========================================================================
+
+[ENGLISH]
+Indeed, technology is infiltrating society so rapidly that few, if any, 
+are independent of its effects. 
+
+[TÜRKÇE]
+Aslında, teknoloji çok hızlı bir şekilde toplum içine etkilerinden bağımsız
+olarak sızmaktadır.
+
+========================================================================
+
+[ENGLISH]
+This text provides the technical background needed to approach the 
+dilemmas generated by computer science in a rational manner. 
+
+[TÜRKÇE]
+Bu metin bilgisayar bilimi tarafından rasyonel bir şekilde üretilen
+ikilemlere yaklaşmak için gerekli teknik altyapıyı sağlar.
+
+========================================================================
+
+[ENGLISH]
+However, technical knowledge of the science alone does not provide 
+solutions to all the questions involved. 
+
+[TÜRKÇE]
+Ancak, bilimde teknik bilgi bütün sorulara tek başına çözüm sağlamaz.
+
+========================================================================
+
+[ENGLISH]
+With this in mind, this text includes several sections that are 
+devoted to social, ethical, and legal impacts of computer science. 
+
+[TÜRKÇE]
+Bunu akılda tutarak bu metin bilgisayar bilimlerinin sosyal, etik ve
+yasal etkilerine adanmış çeşitli bölümler içermektedir.
+
+========================================================================
+
+[ENGLISH]
+These include security concerns, issues of software ownership and 
+liability, the social impact of database technology, and the consequences 
+of advances in artificial intelligence. 
+
+[TÜRKÇE]
+Bunlar güvenlik kaygılarını, yazılım sahipliği ve yükümlülüğü sorunlarını,
+veri tabanı teknolojisinin sosyal etkilerini ve yapay zeka gelişmelerinin
+sonuçlarını içermektedir.
+
+========================================================================
+
+[ENGLISH]
+1.1 Bits and Their Storage Inside today's computers information is 
+encoded as patterns of Os and ls. 
+
+[TÜRKÇE]
+1.1 Bitler ve Depolanmaları Bugünün bilgisayarlan içinde bilgi 0'lar 
+ve 1'ler şeklinde kodlanmaktadır. 
+
+========================================================================
+
+[ENGLISH]
+These digits are called bits (short for binary digits). 
+
+[TÜRKÇE]
+Bu rakamlar bitler (ikilik rakamlar için kısaltma) olarak 
+adlandırılmaktadırlar. 
+
+========================================================================
+
+[ENGLISH]
+Although you may be inclined to associate bits with numeric values, 
+they are really only symbols whose meaning depends on the application 
+at hand. 
+
+[TÜRKÇE]
+Sayısal değerler ile bit'leri ilişkilendirme eğiliminde olmanıza rağmen 
+onlar, gerçekten anlamları eldeki uygulamaya bağlı olan sadece 
+sembollerdirler. 
+
+========================================================================
+
+[ENGLISH]
+Sometimes patterns of bits are used to represent numeric values; 
+sometimes they represent characters in an alphabet and punctuation marks; 
+sometimes they represent images; and sometimes they represent sounds. 
+
+[TÜRKÇE]
+Bazen bit'lerin desenleri sayısal değerleri göstermek için 
+kullanılmaktadır; bazen alfabedeki ve noktalama işaretlerindeki 
+karakterleri göstermektedirler ve bazen de sesleri göstermektedirler.
+
+========================================================================
+
+[ENGLISH]
+1.3 Mass Storage Due to the volatility and limited size of a computer's 
+main memory, most computers have additional memory devices called mass 
+storage (or secondary storage) systems, including magnetic disks, CDs, 
+DVDs, magnetic tapes, flash drives, and solid-state disks 
+(all of which we will discuss shortly). 
+
+[TÜRKÇE]
+1 .3 Yığın Depolama Bir bilgisayarın ana belleğindeki değişkenlik ve 
+sınırlı büyüklük nedeniyle, birçok bilgisayar manyetik diskler, CD'ler, 
+DVD'ler, manyetik tape'ler, flaş sürücüler ve katı hal diskleri 
+(hepsine daha sonra değineceğiz) içeren, yığın depolama (masa storage) 
+(veya ikincil depolama) sistemleri olarak adlandırılan ek bellek 
+aygıtlarına sahiptirler. 
+
+========================================================================
+
+[ENGLISH]
+The advantages of mass storage systems over main memory include less 
+volatility, large storage capacities, low cost, and in many cases, 
+the ability to remove the storage medium from the machine for archival 
+purposes.
+
+[TÜRKÇE]
+Yığın depolama sistemlerinin ana belleğe göre avantajları, daha az 
+değişkenlik, büyük depolama kapasiteleri, düşük maliyet ve birçok 
+durumda arşivleme amacı ile makineden depolama ortamının çıkarılabilme 
+özelliğidir. Manyetik ve optik depolama sistemlerinin temel dezavantajı, 
+genellikle mekanik hareket gerektirmesidir ve bu nedenle, veri kaydetmek 
+ve getirmek için tüm etkinliklerin elektronik olarak gerçekleştiği bir 
+makine ana belleğinden çok daha fazla zaman gerektirmektedir. Ayrıca, 
+hareketli parçala ile depolama sistemleri, katı hal sistemlerine göre 
+mekanik arızalara daha yatkındırlar. 
+
+========================================================================
+
+[ENGLISH]
+Magnetic Systems For years, magnetic technology has dominated the mass 
+storage arena. 
+
+[TÜRKÇE]
+Manyetik Sistemler Yıllardır manyetik teknoloji, yığın depolama alanına 
+hükmetmektedir. 
+
+========================================================================
+
+[ENGLISH] 
+The most common example in use today is the magnetic disk or hard disk 
+drive (HDD), in which a thin spinning disk with magnetic coating is 
+used to hold data (Figure 1.9). 
+
+[TÜRKÇE]
+Günümüzde kullanılmakta olan en bilinen örneği, veriyi depolamak için 
+kullanılan manyetik kaplama], ince bir dönen diskin olduğu manyetik 
+disk (magnetic disk) veya sabit disk sürücüsü (hard disk drive-HDD)'dür 
+(Şekil 19). 
+
+========================================================================
+
+[ENGLISH]
+Read/write heads are placed above and/or below the disk so that as the 
+disk spins, each head traverses a circle, called a track. 
+
+[TÜRKÇE]
+Okuma/yazma başlıkları diskin üzerinde ve/veya altında bulunmaktadır, 
+böylece disk döndükçe her başlık, iz (track) denilen bir çember 
+çizmektedir. 
+
+========================================================================
+
+[ENGLISH]
+By repositioning the read/write heads, different concentric tracks 
+can be accessed. 
+
+[TÜRKÇE]
+Okuma/ yazma başlıklarının yeniden pozisyon alması ile farklı eş merkezli
+izlere erişilebilmektedir. 
+
+========================================================================
+
+[ENGLISH]
+In many cases, a disk storage system consists of several disks mounted 
+on a common spindle, one on top of the other, with enough space for the 
+read/write heads to slip between the platters. 
+
+[TÜRKÇE]
+Birçok durumda, disk depolama sistemi, plakalar arasında kayarak 
+okuma/yazma başlıkları için yeterli alan ile biri diğerinin üstünde 
+olacak şekilde ortak bir mil üzerine monte edilmiş birçok diskten 
+oluşmaktadır. 
+
+========================================================================
+
+[ENGLISH]
+In such cases, the read/write heads move in unison. 
+
+[TÜRKÇE]
+Bu gibi durumlarda, okuma/yazma başlıkları birlikte hareket ederler. 
+
+========================================================================
+
+[ENGLISH]
+Each time the read/write heads are repositioned, a new set of 
+tracks—which is called a cylinder—becomes accessible. 
+
+[TÜRKÇE]
+Okuma/yazma başlığı her defasında yeniden pozisyon almaktadır, 
+silindir (cylinder) olarak adlandırılan yeni bir iz kümesi erişilebilir 
+hale gelmektedir. 
+
+========================================================================
+
+[ENGLISH]
+Gates and Flip-Flops A device that produces the output of a Boolean 
+operation when given the operation's input values is called a gate. 
+
+[TÜRKÇE]
+Kapılar ve Flip-Floplar Bir Boolean işleminin, verilen giriş değerlerine 
+göre çıkışını üreten bir aygıta kapı denilmektedir. 
+
+========================================================================
+
+[ENGLISH]
+Gates can be constructed from a variety of technologies such as gears, 
+relays, and optic devices. 
+
+[TÜRKÇE]
+Kapılar dişliler, röleler ve optik aygıtlar gibi çeşitli teknolojilerden 
+imal edilebilmektedir. 
+
+========================================================================
+
+[ENGLISH]
+Inside today's computers, gates are usually implemented as small 
+electronic circuits in which the digits 0 and 1 are represented as 
+voltage levels. 
+
+[TÜRKÇE]
+Bugünkü bilgisayarlann içinde, kapılar genellikle voltaj seviyeleri 
+olarak gösterilen 0 ve 1 basamaklannın bulunduğu küçük elektronik 
+devreler olarak uygulanmaktadırlar. 
+
+========================================================================
+
+[ENGLISH]
+We need not concern ourselves with such details, however. 
+
+[TÜRKÇE]
+Bizlerin ancak bu ayrıntılar ile ilgilenmemiz gerekmemektedir. 
+
+========================================================================
+
+[ENGLISH]
+For our purposes, it suffices to represent gates in their symbolic form, 
+as shown in Figure 1.2. 
+
+[TÜRKÇE]
+Bizim için, kapılan Şekil 1.2'de gösterildiği gibi sembolik şekillerinde 
+göstermek yeterlidir. 
+
+========================================================================
+
+[ENGLISH]
+Note that the AND, OR, XOR, and NOT gates are represented by 
+distinctively shaped symbols, with the input values entering on one side, 
+and the output exiting on the other. 
+
+[TÜRKÇE]
+AND, OR, XOR ve NOT kapılarının, bir taraftan giriş değerleri ve diğer 
+taraftan çıkış değeri ile belirgin olarak şekillendirilmiş semboller 
+tarafından gösterildiğine dikkat edilmelidir.
+
+========================================================================
+
+[ENGLISH]
+Primary memory is computer memory that is accessed directly by the CPU. 
+
+[TÜRKÇE]
+Birincil hafıza, CPU tarafından doğrudan erişilen bilgisayar hafızadır.
+
+========================================================================
+
+[ENGLISH]
+This includes several types of memory, such as the processor cache and 
+system ROM. 
+
+[TÜRKÇE]
+Bu birçok tipte hafiza türlerini içerir, işlemci önbelleği ve sistem ROM'u
+gibi.
+
+========================================================================
+
+[ENGLISH]
+However, in most cases, primary memory refers to system RAM.
+
+[TÜRKÇE]
+Bununla birlikte çoğu durumda, birincil hafıza, sistem RAM'ine 
+karşılık gelir.
+
+========================================================================
+
+[ENGLISH]
+RAM, or random access memory, consists of one or more memory modules 
+that temporarily store data while a computer is running.
+
+[TÜRKÇE]
+RAM (Random Acces Memory), bilgisayar çalışırken verileri geçici olarak
+depolayan bir veya daha fazla hafıza modülünden oluşur.
+
+========================================================================
+
+[ENGLISH]
+RAM is volatile memory, meaning it is erased when the power is turned off. 
+
+[TÜRKÇE]
+RAM geçici bir bellektir, yani güç kapatıldığında silinir.
+
+========================================================================
+
+[ENGLISH]
+Therefore, each time you start up your computer, the operating system 
+must be loaded from secondary memory (such as a hard drive) into the 
+primary memory, or RAM. 
+
+[TÜRKÇE]
+Böylece, bilgisayarınızı her başlattığınızda, işletim sistemi ikincil
+hafızadan birincil belleğe veya RAM'e yüklenmelidir. 
+
+========================================================================
+
+[ENGLISH]
+Similarly, whenever you launch an application on your computer, it is 
+loaded into RAM.
+
+[TÜRKÇE]
+Benzer olarak, bilgisayarınızda bir uygulama başlattığınızda, RAM'e
+yüklenir.
+
+========================================================================
+
+[ENGLISH]
+The operating system and applications are loaded into primary memory, 
+since RAM can be accessed much faster than storage devices.
+
+[TÜRKÇE]
+RAM'e depolama aygıtlarından çok daha hızlı erişilebildiğinden, işletim
+sistemi uygulamalar ve uygulamalar birincil belleğe yüklenir.
+
+========================================================================
+
+[ENGLISH]
+In fact, the data can be transferred between CPU and RAM more than a 
+hundred times faster than between the CPU and the hard drive.
+
+[TÜRKÇE]
+Aslında, veriler CPU ile RAM arasında, CPU ile sabit sürücü arasında
+olduğundan yüz kat daha hızlı aktarılabilir.
+
+========================================================================
+
+[ENGLISH]
+By loading data into RAM, programs can run significantly faster and are 
+much more responsive than if than constantly accessed data from secondary 
+memory.
+
+[TÜRKÇE]
+Verileri RAM'e yükleyerek, programlar önemli ölçüde daha hızlı 
+çalışabilir ve ikincil bellekten sürekli olarak erişilen verilere 
+göre çok daha hızlı yanıt verir.
+
+========================================================================
+
+[ENGLISH]
+Primary memory may be called "primary storage" as well. 
+
+[TÜRKÇE]
+Birincil bellek, "birincil depolama" olarak da adlandırılabilir.
+
+========================================================================
+
+[ENGLISH]
+However, this term is somewhat more ambiguous since, depending on the 
+context, primary storage may also refer to internal storage devices, 
+such as internal hard drives.
+
+[TÜRKÇE]
+Bununla birlikte, bu terim biraz daha belirsizdir, çünkü içeriğe bağlı 
+olarak birincil depolama, dahili sabit sürücüler gibi dahili depolama 
+aygıtlarına da atıfta bulunabilir.
+
+========================================================================
+
+[ENGLISH]
+Secondary memory refers to storage devices, such as hard drives and 
+solid state drives. 
+
+[TÜRKÇE]
+İkincil bellek, sabit sürücüler ve katı hal sürücüleri gibi depolama 
+aygıtlarını ifade eder.
+
+========================================================================
+
+[ENGLISH]
+It may also refer to removable storage media, such as USB flash drives, 
+CDs, and DVDs.
+
+[TÜRKÇE]
+USB flash sürücüler, CD'ler ve DVD'ler gibi çıkarılabilir depolama 
+ortamlarına da atıfta bulunabilir.
+
+========================================================================
+
+[ENGLISH]
+Unlike primary memory, secondary memory is not accessed directly by the 
+CPU.
+
+[TÜRKÇE]
+Birincil bellekten farklı olarak, ikincil belleğe doğrudan CPU 
+tarafından erişilmez.
+
+========================================================================
+
+[ENGLISH]
+Instead, data accessed from secondary memory is first loaded into RAM 
+and is then sent to the processor. 
+
+[TÜRKÇE]
+Bunun yerine ikincil bellekten erişilen veriler önce RAM'e yüklenir 
+ve ardından işlemciye gönderilir.
+
+========================================================================
+
+[ENGLISH]
+The RAM plays an important intermediate role, since it provides much 
+faster data access speeds than secondary memory.
+
+[TÜRKÇE]
+RAM, ikincil belleğe göre çok daha hızlı veri erişim hızları sağladığı 
+için önemli bir ara rol oynar.
+
+========================================================================
+
+[ENGLISH]
+By loading software programs and files into primary memory, computers 
+can process data much more quickly.
+
+[TÜRKÇE]
+Bilgisayarlar, yazılım programlarını ve dosyaları birincil belleğe 
+yükleyerek verileri çok daha hızlı işleyebilir.
+
+========================================================================
+
+[ENGLISH]
+For example, a computer may have a one terabyte hard drive, but only 16 
+gigabytes of RAM. 
+
+[TÜRKÇE]
+Örneğin, bir bilgisayarda bir terabayt sabit sürücü olabilir, ancak 
+yalnızca 16 gigabayt RAM olabilir.
+
+========================================================================
+
+[ENGLISH]
+That means the computer has roughly 64 times more secondary memory than 
+primary memory. 
+
+[TÜRKÇE]
+Bu, bilgisayarın birincil belleğe göre yaklaşık 64 kat daha fazla 
+ikincil belleğe sahip olduğu anlamına gelir.
+
+========================================================================
+
+[ENGLISH]
+Additionally, secondary memory is non-volatile, meaning it retains its 
+data with or without electrical power.
+
+[TÜRKÇE]
+Ek olarak, ikincil bellek geçici değildir, yani verilerini elektrik 
+gücüyle veya elektrik gücü olmadan saklar.
+
+========================================================================
+
+[ENGLISH]
+RAM, on the other hand, is erased when a computer is shut down or 
+restarted.
+
+[TÜRKÇE]
+RAM ise bilgisayar kapatıldığında veya yeniden başlatıldığında silinir.
+
+========================================================================
+
+[ENGLISH]
+Therefore, secondary memory is used to store "permanent data," such as 
+the operating system, applications, and user files.
+
+[TÜRKÇE]
+Bu nedenle ikincil bellek, işletim sistemi, uygulamalar ve kullanıcı 
+dosyaları gibi "kalıcı verileri" depolamak için kullanılır.
+
+========================================================================
+
+[ENGLISH]
+Secondary memory may also be called "secondary storage." 
+
+[TÜRKÇE]
+İkincil bellek, "ikincil depolama" olarak da adlandırılabilir.
+
+========================================================================
+
+[ENGLISH]
+However, this term is a bit more ambiguous, since internal storage 
+devices are sometimes called "primary storage devices" as well.
+
+[TÜRKÇE]
+Ancak, bu terim biraz daha belirsizdir, çünkü dahili depolama aygıtları 
+bazen "birincil depolama aygıtları" olarak da adlandırılır.
+
+========================================================================
+
+[ENGLISH]
+A network consists of multiple devices that communicate with one another. 
+
+[TÜRKÇE]
+Bir ağ, birbiriyle iletişim kuran birden fazla cihazdan oluşur.
+
+========================================================================
+
+[ENGLISH]
+It can be as small as two computers or as large as billions of devices.
+
+[TÜRKÇE]
+İki bilgisayar kadar küçük veya milyarlarca cihaz kadar büyük olabilir.
+
+========================================================================
+
+[ENGLISH]
+While a traditional network is comprised of desktop computers, modern
+networks may include laptops, tablets, smartphones, televisions, 
+gaming consoles, smart appliances, and other electronics.
+
+[TÜRKÇE]
+Geleneksel bir ağ masaüstü bilgisayarlardan oluşurken, modern ağlar 
+dizüstü bilgisayarlar, tabletler, akıllı telefonlar, televizyonlar, 
+oyun konsolları, akıllı cihazlar ve diğer elektronik cihazları içerebilir.
+
+========================================================================
+
+[ENGLISH]
+Many types of networks exist, but they fall under two primary categories: 
+LANs and WANs.
+
+[TÜRKÇE]
+Birçok ağ türü vardır, ancak bunlar iki ana kategoriye girer: 
+LAN'lar ve WAN'lar.
+
+========================================================================
+
+[ENGLISH]
+A local area network is limited to a specific area, such as a home, 
+office, or campus. 
+
+[TÜRKÇE]
+Yerel alan ağı, ev, ofis veya kampüs gibi belirli bir alanla sınırlıdır.
+
+========================================================================
+
+[ENGLISH]
+A home network may have a single router that offers both wired and 
+wirelessconnections. 
+
+[TÜRKÇE]
+Bir ev ağında hem kablolu hem de kablosuz bağlantılar sunan tek bir 
+yönlendirici olabilir.
+
+========================================================================
+
+[ENGLISH]
+For example, a computer may connect to the router via Ethernet, while 
+smartphones and tablets connect to the router via Wi-Fi. 
+
+[TÜRKÇE]
+Örneğin, bir bilgisayar yönlendiriciye Ethernet üzerinden bağlanabilirken 
+akıllı telefonlar ve tabletler yönlendiriciye Wi-Fi üzerinden bağlanabilir.
+
+========================================================================
+
+[ENGLISH]
+All devices connected to the router share the same network and often 
+the same Internet connection.
+
+[TÜRKÇE]
+Yönlendiriciye bağlı tüm cihazlar aynı ağı ve genellikle aynı İnternet 
+bağlantısını paylaşır.
+
+========================================================================
+
+[ENGLISH]
+A larger network, such as the network of an educational institution, 
+may be comprised of many switches, hubs, and Ethernet cables. 
+
+[TÜRKÇE]
+Bir eğitim kurumunun ağı gibi daha büyük bir ağ, birçok anahtar, hub
+ve Ethernet kablosundan oluşabilir.
+
+========================================================================
+
+[ENGLISH]
+It may also include multiple wireless access points and wireless 
+repeaters that provide wireless access to the network. 
+
+[TÜRKÇE]
+Ayrıca, ağa kablosuz erişim sağlayan birden çok kablosuz erişim noktası 
+ve kablosuz tekrarlayıcı içerebilir.
+
+========================================================================
+
+[ENGLISH]
+While this type of network is much more complex than a home network, 
+it is still considered a LAN since it is limited to a specific location.
+
+[TÜRKÇE]
+Bu ağ türü bir ev ağından çok daha karmaşık olsa da, belirli bir 
+konumla sınırlı olduğu için yine de bir LAN olarak kabul edilir.
+
+========================================================================
+
+[ENGLISH]
+A wide area network is not limited to a single area, but spans multiple
+locations. 
+
+[TÜRKÇE]
+Geniş alan ağı tek bir alanla sınırlı değildir, birden çok yeri kapsar.
+
+========================================================================
+
+[ENGLISH]
+WANs are often comprised of multiple LANs that are connected over the 
+Internet. 
+
+[TÜRKÇE]
+WAN'lar genellikle İnternet üzerinden bağlanan birden çok LAN'dan oluşur.
+
+========================================================================
+
+[ENGLISH]
+A company WAN, for example, may extend from the headquarters to other 
+offices around the world. 
+
+[TÜRKÇE]
+Örneğin bir şirket WAN'ı, genel merkezden dünyadaki diğer ofislere 
+kadar uzanabilir.
+
+========================================================================
+
+[ENGLISH]
+Access to WANs may be limited using authentication, firewalls, and other 
+security measures. 
+
+[TÜRKÇE]
+WAN'lara erişim, kimlik doğrulama, güvenlik duvarları ve diğer güvenlik 
+önlemleri kullanılarak sınırlandırılabilir.
+
+========================================================================
+
+[ENGLISH]
+The Internet itself is the largest WAN since it encompasses all locations 
+connected to the Internet.
+
+[TÜRKÇE]
+İnternet'e bağlı tüm konumları kapsadığı için İnternet'in kendisi en 
+büyük WAN'dır.
+
+========================================================================
+
+[ENGLISH]
+A network topology describes the arrangement of systems on a computer 
+network. 
+
+[TÜRKÇE]
+Bir ağ topolojisi, bir bilgisayar ağındaki sistemlerin düzenini tanımlar.
+
+========================================================================
+
+[ENGLISH]
+It defines how the computers, or nodes, within the network are arranged 
+and connected to each other. 
+
+[TÜRKÇE]
+Ağ içindeki bilgisayarların veya düğümlerin nasıl düzenlendiğini ve birbirine nasıl bağlandığını tanımlar.
+
+========================================================================
+
+[ENGLISH]
+Some common network topologies include star, ring, line, bus, and tree 
+configurations. 
+
+[TÜRKÇE]
+Bazı yaygın ağ topolojileri yıldız, halka, hat, veri yolu ve ağaç 
+konfigürasyonlarını içerir.
+
+========================================================================
+
+[ENGLISH]
+Star - One central note is connected to each of the other nodes on a 
+network. 
+
+[TÜRKÇE]
+Yıldız - Bir merkezi not, bir ağdaki diğer düğümlerin her birine bağlanır.
+
+========================================================================
+
+[ENGLISH]
+Ring - Each node is connected to exactly two other nodes, forming a ring. 
+
+[TÜRKÇE]
+Halka - Her düğüm, bir halka oluşturan tam olarak iki diğer düğüme 
+bağlanır.
+
+========================================================================
+
+[ENGLISH]
+Can be visualized as a circular configuration. Requires at least 
+three nodes.
+
+[TÜRKÇE]
+Dairesel bir konfigürasyon olarak görselleştirilebilir. En az üç 
+düğüm gerektirir.
+
+========================================================================
+
+[ENGLISH]
+Line - Nodes are arranged in a line, where most nodes are connected to 
+two other nodes. 
+
+[TÜRKÇE]
+Hat - Düğümler, çoğu düğümün diğer iki düğüme bağlı olduğu bir çizgide 
+düzenlenir.
+
+========================================================================
+
+[ENGLISH]
+However, the first and last node are not connected like they are in a ring.
+
+[TÜRKÇE]
+Ancak, ilk ve son düğüm bir halkada olduğu gibi bağlı değildir.
+
+========================================================================
+
+[ENGLISH]
+Bus - Each node is connected to a central bus that runs along the entire 
+network. 
+
+[TÜRKÇE]
+Veri Yolu - Her düğüm, tüm ağ boyunca çalışan merkezi bir veri 
+yoluna bağlıdır.
+
+========================================================================
+
+[ENGLISH]
+All information transmitted across the bus can be received by any system 
+in the network.
+
+[TÜRKÇE]
+Veri yolu üzerinden iletilen tüm bilgiler ağdaki herhangi bir sistem 
+tarafından alınabilir.
+
+========================================================================
+
+[ENGLISH]
+Tree - One "root" node connects to other nodes, which in turn connect 
+to other nodes, forming a tree structure. 
+
+[TÜRKÇE]
+Ağaç - Bir "kök" düğüm, diğer düğümlere bağlanır, bu da diğer düğümlere 
+bağlanır ve bir ağaç yapısı oluşturur.
+
+========================================================================
+
+[ENGLISH]
+Information from the root node may have to pass through other nodes to 
+reach the end nodes.
+
+[TÜRKÇE]
+Kök düğümden gelen bilgiler, son düğümlere ulaşmak için diğer 
+düğümlerden geçmek zorunda kalabilir.
+
+========================================================================
+
+[ENGLISH]
+It is helpful for a network administrator to know the pros and cons of 
+different network topologies when putting together a network. 
+
+[TÜRKÇE]
+Bir ağ yöneticisinin, bir ağı bir araya getirirken farklı ağ 
+topolojilerinin artılarını ve eksilerini bilmesi yararlıdır.
+
+========================================================================
+
+[ENGLISH]
+By weighing the benefits of each type, the administrator can choose 
+the configuration that is most efficient for the network's intended 
+purpose.
+
+[TÜRKÇE]
+Yönetici, her türün avantajlarını tartarak, ağın kullanım amacı için en
+verimli olan yapılandırmayı seçebilir.
+
+========================================================================
