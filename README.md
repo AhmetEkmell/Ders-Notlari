@@ -1,5 +1,5 @@
 # Repo Hakkında Açıklama
-- Repo çok büyük ve dağınık gibi görünse de içerisinde çok değerli notlar ve bilgilerin olduğu bir repo'dur. Açıkcası biraz üşeniyorum dağınık görüntüyü toparlamak için kusura bakmayın :upside_down_face:
+- Repo çok büyük ve dağınık gibi görünse de içerisinde çok değerli notlar ve bilgilerin olduğu bir repo'dur. Açıkçası biraz üşeniyorum dağınık görüntüyü toparlamak için kusura bakmayın :upside_down_face:
 - Genellikle komple repoyu indirmek istemeyenler için ilgili derslere .rar uzantılı haliyle de yüklemeler yapılıyor.
 - Dileyen arkadaşlar sadece ilgili ders içeriğine ulaşmak için .rar uzantılı dosyayı indirmeleri yeterli olacaktır.
 - Siz de bu repo'nun kaynak bakımından zenginleşmesine katkıda bulunmak isterseniz mail adresim veya LinkedIn hesabımdan bana ulaşabilirsiniz.
