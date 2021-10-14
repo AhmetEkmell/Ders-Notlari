@@ -5,5 +5,5 @@
 - Siz de bu repo'nun kaynak bakımından zenginleşmesine katkıda bulunmak isterseniz mail adresim veya LinkedIn hesabımdan bana ulaşabilirsiniz.
 - Tamamen öğrenci arkadaşlarımızın faydalanması amacıyla oluşturduğum bir repodur. Başka bir amaç ve niyet güdülmemektedir.
 
-- [x] Mail adresim: ekmel.147@gmail.com
+- [x] Mail adresim: ahmetekmelll@gmail.com
 - [x] Linkedin Hesabım: [Ahmet Ekmel Yeşilyurt](https://www.linkedin.com/in/ahmetekmell/)
