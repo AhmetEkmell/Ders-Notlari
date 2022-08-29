@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/43041763/186436009-f2762902-ad72-417a-aba5-b192bf1f4768.png">  
+  <img src="https://user-images.githubusercontent.com/43041763/186436009-f2762902-ad72-417a-aba5-b192bf1f4768.png#gh-dark-mode-only">
+  <img src="https://user-images.githubusercontent.com/43041763/187186885-d721df7d-4922-4b54-a4b9-f3644f0fde56.png#gh-light-mode-only">
 </p>
 <h1 align="center">
   <img width="50" height="50" src="https://user-images.githubusercontent.com/43041763/186440936-fd4a31bb-0c8b-45ae-8c7e-e20b29d558cd.png" alt="icon-1">
